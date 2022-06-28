@@ -1,0 +1,8 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Categories - Category - ココのブログ</title>
+        <link>/categories/</link>
+        <description>Categories - Category - ココのブログ</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
+            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><atom:link href="/categories/" rel="self" type="application/rss+xml" /></channel>
+</rss>

@@ -2,9 +2,10 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>/coding/</loc><lastmod>2022-06-29T05:50:49&#43;08:00</lastmod></url><url>
-            <loc>/coding/first_post/</loc><lastmod>2022-06-29T05:50:49&#43;08:00</lastmod></url><url>
+            <loc>/posts/coding/</loc><lastmod>2022-06-29T05:50:49&#43;08:00</lastmod></url><url>
+            <loc>/posts/coding/first_post/</loc><lastmod>2022-06-29T05:50:49&#43;08:00</lastmod></url><url>
+            <loc>/posts/</loc><lastmod>2022-06-29T05:50:49&#43;08:00</lastmod></url><url>
             <loc>/</loc><lastmod>2022-06-29T05:50:49&#43;08:00</lastmod></url><url>
             <loc>/categories/</loc></url><url>
             <loc>/tags/</loc></url><url>
-            <loc>/thinking/</loc></url></urlset>
+            <loc>/posts/thinking/</loc></url></urlset>

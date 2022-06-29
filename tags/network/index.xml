@@ -1,10 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>All thinking - ココのブログ</title>
-        <link>/posts/thinking/</link>
-        <description>All thinking | ココのブログ</description>
+        <title>network - Tag - ココのブログ</title>
+        <link>/tags/network/</link>
+        <description>network - Tag - ココのブログ</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
-            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Mon, 04 Apr 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/posts/thinking/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Mon, 04 Apr 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/network/" rel="self" type="application/rss+xml" /><item>
     <title>Wireshark的使用</title>
     <link>/posts/thinking/wireshark_use/</link>
     <pubDate>Mon, 04 Apr 2022 15:58:26 &#43;0800</pubDate>

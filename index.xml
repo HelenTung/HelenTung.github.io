@@ -15,12 +15,12 @@
     <description><![CDATA[指针与多级指针 什么是指针？指针是变量，确切的讲是储存地址的一种变量，全称应当是指针变量而非指针，以下是定义整形指针变量的代码。 #include&lt;stdio.h&gt; int main() { int *p =]]></description>
 </item>
 <item>
-    <title></title>
+    <title>Wireshark的使用</title>
     <link>/posts/thinking/wireshark_use/</link>
-    <pubDate>Wed, 04 Mar 2020 15:58:26 &#43;0800</pubDate>
+    <pubDate>Mon, 04 Apr 2022 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/thinking/wireshark_use/</guid>
-    <description><![CDATA[ココの]]></description>
+    <description><![CDATA[Wireshark的使用与常见错误 wireshark的主要作用是为了诊断网络出现的问题，大致上比较重要的部分是过滤器与结果的表达，这两点是比]]></description>
 </item>
 </channel>
 </rss>

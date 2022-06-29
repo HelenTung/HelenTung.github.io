@@ -4,13 +4,13 @@
         <link>/posts/coding/</link>
         <description>All coding | ココのブログ</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
-            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Wed, 29 Jun 2022 05:50:49 &#43;0800</lastBuildDate><atom:link href="/posts/coding/" rel="self" type="application/rss+xml" /><item>
-    <title>First_post</title>
-    <link>/posts/coding/first_post/</link>
-    <pubDate>Wed, 29 Jun 2022 05:50:49 &#43;0800</pubDate>
-    <author>ココ也叫CoCo</author>
-    <guid>/posts/coding/first_post/</guid>
-    <description><![CDATA[ssss ]]></description>
+            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Sat, 04 Jun 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/posts/coding/" rel="self" type="application/rss+xml" /><item>
+    <title>C指针与多级指针</title>
+    <link>/posts/coding/c_point/</link>
+    <pubDate>Sat, 04 Jun 2022 15:58:26 &#43;0800</pubDate>
+    <author>ココ</author>
+    <guid>/posts/coding/c_point/</guid>
+    <description><![CDATA[指针与多级指针 什么是指针？指针是变量，确切的讲是储存地址的一种变量，全称应当是指针变量而非指针，以下是定义整形指针变量的代码。 #include&lt;stdio.h&gt; int main() { int *p =]]></description>
 </item>
 </channel>
 </rss>

@@ -4,5 +4,21 @@
         <link>/tags/</link>
         <description>Tags - Tag - ココのブログ</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
-            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><atom:link href="/tags/" rel="self" type="application/rss+xml" /></channel>
+            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Sat, 04 Jun 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>C</title>
+    <link>/tags/c/</link>
+    <pubDate>Sat, 04 Jun 2022 15:58:26 &#43;0800</pubDate>
+    <author>ココ也叫CoCo</author>
+    <guid>/tags/c/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Point</title>
+    <link>/tags/point/</link>
+    <pubDate>Sat, 04 Jun 2022 15:58:26 &#43;0800</pubDate>
+    <author>ココ也叫CoCo</author>
+    <guid>/tags/point/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
 </rss>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>RSA加密算法 - ココのブログ</title><meta name="Description" content="ココの~rsa思考"><meta property="og:title" content="RSA加密算法" />
+<meta property="og:description" content="ココの~rsa思考" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/thinking/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" /><meta property="og:image" content="/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-04T15:58:26+08:00" />
+<meta property="article:modified_time" content="2022-07-04T15:58:26+08:00" /><meta property="og:site_name" content="ココのブログ" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/logo.png"/>
+
+<meta name="twitter:title" content="RSA加密算法"/>
+<meta name="twitter:description" content="ココの~rsa思考"/>
+<meta name="application-name" content="ココのブログ">
+<meta name="apple-mobile-web-app-title" content="ココのブログ"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/thinking/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" /><link rel="prev" href="/posts/thinking/wireshark_use/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "RSA加密算法",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/thinking\/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95\/"
+        },"genre": "posts","keywords": "算法, 加密, RSA","wordcount":  2275 ,
+        "url": "\/posts\/thinking\/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95\/","datePublished": "2022-07-04T15:58:26+08:00","dateModified": "2022-07-04T15:58:26+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ココ"
+            },"description": "ココの~rsa思考"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ココのブログ"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> Me </a><a class="menu-item" href="/posts/coding/" title="算法"> Coding </a><a class="menu-item" href="/posts/thinking/" title="思考"> Thinking </a><a class="menu-item" href="/tags/" title="标签"> Label </a><a class="menu-item" href="/categories/" title="分类"> Category </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ココのブログ"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">Me</a><a class="menu-item" href="/posts/coding/" title="算法">Coding</a><a class="menu-item" href="/posts/thinking/" title="思考">Thinking</a><a class="menu-item" href="/tags/" title="标签">Label</a><a class="menu-item" href="/categories/" title="分类">Category</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">RSA加密算法</h1><h2 class="single-subtitle">对于RSA的一些笔记</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="15816034825" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ココ</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AE%97%E6%B3%95/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>算法</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-07-04">2022-07-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2275 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#非对称加密-rsa算法">非对称加密-RSA算法</a>
+      <ul>
+        <li><a href="#概念">概念</a></li>
+        <li><a href="#前置知识">前置知识</a></li>
+        <li><a href="#rsa加密">RSA加密</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="非对称加密-rsa算法">非对称加密-RSA算法</h2>
+<h3 id="概念">概念</h3>
+<blockquote>
+<p>加密和解密可以使用不同的规则，只要这两种规则之间存在某种对应关系即可，这样就避免了直接传递密钥。这种新的加密模式被称为&quot;非对称加密算法&quot;。</p>
+</blockquote>
+<p>对称加密：</p>
+<ul>
+<li>甲方选择某一种加密规则，对信息进行加密；</li>
+<li>乙方使用同一种规则，对信息进行解密。</li>
+</ul>
+<p>非对称加密：</p>
+<ul>
+<li>乙方生成两把密钥（公钥和私钥）。公钥是公开的，任何人都可以获得，私钥则是保密的。</li>
+<li>甲方获取乙方的公钥，然后用它对信息加密。</li>
+<li>乙方得到加密后的信息，用私钥解密。</li>
+</ul>
+<blockquote>
+<p>常见的非对称加密算法有RSA算法、ECC椭圆曲线算法等等</p>
+</blockquote>
+<h3 id="前置知识">前置知识</h3>
+<blockquote>
+<p>RSA算法与欧拉函数存在一定关系，本篇不对欧拉函数进行讨论，仅仅了解计算即可</p>
+</blockquote>
+<p>互质关系：</p>
+<ul>
+<li>一个数是质数，另一个数只要不是前者的倍数，两者就构成互质关系，比如3和10。</li>
+<li>如果两个数之中，较大的那个数是质数，则两者构成互质关系，比如97和57。</li>
+<li>1和任意一个自然数是都是互质关系，比如1和99。</li>
+<li>p是大于1的整数，则p和p-1构成互质关系，比如57和56。</li>
+<li>p是大于1的奇数，则p和p-2构成互质关系，比如17和15。</li>
+</ul>
+<p>欧拉函数计算：</p>
+<blockquote>
+<p>概念：任意给定正整数n，请问在小于等于n的正整数之中，有多少个与n构成互质关系，计算这个值的方法就叫做欧拉函数，以φ(n)表示。例如、在1到7之中，与7形成互质关系的是1、2、3、4、5、6，在1到9之中，与9形成互质关系的是1、2、4、5、7、8。</p>
+</blockquote>
+<p>公式：m^φ(n) ≡ 1 (mod n)</p>
+<blockquote>
+<p>若	p * q = n 且pq也为质数的情况下，则有φ(n) = (p-1) * (q-1)。也即是得出结论：两个质数之积的欧拉函数的值等于两个数的欧拉函数之值的乘积。利用到了互质关系中的第三点，任何数与质数都是互质关系。</p>
+</blockquote>
+<p>模反元素：</p>
+<blockquote>
+<p>模反元素：如果两个正整数a和n互质，那么一定可以找到整数b，使得 ab-1 被n整除，或者说ab被n除的余数是1，b就叫做a的&quot;模反元素&quot;。此处的ab即为RSA算法中提到的&quot;私钥&quot;与&quot;公钥&quot;。公式有：ab≡ 1 (mod n)</p>
+</blockquote>
+<p>举例有：3和11互质，那么3的模反元素就是4，因为3*4-1刚好可以被11整除,所以4和3互为模反元素，又如5和34互质，那么5和7就互为模反元素，也是5*7-1=34</p>
+<blockquote>
+<p>注意互质关系不一定两个数都是质数，具体可以参考5和34,7和12等等。</p>
+</blockquote>
+<h3 id="rsa加密">RSA加密</h3>
+<p>加密过程：</p>
+<blockquote>
+<p>第一步：随机生成质数p与q、得出n = p * q
+第二步：计算n的欧拉函数值，使用欧拉函数公式即可：φ(n) = (p-1) * (q-1)
+第三步：在1与φ(n)之间随机生成整数e，条件是1&lt; e &lt; φ(n)，且e与φ(n) 互质。
+第四步：计算e对于φ(n)的模反元素d，带入公式有ed≡ 1 (mod n)，等价于 ed - 1 = kφ(n)、于是，找到模反元素d
+第五步：将n和e封装成公钥，n和d封装成私钥。</p>
+</blockquote>
+<p>举例分析：若p = 53、q= 61、则 n = p*q =  3233、φ(n) = (p-1)*(q-1) = 3120、若随即选择e = 17、d = 2753。则私钥对为（3233,2753）、公钥对为（3233,17）。</p>
+<blockquote>
+<p>可靠性分析：p、q、n、e、φ(n)、d是已经出现的数字、这六个数字之中，公钥用到了两个（n和e），其余四个数字都是不公开的。其中最关键的是d，因为n和d组成了私钥，一旦d泄漏，就等于私钥泄漏。那么在（n,e）公开的情况下，有没有可能推导出d,从而得出私钥（n,d）。</p>
+</blockquote>
+<p>推导条件：</p>
+<ul>
+<li>ed≡1 (mod φ(n))。只有知道e和φ(n)，才能算出d。</li>
+<li>φ(n)=(p-1)(q-1)。只有知道p和q，才能算出φ(n)。</li>
+<li>n=pq。只有将n因数分解，才能算出p和q。</li>
+</ul>
+<blockquote>
+<p>结论：如果n可以被因数分解，d就可以算出，也就意味着私钥被破解。</p>
+</blockquote>
+<p>&ldquo;对极大整数做因数分解的难度决定了RSA算法的可靠性。换言之，对一极大整数做因数分解愈困难，RSA算法愈可靠。假如有人找到一种快速因数分解的算法，那么RSA的可靠性就会极度下降。但找到这样的算法的可能性是非常小的。今天只有短的RSA密钥才可能被暴力破解。到2008年为止，世界上还没有任何可靠的攻击RSA算法的方式。只要密钥长度足够长，用RSA加密的信息实际上是不能被解破的。&rdquo;</p>
+<p>解密过程：
+加密：m^e ≡ c (mod n)带入上述数字得出65^17 ≡ 2790 (mod 3233)，也即是2790为加密数字，65为真实数字
+解密：c^d ≡ m (mod n)带入计算有2790^2753 ≡ 65 (mod 3233),解密得出65为真实数字</p>
+<blockquote>
+<p>至此，&ldquo;加密&ndash;解密&quot;的整个过程全部完成。</p>
+</blockquote>
+<p>私钥解密的证明：</p>
+<blockquote>
+<p>为什么用私钥解密，一定可以正确地得到m</p>
+</blockquote>
+<p>由解密规则有：c^d ≡ m (mod n)、又由加密规则有：ｍ^e ≡ c (mod n)、则有：c = m^e - kn、将c代入要我们要证明的那个解密规则：(m^e - kn)^d ≡ m (mod n)等同于m^(ed) ≡ m (mod n)推出ed ≡ 1 (mod φ(n))、既有ed = hφ(n)+1、将ed代入ed ≡ 1 (mod φ(n))：m^(hφ(n)+1) ≡ m (mod n)</p>
+<blockquote>
+<p>若mn互质：则有m^φ(n) ≡ 1 (mod n)、与上式连立有：(m^φ(n))^h × m ≡ m (mod n),原式得到证明。
+若mn不为互质关系：以 m = kp为例，考虑到这时k与q必然互质，则根据欧拉定理，下面的式子成立：　(kp)^(q-1) ≡ 1 (mod q)、进一步得到:[(kp)^(q-1) ]^h(p-1) × kp ≡ kp (mod q)、既有(kp)ed ≡ kp (mod q)、改写为：(kp)^ed = tq + kp、这时t必然能被p整除，即 t=t&rsquo;p、因为 m=kp，n=pq，所以m^ed ≡ m (mod n)、得证。</p>
+</blockquote>
+<p>本文参考自：https://www.ruanyifeng.com/blog/2013/07/rsa_algorithm_part_two.html</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-07-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="/posts/thinking/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" data-title="RSA加密算法" data-hashtags="算法,加密,RSA"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="/posts/thinking/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" data-hashtag="算法"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="/posts/thinking/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" data-title="RSA加密算法"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="/posts/thinking/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" data-title="RSA加密算法"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Instapaper" data-sharer="instapaper" data-url="/posts/thinking/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" data-title="RSA加密算法" data-description="ココの~rsa思考"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/instapaper.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/posts/thinking/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" data-title="RSA加密算法"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>,&nbsp;<a href="/tags/%E5%8A%A0%E5%AF%86/">加密</a>,&nbsp;<a href="/tags/rsa/">RSA</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/thinking/wireshark_use/" class="prev" rel="prev" title="Wireshark的使用"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Wireshark的使用</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">良い夢 - coding....</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="15816034825" target="_blank">ココ也叫CoCo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"ココのブログ - coding","id-2":"ココのブログ - coding"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

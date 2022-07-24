@@ -1,24 +1,16 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>All coding - ココのブログ</title>
-        <link>/posts/coding/</link>
-        <description>All coding | ココのブログ</description>
+        <title>coding - Tag - ココのブログ</title>
+        <link>/tags/coding/</link>
+        <description>coding - Tag - ココのブログ</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
-            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/posts/coding/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/coding/" rel="self" type="application/rss+xml" /><item>
     <title>go并发的三种模式</title>
     <link>/posts/coding/go%E5%B9%B6%E5%8F%91%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/</link>
     <pubDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/coding/go%E5%B9%B6%E5%8F%91%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/</guid>
     <description><![CDATA[并发的三种模式 runner.go 主要为切片放置任务函数 package runner import ( &#34;errors&#34; &#34;os&#34; &#34;os/signal&#34; &#34;time&#34; ) type Runner struct { // interrupt 通道报告从操作系统发送的信号 interrupt chan os.Signal //complete通道报告处理任务已]]></description>
-</item>
-<item>
-    <title>C指针与多级指针</title>
-    <link>/posts/coding/c_point/</link>
-    <pubDate>Sat, 04 Jun 2022 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
-    <guid>/posts/coding/c_point/</guid>
-    <description><![CDATA[指针与多级指针 什么是指针？指针是变量，确切的讲是储存地址的一种变量，全称应当是指针变量而非指针，以下是定义整形指针变量的代码。 #include&lt;stdio.h&gt; int main() { int *p =]]></description>
 </item>
 </channel>
 </rss>

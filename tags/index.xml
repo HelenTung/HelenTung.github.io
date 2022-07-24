@@ -4,7 +4,23 @@
         <link>/tags/</link>
         <description>Tags - Tag - ココのブログ</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
-            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Mon, 04 Jul 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>coding</title>
+    <link>/tags/coding/</link>
+    <pubDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</pubDate>
+    <author>ココ也叫CoCo</author>
+    <guid>/tags/coding/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>go</title>
+    <link>/tags/go/</link>
+    <pubDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</pubDate>
+    <author>ココ也叫CoCo</author>
+    <guid>/tags/go/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>RSA</title>
     <link>/tags/rsa/</link>
     <pubDate>Mon, 04 Jul 2022 15:58:26 &#43;0800</pubDate>

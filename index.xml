@@ -39,6 +39,14 @@
     <description><![CDATA[Wireshark的使用与常见错误 wireshark的主要作用是为了诊断网络出现的问题，大致上比较重要的部分是过滤器与结果的表达，这两点是比]]></description>
 </item>
 <item>
+    <title>操作系统结构</title>
+    <link>/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/</link>
+    <pubDate>Wed, 17 Mar 2021 15:58:26 &#43;0800</pubDate>
+    <author>ココ</author>
+    <guid>/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/</guid>
+    <description><![CDATA[操作系统结构 这六种设计是，单体系统、层次系统、微内核、客户机-服务器系统、虚拟机和exokernels等 单体系统 需要一个主程序，用来处理服务]]></description>
+</item>
+<item>
     <title>操作系统概念</title>
     <link>/posts/thinking/%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/</link>
     <pubDate>Thu, 04 Mar 2021 15:58:26 &#43;0800</pubDate>

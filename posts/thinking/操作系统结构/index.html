@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>操作系统结构 - ココのブログ</title><meta name="Description" content="ココの"><meta property="og:title" content="操作系统结构" />
+<meta property="og:description" content="ココの" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/" /><meta property="og:image" content="/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-03-17T15:58:26+08:00" />
+<meta property="article:modified_time" content="2021-03-17T15:58:26+08:00" /><meta property="og:site_name" content="ココのブログ" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/logo.png"/>
+
+<meta name="twitter:title" content="操作系统结构"/>
+<meta name="twitter:description" content="ココの"/>
+<meta name="application-name" content="ココのブログ">
+<meta name="apple-mobile-web-app-title" content="ココのブログ"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/" /><link rel="prev" href="/posts/thinking/%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" /><link rel="next" href="/posts/thinking/wireshark_use/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "操作系统结构",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/thinking\/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84\/"
+        },"genre": "posts","keywords": "操作系统","wordcount":  2177 ,
+        "url": "\/posts\/thinking\/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84\/","datePublished": "2021-03-17T15:58:26+08:00","dateModified": "2021-03-17T15:58:26+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ココ"
+            },"description": "ココの"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ココのブログ"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> Me </a><a class="menu-item" href="/posts/coding/" title="算法"> Coding </a><a class="menu-item" href="/posts/thinking/" title="思考"> Thinking </a><a class="menu-item" href="/tags/" title="标签"> Label </a><a class="menu-item" href="/categories/" title="分类"> Category </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ココのブログ"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">Me</a><a class="menu-item" href="/posts/coding/" title="算法">Coding</a><a class="menu-item" href="/posts/thinking/" title="思考">Thinking</a><a class="menu-item" href="/tags/" title="标签">Label</a><a class="menu-item" href="/categories/" title="分类">Category</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">操作系统结构</h1><h2 class="single-subtitle">概论</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="15816034825" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ココ</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>操作系统</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-03-17">2021-03-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2177 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#操作系统结构">操作系统结构</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="操作系统结构">操作系统结构</h3>
+<blockquote>
+<p>这六种设计是，单体系统、层次系统、微内核、客户机-服务器系统、虚拟机和exokernels等</p>
+</blockquote>
+<h4 id="单体系统">单体系统</h4>
+<ul>
+<li>需要一个主程序，用来处理服务过程请求。</li>
+<li>需要一套服务过程，用来执行系统调用。</li>
+<li>需要一套实用过程，用来辅助服务过程。</li>
+</ul>
+<blockquote>
+<p>每一个系统调用都通过一个服务过程为其工作并运行之。要有一组实用程序来完成一些服务过程所需要用到的功能，如从用户程序取数据等。可将各种过程划分为一个三层的模型</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e5%8d%95%e4%bd%93%e7%bb%93%e6%9e%84.png"
+        data-srcset="/images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e5%8d%95%e4%bd%93%e7%bb%93%e6%9e%84.png, /images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e5%8d%95%e4%bd%93%e7%bb%93%e6%9e%84.png 1.5x, /images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e5%8d%95%e4%bd%93%e7%bb%93%e6%9e%84.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/系统调用/单体结构.png"
+        title="单体结构" /></p>
+<blockquote>
+<p>进一步通用化，就变成一个层次式结构的操作系统，它的上层软件都是在下一层软件的基础之上构建的。</p>
+</blockquote>
+<h4 id="层次式系统">层次式系统</h4>
+<p><strong>内存管理在第1层中进行，它分配进程的主存空间</strong>，当内存用完时则在一个512K字的磁鼓上保留进程的一部分（页面）。在第1层上，进程不用考虑它是在磁鼓上还是在内存中运行。第1层软件保证一旦需要访问某一页面时，该页面必定已在内存中。<strong>第2层处理进程与操作员控制台（即用户）之间的通信</strong>。在这层的上部，可以认为每个进程都有自己的操作员控制台。<strong>第3层管理I/O设备和相关的信息流缓冲区</strong>。在第3层上，每个进程都与有良好特性的抽象I/O设备打交道，而不必考虑外部设备的物理细节。<strong>第4层是用户程序层</strong>。用户程序不用考虑进程、内存、控制台或I/O设备管理等细节。系统操作员进程位于第5层中。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e5%b1%82%e6%ac%a1%e7%bb%93%e6%9e%84.png"
+        data-srcset="/images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e5%b1%82%e6%ac%a1%e7%bb%93%e6%9e%84.png, /images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e5%b1%82%e6%ac%a1%e7%bb%93%e6%9e%84.png 1.5x, /images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e5%b1%82%e6%ac%a1%e7%bb%93%e6%9e%84.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/系统调用/层次结构.png"
+        title="层次结构" /></p>
+<blockquote>
+<p>在分层方式中，设计者要确定在哪里划分内核-用户的边界。在传统上，所有的层都在内核中，但是这样做没有必要。事实上，尽可能减少内核态中功能的做法更好，因为内核中的错误会快速拖累系统。</p>
+</blockquote>
+<h4 id="微内核">微内核</h4>
+<blockquote>
+<p>微内核设计背后的思想是，为了实现高可靠性，将操作系统划分成小的、良好定义的模块，只有其中一个模块——微内核——运行在内核态上，其余的模块，由于功能相对弱些，则作为普通用户进程运行。这些模块中的错误虽然会使这些模块崩溃，但是不会使得整个系统死机。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e5%be%ae%e5%86%85%e6%a0%b8.png"
+        data-srcset="/images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e5%be%ae%e5%86%85%e6%a0%b8.png, /images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e5%be%ae%e5%86%85%e6%a0%b8.png 1.5x, /images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e5%be%ae%e5%86%85%e6%a0%b8.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/系统调用/微内核.png"
+        title="微内核" /></p>
+<p>在内核的外部，系统的构造有三层进程，它们都在用户态中运行。最底层中包含设备驱动器。由于它们在用户态中运行，所以不能物理地访问I/O端口空间，也不能直接发出I/O命令。相反，为了能够对I/O设备编程，驱动器构建了一个结构，指明哪个参数值写到哪个I/O端口，并生成一个内核调用，通知内核完成写操作。这个处理意味着内核可以检查驱动正在对I/O的读（或写）是否是得到授权使用的。这样，（与单体设计不同），一个有错误的操作就不能够偶发性地在硬盘上进行写操作。</p>
+<p>系统对每个进程的权限有着许多限制。正如已经提及的，设备驱动器只能与授权的I/O端口接触，对内核调用的访问也是按单个进程进行控制的，是考虑到进程具有向其他多个进程发送消息的能力。进程也可获得有限的许可，让在内核的其他进程访问其地址空间。</p>
+<blockquote>
+<p><strong>一个与小内核相关联的思想是在内核中的机制与策略分离的原则。</strong></p>
+</blockquote>
+<h4 id="客户机-服务器模式">客户机-服务器模式</h4>
+<blockquote>
+<p>一个微内核思想的略微变体是将进程划分为两类：服务器，每个服务器提供某种服务；客户端，使用这些服务。这个模式就是所谓的客户机-服务器模式。通常，在系统最底层是微内核，但并不是必须这样的。这个模式的本质是存在客户端进程和服务器进程。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e5%ae%a2%e6%88%b7%e6%9c%8d%e5%8a%a1%e5%99%a8.png"
+        data-srcset="/images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e5%ae%a2%e6%88%b7%e6%9c%8d%e5%8a%a1%e5%99%a8.png, /images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e5%ae%a2%e6%88%b7%e6%9c%8d%e5%8a%a1%e5%99%a8.png 1.5x, /images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e5%ae%a2%e6%88%b7%e6%9c%8d%e5%8a%a1%e5%99%a8.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/系统调用/客户服务器.png"
+        title="客户服务器" /></p>
+<p>这个思想的一个显然的、普遍方式是，客户端和服务器运行在不同的计算机上，它们通过局域或广域网连接，由于客户端通过发送消息与服务器通信，客户端并不需要知道这些消息是在它们的本地机器上处理，还是通过网络被送到远程机器上处理。对于客户端而言，这两种情形是一样的：都是发送请求并得到回应。<strong>所以，客户机-服务器模式是一种可以应用在单机或者网络机器上的抽象。</strong></p>
+<h4 id="虚拟机">虚拟机</h4>
+<blockquote>
+<p>这个系统最初被命名为CP/CMS，后来改名为VM/370（Seawright和MacKinnon，1979）。它是源于如下一种机敏的观察。分时系统应该提供这些功能：（1）多道程序，（2）一个比裸机更方便的、有扩展界面的计算机。VM/370存在的目的是将二者彻底地隔离开来。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e8%99%9a%e6%8b%9f%e6%9c%ba.png"
+        data-srcset="/images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e8%99%9a%e6%8b%9f%e6%9c%ba.png, /images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e8%99%9a%e6%8b%9f%e6%9c%ba.png 1.5x, /images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e8%99%9a%e6%8b%9f%e6%9c%ba.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/系统调用/虚拟机.png"
+        title="虚拟机" /></p>
+<p>这个系统的核心称为虚拟机监控程序（virtual machine monitor），它在裸机上运行并且具备了多道程序功能。该系统向上层提供了若干台虚拟机，它不同于其他操作系统的地方是：这些虚拟机不是那种具有文件等优良特征的扩展计算机。与之相反，它们仅仅是裸机硬件的精确复制品。这个复制品包含了<strong>内核态/用户态、I/O功能、中断及其他真实硬件所应该具有的全部内容。</strong></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e8%99%9a%e6%8b%9f%e6%9c%ba2.png"
+        data-srcset="/images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e8%99%9a%e6%8b%9f%e6%9c%ba2.png, /images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e8%99%9a%e6%8b%9f%e6%9c%ba2.png 1.5x, /images/thinking/%e7%b3%bb%e7%bb%9f%e8%b0%83%e7%94%a8/%e8%99%9a%e6%8b%9f%e6%9c%ba2.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/系统调用/虚拟机2.png"
+        title="虚拟机2" /></p>
+<h4 id="外核">外核</h4>
+<blockquote>
+<p>在底层中，一种称为外核（exokernel，Engler等人，1995）的程序在内核态中运行。它的任务是为虚拟机分配资源，并检查试图使用这些资源的企图，以确保没有机器会使用他人的资源。每个用户层的虚拟机可以运行自己的操作系统，如VM/370和Pentium虚拟8086等，但限制在只能使用已经申请并且获得分配的那部分资源。</p>
+</blockquote>
+<p>外核机制的优点是，它减少了映像层。在其他的设计中，每个虚拟机都认为它有自己的磁盘，其盘块号从0到最大编号，这样虚拟机监控程序必须维护一张表格用以重映像磁盘地址（以及其他资源）。有了外核这个重映像处理就不需要了。外核只需要记录已经分配给各个虚拟机的有关资源即可。这个方法还有一个优点，它将多道程序（在外核内）与用户操作系统代码（在用户空间内）加以分离，而且相应负载并不重，这是因为外核所做的一切，只是保持多个虚拟机彼此不发生冲突。</p>
+<blockquote>
+<p>与虚拟机克隆真实机器不同，另一种策略是对机器进行分区，换句话说，给每个用户整个资源的一个子集。</p>
+</blockquote>
+<blockquote>
+<p>参考书籍：现代操作系统（原书第4版）_Modern Operating Systems (4th Edition) ([荷] Andrew S. Tanenbaum [荷] Herbert Bos)</p>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-03-17</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/" data-title="操作系统结构" data-hashtags="操作系统"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/" data-hashtag="操作系统"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/" data-title="操作系统结构"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/" data-title="操作系统结构"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Instapaper" data-sharer="instapaper" data-url="/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/" data-title="操作系统结构" data-description="ココの"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/instapaper.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/" data-title="操作系统结构"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/thinking/%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" class="prev" rel="prev" title="操作系统概念"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>操作系统概念</a>
+            <a href="/posts/thinking/wireshark_use/" class="next" rel="next" title="Wireshark的使用">Wireshark的使用<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">良い夢 - coding....</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="15816034825" target="_blank">ココ也叫CoCo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"ココのブログ - coding","id-2":"ココのブログ - coding"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

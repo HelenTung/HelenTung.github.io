@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>调度 - ココのブログ</title><meta name="Description" content="ココの调度"><meta property="og:title" content="调度" />
+<meta property="og:description" content="ココの调度" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/thinking/%E8%B0%83%E5%BA%A6/" /><meta property="og:image" content="/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-03-25T15:58:26+08:00" />
+<meta property="article:modified_time" content="2021-03-25T15:58:26+08:00" /><meta property="og:site_name" content="ココのブログ" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/logo.png"/>
+
+<meta name="twitter:title" content="调度"/>
+<meta name="twitter:description" content="ココの调度"/>
+<meta name="application-name" content="ココのブログ">
+<meta name="apple-mobile-web-app-title" content="ココのブログ"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/thinking/%E8%B0%83%E5%BA%A6/" /><link rel="prev" href="/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/" /><link rel="next" href="/posts/thinking/wireshark_use/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "调度",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/thinking\/%E8%B0%83%E5%BA%A6\/"
+        },"genre": "posts","keywords": "操作系统","wordcount":  6134 ,
+        "url": "\/posts\/thinking\/%E8%B0%83%E5%BA%A6\/","datePublished": "2021-03-25T15:58:26+08:00","dateModified": "2021-03-25T15:58:26+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ココ"
+            },"description": "ココの调度"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ココのブログ"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> Me </a><a class="menu-item" href="/posts/coding/" title="算法"> Coding </a><a class="menu-item" href="/posts/thinking/" title="思考"> Thinking </a><a class="menu-item" href="/tags/" title="标签"> Label </a><a class="menu-item" href="/categories/" title="分类"> Category </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ココのブログ"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">Me</a><a class="menu-item" href="/posts/coding/" title="算法">Coding</a><a class="menu-item" href="/posts/thinking/" title="思考">Thinking</a><a class="menu-item" href="/tags/" title="标签">Label</a><a class="menu-item" href="/categories/" title="分类">Category</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">调度</h1><h2 class="single-subtitle">调度算法</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="15816034825" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ココ</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>操作系统</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-03-25">2021-03-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6134 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#调度">调度</a>
+      <ul>
+        <li><a href="#调度介绍">调度介绍</a></li>
+        <li><a href="#批处理系统中的调度">批处理系统中的调度</a></li>
+        <li><a href="#交互式系统中的调度">交互式系统中的调度</a></li>
+        <li><a href="#实时系统中的调度">实时系统中的调度</a></li>
+        <li><a href="#策略和机制">策略和机制</a></li>
+        <li><a href="#线程调度">线程调度</a></li>
+        <li><a href="#ipc问题">IPC问题</a></li>
+        <li><a href="#小结">小结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="调度">调度</h2>
+<blockquote>
+<p>当计算机系统是多道程序设计系统时，通常就会有多个进程或线程同时竞争CPU。只要有两个或更多的进程处于就绪状态，这种情形就会发生。如果只有一个CPU可用，那么就必须选择下一个要运行的进程。在操作系统中，完成选择工作的这一部分称为调度程序（scheduler），该程序使用的算法称为调度算法（scheduling algorithm）。</p>
+</blockquote>
+<h3 id="调度介绍">调度介绍</h3>
+<blockquote>
+<p>调度程序还要考虑CPU的利用率，因为进程切换的代价是比较高的。</p>
+</blockquote>
+<p>首先，<strong>用户态必须切换到内核态；然后要保存当前进程的状态，包括在进程表中存储寄存器值以便以后重新装载。在许多系统中，内存映像（例如，页表内的内存访问位）也必须保存</strong>；接着，<strong>通过运行调度算法选定一个新进程</strong>；之后，<strong>应该将新进程的内存映像重新装入MMU</strong>；最后新进程开始运行。除此之外，<strong>进程切换还要使整个内存高速缓存失效，强迫缓存从内存中动态重新装入两次（进入内核一次，离开内核一次）</strong>。总之，如果每秒钟切换进程的次数太多，会耗费大量CPU时间，所以有必要提醒注意。</p>
+<h4 id="进程行为">进程行为</h4>
+<blockquote>
+<p>几乎所有进程的（磁盘）I/O请求或计算都是交替突发的</p>
+</blockquote>
+<p>典型地，CPU不停顿地运行一段时间，然后发出一个系统调用以便读写文件。在完成系统调用之后，CPU又开始计算，直到它需要读更多的数据或写更多的数据为止。</p>
+<p><strong>请注意</strong>，某些I/O活动可以看作是计算。例如，当CPU向视频RAM复制数据以更新屏幕时，因为使用了CPU，所以这是计算，而不是I/O活动</p>
+<h4 id="何时调度">何时调度</h4>
+<blockquote>
+<p>第一，在创建一个新进程之后，需要决定是运行父进程还是运行子进程</p>
+</blockquote>
+<p>由于这两种进程都处于就绪状态，所以这是一种正常的调度决策，可以任意决定，也就是说，调度程序可以合法选择先运行父进程还是先运行子进程。</p>
+<blockquote>
+<p>第二，在一个进程退出时必须做出调度决策。</p>
+</blockquote>
+<p>一个进程不再运行（因为它不再存在），所以必须从就绪进程集中选择另外某个进程。如果没有就绪的进程，通常会运行一个系统提供的空闲进程。</p>
+<blockquote>
+<p>第三，当一个进程阻塞在I/O和信号量上或由于其他原因阻塞时，必须选择另一个进程运行。</p>
+</blockquote>
+<p>有时，阻塞的原因会成为选择的因素。例如，如果A是一个重要的进程，并正在等待B退出临界区，让B随后运行将会使得B退出临界区，从而可以让A运行。不过问题是，通常调度程序并不拥有做出这种相关考虑的必要信息。</p>
+<blockquote>
+<p>第四，在一个I/O中断发生时，必须做出调度决策。</p>
+</blockquote>
+<p>如果中断来自I/O设备，而该设备现在完成了工作，某些被阻塞的等待该I/O的进程就成为可运行的就绪进程了。是否让新就绪的进程运行，这取决于调度程序的决定，或者让中断发生时运行的进程继续运行，或者应该让某个其他进程运行。</p>
+<h4 id="调度算法分类">调度算法分类</h4>
+<ul>
+<li>批处理。</li>
+</ul>
+<blockquote>
+<p>在批处理系统中，不会有用户不耐烦地在终端旁等待一个短请求的快捷响应。因此，非抢占式算法，或对每个进程都有长时间周期的抢占式算法，通常都是可接受的。</p>
+</blockquote>
+<ul>
+<li>交互式。</li>
+</ul>
+<blockquote>
+<p>在交互式用户环境中，为了避免一个进程霸占CPU拒绝为其他进程服务，抢占是必需的。服务器也归于此类，因为通常它们要服务多个突发的（远程）用户。</p>
+</blockquote>
+<ul>
+<li>实时</li>
+</ul>
+<blockquote>
+<p>实时系统与交互式系统的差别是，实时系统只运行那些用来推进现有应用的程序，而交互式系统是通用的，它可以运行任意的非协作甚至是有恶意的程序。</p>
+</blockquote>
+<h4 id="调度算法的目标">调度算法的目标</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%b0%83%e5%ba%a6/%e7%9b%ae%e6%a0%87"
+        data-srcset="/images/thinking/%e8%b0%83%e5%ba%a6/%e7%9b%ae%e6%a0%87, /images/thinking/%e8%b0%83%e5%ba%a6/%e7%9b%ae%e6%a0%87 1.5x, /images/thinking/%e8%b0%83%e5%ba%a6/%e7%9b%ae%e6%a0%87 2x"
+        data-sizes="auto"
+        alt="/images/thinking/调度/目标"
+        title="在不同环境中调度算法的一些目标" /></p>
+<h3 id="批处理系统中的调度">批处理系统中的调度</h3>
+<h4 id="先来先服务">先来先服务</h4>
+<blockquote>
+<p>在所有调度算法中，最简单的是非抢占式的先来先服务（first-come first-severd）算法。使用该算法，进程按照它们请求CPU的顺序使用CPU。基本上，有一个就绪进程的单一队列。</p>
+</blockquote>
+<p>这个算法的主要优点是易于理解并且便于在程序中运用。就难以得到的体育或音乐会票的分配问题而言，这对那些愿意在早上两点就去排队的人们也是公平的。在这个算法中，一个单链表记录了所有就绪进程。要选取一个进程运行，只要从该队列的头部移走一个进程即可；要添加一个新的作业或阻塞一个进程，只要把该作业或进程附加在相应队列的末尾即可。</p>
+<h4 id="最短作业优先">最短作业优先</h4>
+<blockquote>
+<p>现在来看一种适用于运行时间可以预知的另一个非抢占式的批处理调度算法。</p>
+</blockquote>
+<p>这里有4个作业A、B、C、D，运行时间分别为8、4、4、4分钟。若按图中的次序运行，则A的周转时间为8分钟，B为12分钟，C为16分钟，D为20分钟，平均为14分钟。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%b0%83%e5%ba%a6/%e6%9c%80%e7%9f%ad%e4%bd%9c%e4%b8%9a"
+        data-srcset="/images/thinking/%e8%b0%83%e5%ba%a6/%e6%9c%80%e7%9f%ad%e4%bd%9c%e4%b8%9a, /images/thinking/%e8%b0%83%e5%ba%a6/%e6%9c%80%e7%9f%ad%e4%bd%9c%e4%b8%9a 1.5x, /images/thinking/%e8%b0%83%e5%ba%a6/%e6%9c%80%e7%9f%ad%e4%bd%9c%e4%b8%9a 2x"
+        data-sizes="auto"
+        alt="/images/thinking/调度/最短作业"
+        title="最短作业优先调度的例子" /></p>
+<p>考虑有4个作业的情况，其运行时间分别为a、b、c、d。第一个作业在时间a结束，第二个在时间a+b结束，以此类推。平均周转时间为（4a+3b+2c+d）/4。显然a对平均值影响最大，所以它应是最短作业，其次是b，再次是c，最后的d只影响它自己的周转时间。</p>
+<p>最短作业调度是将后续具有最短处理时间的进程先放到CPU上运行，如果就绪队列中有同样长度的进程，那么它们之间是采用FCFS调度的。 最短下一个CPU区间，需要操作系统知道接下来是那个进程的CPU区间最短。 SJF就是调度这个最短CPU区间的进程。</p>
+<blockquote>
+<p>有必要指出，只有在所有的作业都可同时运行的情形下，最短作业优先算法才是最优化的。</p>
+</blockquote>
+<h4 id="最短剩余时间优先">最短剩余时间优先</h4>
+<blockquote>
+<p>最短作业优先的抢占式版本是最短剩余时间优先（shortest remaining time next）算法。使用这个算法，调度程序总是选择剩余运行时间最短的那个进程运行。</p>
+</blockquote>
+<p>再次提醒，有关的运行时间必须提前掌握。当一个新的作业到达时，其整个时间同当前进程的剩余时间做比较。如果新的进程比当前运行进程需要更少的时间，当前进程就被挂起，而运行新的进程。这种方式可以使新的短作业获得良好的服务。</p>
+<h3 id="交互式系统中的调度">交互式系统中的调度</h3>
+<h4 id="轮转调度">轮转调度</h4>
+<blockquote>
+<p>一种最古老、最简单、最公平且使用最广的算法是轮转调度（round robin）。</p>
+</blockquote>
+<p>每个进程被分配一个时间段，称为时间片（quantum），即允许该进程在该时间段中运行。如果在时间片结束时该进程还在运行，则将剥夺CPU并分配给另一个进程。如果该进程在时间片结束前阻塞或结束，则CPU立即进行切换。时间片轮转调度很容易实现，调度程序所要做的就是维护一张可运行进程列表，当一个进程用完它的时间片后，就被移到队列的末尾</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%b0%83%e5%ba%a6/%e8%bd%ac%e8%bd%ae"
+        data-srcset="/images/thinking/%e8%b0%83%e5%ba%a6/%e8%bd%ac%e8%bd%ae, /images/thinking/%e8%b0%83%e5%ba%a6/%e8%bd%ac%e8%bd%ae 1.5x, /images/thinking/%e8%b0%83%e5%ba%a6/%e8%bd%ac%e8%bd%ae 2x"
+        data-sizes="auto"
+        alt="/images/thinking/调度/转轮"
+        title="轮转调度" /></p>
+<p>时间片轮转调度中惟一有趣的一点是时间片的长度。从一个进程切换到另一个进程是需要一定时间进行管理事务处理的——保存和装入寄存器值及内存映像、更新各种表格和列表、清除和重新调入内存高速缓存等。假如进程切换（process switch），有时称为上下文切换（context switch），需要1ms，包括切换内存映像、清除和重新调入高速缓存等。再假设时间片设为4ms。有了这些参数，则CPU在做完4ms有用的工作之后，CPU将花费（即浪费）1ms来进行进程切换。因此，CPU时间的20%浪费在管理开销上。</p>
+<blockquote>
+<p>可以归结如下结论：时间片设得太短会导致过多的进程切换，降低了CPU效率；而设得太长又可能引起对短的交互请求的响应时间变长。将时间片设为20ms～50 ms通常是一个比较合理的折中。</p>
+</blockquote>
+<h4 id="优先级调度">优先级调度</h4>
+<p><strong>轮转调度做了一个隐含的假设，即所有的进程同等重要</strong></p>
+<blockquote>
+<p>可以很方便地将一组进程按优先级分成若干类，并且在各类之间采用优先级调度，而在各类进程的内部采用轮转调度。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%b0%83%e5%ba%a6/%e4%bc%98%e5%85%88%e7%ba%a7"
+        data-srcset="/images/thinking/%e8%b0%83%e5%ba%a6/%e4%bc%98%e5%85%88%e7%ba%a7, /images/thinking/%e8%b0%83%e5%ba%a6/%e4%bc%98%e5%85%88%e7%ba%a7 1.5x, /images/thinking/%e8%b0%83%e5%ba%a6/%e4%bc%98%e5%85%88%e7%ba%a7 2x"
+        data-sizes="auto"
+        alt="/images/thinking/调度/优先级"
+        title="有4个优先级类的调度算法" /></p>
+<p><strong>优先级也可以由系统动态确定。优先级可以是静态赋予或动态赋予</strong>。为了防止高优先级进程无休止地运行下去，调度程序可以在每个时钟滴答（即每个时钟中断）降低当前进程的优先级。如果这个动作导致该进程的优先级低于次高优先级的进程，则进行进程切换。一个可采用的方法是，每个进程可以被赋予一个允许运行的最大时间片，当这个时间片用完时，下一个次高优先级的进程获得机会运行。</p>
+<blockquote>
+<p>如果不偶尔对优先级进行调整，则低优先级进程很可能会产生饥饿现象。</p>
+</blockquote>
+<h4 id="多级队列">多级队列</h4>
+<blockquote>
+<p>如前所述，长时间片的进程又会影响到响应时间，其解决办法是设立优先级类。属于最高优先级类的进程运行一个时间片，属于次高优先级类的进程运行2个时间片，再次一级运行4个时间片，以此类推。当一个进程用完分配的时间片后，它被移到下一类。</p>
+</blockquote>
+<h4 id="最短进程优先">最短进程优先</h4>
+<p>对于批处理系统而言，由于最短作业优先常常伴随着最短响应时间，所以如果能够把它用于交互进程，那将是非常好的。</p>
+<blockquote>
+<p>一种办法是根据进程过去的行为进行推测，并执行估计运行时间最短的那一个。假设某个终端上每条命令的估计运行时间为T0 。现在假设测量到其下一次运行时间为T1 。可以用这两个值的加权和来改进估计时间，即aT0 +(1-a)T1 。</p>
+</blockquote>
+<h4 id="保证调度">保证调度</h4>
+<blockquote>
+<p>一种完全不同的调度算法是向用户作出明确的性能保证，然后去实现它。</p>
+</blockquote>
+<p><strong>一种很实际并很容易实现的保证是：若用户工作时有n个用户登录，则用户将获得CPU处理能力的1/n。类似地，在一个有n个进程运行的单用户系统中，若所有的进程都等价，则每个进程将获得1/n的CPU时间</strong>。看上去足够公平了。</p>
+<p>为了实现所做的保证，系统必须跟踪各个进程自创建以来已使用了多少CPU时间。然后它计算各个进程应获得的CPU时间，即自创建以来的时间除以n。由于各个进程实际获得的CPU时间是已知的，所以很容易计算出真正获得的CPU时间和应获得的CPU时间之比。比率为0.5说明一个进程只获得了应得时间的一半，而比率为2.0则说明它获得了应得时间的2倍。于是该算法随后转向比率最低的进程，直到该进程的比率超过它的最接近竞争者为止。</p>
+<h4 id="彩票调度">彩票调度</h4>
+<blockquote>
+<p>其基本思想是向进程提供各种系统资源（如CPU时间）的彩票。一旦需要做出一项调度决策时，就随机抽出一张彩票，拥有该彩票的进程获得该资源。</p>
+</blockquote>
+<p>彩票调度具有若干有趣的性质。例如，如果有一个新的进程出现并得到一些彩票，那么在下一次的抽奖中，该进程会有同它持有彩票数量成比例的机会赢得奖励。换句话说，彩票调度是反应迅速的。</p>
+<h4 id="公平分享调度">公平分享调度</h4>
+<blockquote>
+<p>到现在为止，我们假设被调度的都是各个进程自身，并不关注其所有者是谁。这样做的结果是，如果用户1启动9个进程而用户2启动1个进程，使用轮转或相同优先级调度算法，那么用户1将得到90%的CPU时间，而用户2只得到10%的CPU时间。</p>
+</blockquote>
+<p>为了避免这种情形，某些系统在调度处理之前考虑谁拥有进程这一因素。在这种模式中，每个用户分配到CPU时间的一部分，而调度程序以一种强制的方式选择进程。这样，如果两个用户都得到获得50%CPU时间的保证，那么无论一个用户有多少进程存在，每个用户都会得到应有的CPU份额。</p>
+<h3 id="实时系统中的调度">实时系统中的调度</h3>
+<blockquote>
+<p>实时系统是一种时间起着主导作用的系统。典型地，外部的一种或多种物理设备给了计算机一个刺激，而计算机必须在一个确定的时间范围内恰当地做出反应。</p>
+</blockquote>
+<p>实时系统通常可以分为<strong>硬实时（hard real time）<strong>和</strong>软实时（soft real time）</strong>，前者的含义是必须满足绝对的截止时间，后者的含义是虽然不希望偶尔错失截止时间，但是可以容忍。</p>
+<p>在这两种情形中，实时性能都是通过把程序划分为一组进程而实现的，其中每个进程的行为是可预测和提前掌握的。这些进程一般寿命较短，并且极快地就运行完成。在检测到一个外部信号时，调度程序的任务就是按照满足所有截止时间的要求调度进程。</p>
+<blockquote>
+<p>实时系统中的事件可以按照响应方式进一步分类为周期性（以规则的时间间隔发生）事件或非周期性（发生时间不可预知）事件。</p>
+</blockquote>
+<p>一个系统可能要响应多个周期性事件流。根据每个事件需要处理时间的长短，系统甚至有可能无法处理完所有的事件。例如，如果有m个周期事件，事件i以周期Pi 发生，并需要Ci 秒CPU时间处理一个事件，那么可以处理负载的条件是</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%b0%83%e5%ba%a6/%e5%85%ac%e5%bc%8f"
+        data-srcset="/images/thinking/%e8%b0%83%e5%ba%a6/%e5%85%ac%e5%bc%8f, /images/thinking/%e8%b0%83%e5%ba%a6/%e5%85%ac%e5%bc%8f 1.5x, /images/thinking/%e8%b0%83%e5%ba%a6/%e5%85%ac%e5%bc%8f 2x"
+        data-sizes="auto"
+        alt="/images/thinking/调度/公式"
+        title="公式" /></p>
+<p>满足这个条件的实时系统称为是可调度的。</p>
+<h3 id="策略和机制">策略和机制</h3>
+<blockquote>
+<p>以上讨论的调度算法中没有一个算法从用户进程接收有关的调度决策信息，这就导致了调度程序很少能够做出最优的选择。</p>
+</blockquote>
+<p>解决问题的方法是将调度机制（scheduling mechanism）与调度策略（scheduling policy）分离（著名的原则，Levin等人，1975），也就是将调度算法以某种形式参数化，而参数可以由用户进程填写。</p>
+<h3 id="线程调度">线程调度</h3>
+<blockquote>
+<p>当若干进程都有多个线程时，就存在两个层次的并行：进程和线程。</p>
+</blockquote>
+<p>首先考虑用户级线程。由于内核并不知道有线程存在，所以内核还是和以前一样地操作，选取一个进程，假设为A，并给予A以时间片控制。A中的线程调度程序决定哪个线程运行，假设为A1。由于多道线程并不存在时钟中断，所以这个线程可以按其意愿任意运行多长时间。如果该线程用完了进程的全部时间片，内核就会选择另一个进程运行。在进程A终于又一次运行时，线程A1会接着运行。该线程会继续耗费A进程的所有时间，直到它完成工作。不过，该线程的这种不合群的行为不会影响到其他的进程。其他进程会得到调度程序所分配的合适份额，不会考虑进程A内部所发生的事。</p>
+<blockquote>
+<p>惟一的局限是，缺乏一个时钟将运行过长的线程加以中断。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%b0%83%e5%ba%a6/%e7%ba%bf%e7%a8%8b%e8%b0%83%e5%ba%a6"
+        data-srcset="/images/thinking/%e8%b0%83%e5%ba%a6/%e7%ba%bf%e7%a8%8b%e8%b0%83%e5%ba%a6, /images/thinking/%e8%b0%83%e5%ba%a6/%e7%ba%bf%e7%a8%8b%e8%b0%83%e5%ba%a6 1.5x, /images/thinking/%e8%b0%83%e5%ba%a6/%e7%ba%bf%e7%a8%8b%e8%b0%83%e5%ba%a6 2x"
+        data-sizes="auto"
+        alt="/images/thinking/调度/线程调度"
+        title="线程调度" /></p>
+<p>现在考虑A线程每次CPU计算的工作比较少的情况，例如，在50ms的时间片中有5ms的计算工作。于是，每个线程运行一会儿，然后把CPU交回给线程调度程序。这样在内核切换到进程B之前，就会有序列A1，A2，A3，A1，A2，A3，A1，A2，A3，A1</p>
+<p>现在考虑使用内核级线程的情形。内核选择一个特定的线程运行。它不用考虑该线程属于哪个进程，不过如果有必要的话，它可以这样做。对被选择的线程赋予一个时间片，而且如果超过了时间片，就会强制挂起该线程。一个线程在50ms的时间片内，5ms之后被阻塞，在30ms的时间段中，线程的顺序会是A1，B1，A2，B2，A3，B3</p>
+<blockquote>
+<p>用户级线程和内核级线程之间的差别在于性能。</p>
+</blockquote>
+<blockquote>
+<p>用户级线程的线程切换需要少量的机器指令，而内核级线程需要完整的上下文切换，修改内存映像，使高速缓存失效，这导致了若干数量级的延迟。</p>
+</blockquote>
+<h3 id="ipc问题">IPC问题</h3>
+<h4 id="哲学家就餐问题">哲学家就餐问题</h4>
+<p>有 5 个哲学家，他们面前都有一双筷子，即左手有一根筷子，右手有一根筷子。当然，这个问题有多个版本的描述，可以说是筷子，也可以说是一刀一叉，因为吃牛排的时候，需要刀和叉，缺一不可，也有说是用两把叉子来吃意大利面。这里具体是刀叉还是筷子并不重要，重要的是必须要同时持有<strong>左右两边的两个</strong>才行，也就是说，哲学家左手要拿到一根筷子，右手也要拿到一根筷子，在这种情况下哲学家才能吃饭。</p>
+<h4 id="读者-写者问题">读者-写者问题</h4>
+<p>例如，设想一个飞机订票系统，其中有许多竞争的进程试图读写其中的数据。多个进程同时读数据库是可以接受的，但如果一个进程正在更新（写）数据库，则所有的其他进程都不能访问该数据库，即使读操作也不行。</p>
+<h3 id="小结">小结</h3>
+<ul>
+<li>
+<p>为了隐蔽中断的影响，操作系统提供了一个由并行运行的顺序进程组成的概念模型。进程可以动态地创建和终止。每个进程都有自己的地址空间。</p>
+</li>
+<li>
+<p>对于某些应用而言，在一个进程中使用多个控制线程是有益的。这些线程被独立调度，每个线程有自己的堆栈，但是在一个进程中的所有线程共享一个公共地址空间。线程可以在用户空间或内核中实现。</p>
+</li>
+<li>
+<p>进程之间通过进程间通信原语彼此通信，如信号量、管程或消息。这些原语用来确保同一时刻不会有两个进程在临界区中，免除了出现混乱的情形。进程可以处在运行、可运行或阻塞状态，并且在该进程或其他进程执行某个进程间通信原语时，可以改变其状态。线程间通信也是类似的。</p>
+</li>
+<li>
+<p>进程间通信原语可以用来解决诸如生产者-消费者问题、哲学家就餐问题和读者-写者问题等。即便有了这些原语，也要仔细设计以避免出错和死锁。</p>
+</li>
+<li>
+<p>已经有一大批研究出来的调度算法。某些算法主要用于批处理系统中，如<strong>最短作业优先调度算法。其他算法常用在批处理系统和交互式系统中，它们包括轮转调度、优先级调度、多级队列、保证调度、彩票调度以及公平分享调度等。有些系统将调度策略和调度机制清晰地分离，这样可以使用户对调度算法进行控制</strong>。</p>
+</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-03-25</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="/posts/thinking/%E8%B0%83%E5%BA%A6/" data-title="调度" data-hashtags="操作系统"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="/posts/thinking/%E8%B0%83%E5%BA%A6/" data-hashtag="操作系统"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="/posts/thinking/%E8%B0%83%E5%BA%A6/" data-title="调度"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="/posts/thinking/%E8%B0%83%E5%BA%A6/" data-title="调度"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Instapaper" data-sharer="instapaper" data-url="/posts/thinking/%E8%B0%83%E5%BA%A6/" data-title="调度" data-description="ココの调度"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/instapaper.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/posts/thinking/%E8%B0%83%E5%BA%A6/" data-title="调度"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/" class="prev" rel="prev" title="进程间通信"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>进程间通信</a>
+            <a href="/posts/thinking/wireshark_use/" class="next" rel="next" title="Wireshark的使用">Wireshark的使用<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">良い夢 - coding....</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="15816034825" target="_blank">ココ也叫CoCo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"ココのブログ - coding","id-2":"ココのブログ - coding"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

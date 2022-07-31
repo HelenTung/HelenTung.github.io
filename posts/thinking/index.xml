@@ -21,6 +21,14 @@
     <description><![CDATA[Wireshark的使用与常见错误 wireshark的主要作用是为了诊断网络出现的问题，大致上比较重要的部分是过滤器与结果的表达，这两点是比]]></description>
 </item>
 <item>
+    <title>调度</title>
+    <link>/posts/thinking/%E8%B0%83%E5%BA%A6/</link>
+    <pubDate>Thu, 25 Mar 2021 15:58:26 &#43;0800</pubDate>
+    <author>ココ</author>
+    <guid>/posts/thinking/%E8%B0%83%E5%BA%A6/</guid>
+    <description><![CDATA[调度 当计算机系统是多道程序设计系统时，通常就会有多个进程或线程同时竞争CPU。只要有两个或更多的进程处于就绪状态，这种情形就会发生。如果只有]]></description>
+</item>
+<item>
     <title>进程间通信</title>
     <link>/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</link>
     <pubDate>Mon, 22 Mar 2021 15:58:26 &#43;0800</pubDate>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>进程间通信 - ココのブログ</title><meta name="Description" content="ココの通信"><meta property="og:title" content="进程间通信" />
+<meta property="og:description" content="ココの通信" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/" /><meta property="og:image" content="/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-03-22T15:58:26+08:00" />
+<meta property="article:modified_time" content="2021-03-22T15:58:26+08:00" /><meta property="og:site_name" content="ココのブログ" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/logo.png"/>
+
+<meta name="twitter:title" content="进程间通信"/>
+<meta name="twitter:description" content="ココの通信"/>
+<meta name="application-name" content="ココのブログ">
+<meta name="apple-mobile-web-app-title" content="ココのブログ"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/" /><link rel="prev" href="/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%BA%BF%E7%A8%8B%E7%AF%87/" /><link rel="next" href="/posts/thinking/wireshark_use/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "进程间通信",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/thinking\/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1\/"
+        },"genre": "posts","keywords": "操作系统","wordcount":  5897 ,
+        "url": "\/posts\/thinking\/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1\/","datePublished": "2021-03-22T15:58:26+08:00","dateModified": "2021-03-22T15:58:26+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ココ"
+            },"description": "ココの通信"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ココのブログ"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> Me </a><a class="menu-item" href="/posts/coding/" title="算法"> Coding </a><a class="menu-item" href="/posts/thinking/" title="思考"> Thinking </a><a class="menu-item" href="/tags/" title="标签"> Label </a><a class="menu-item" href="/categories/" title="分类"> Category </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ココのブログ"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">Me</a><a class="menu-item" href="/posts/coding/" title="算法">Coding</a><a class="menu-item" href="/posts/thinking/" title="思考">Thinking</a><a class="menu-item" href="/tags/" title="标签">Label</a><a class="menu-item" href="/categories/" title="分类">Category</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">进程间通信</h1><h2 class="single-subtitle">通信</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="15816034825" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ココ</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>操作系统</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-03-22">2021-03-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5897 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#进程间通信">进程间通信</a>
+      <ul>
+        <li><a href="#竞争条件">竞争条件</a></li>
+        <li><a href="#临界区">临界区</a></li>
+        <li><a href="#忙等待的互斥">忙等待的互斥</a></li>
+        <li><a href="#睡眠与唤醒">睡眠与唤醒</a></li>
+        <li><a href="#信号量">信号量</a></li>
+        <li><a href="#互斥量">互斥量</a></li>
+        <li><a href="#管道">管道</a></li>
+        <li><a href="#消息传递">消息传递</a></li>
+        <li><a href="#屏障">屏障</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="进程间通信">进程间通信</h2>
+<blockquote>
+<p>简要地说，有三个问题。</p>
+</blockquote>
+<ul>
+<li>第一个问题与上面的叙述有关，即一个进程如何把信息传递给另一个。</li>
+<li>第二个要处理的问题是，确保两个或更多的进程在关键活动中不会出现交叉，例如，在飞机订票系统中的两个进程为不同的客户试图争夺飞机上的最后一个座位。</li>
+<li>第三个问题与正确的顺序有关（如果该顺序是有关联的话），比如，如果进程A产生数据而进程B打印数据，那么B在打印之前必须等待，直到A已经产生一些数据。我们将从下一节开始考察所有这三个问题。</li>
+</ul>
+<h3 id="竞争条件">竞争条件</h3>
+<blockquote>
+<p>即两个或多个进程读写某些共享数据，而最后的结果取决于进程运行的精确时序，称为竞争条件（race condition）</p>
+</blockquote>
+<p>在一些操作系统中，协作的进程可能共享一些彼此都能读写的公用存储区。这个公用存储区可能在内存中（可能是在内核数据结构中），也可能是一个共享文件。这里共享存储区的位置并不影响通信的本质及其带来的问题。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e7%ab%9e%e4%ba%89%e6%9d%a1%e4%bb%b6"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e7%ab%9e%e4%ba%89%e6%9d%a1%e4%bb%b6, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e7%ab%9e%e4%ba%89%e6%9d%a1%e4%bb%b6 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e7%ab%9e%e4%ba%89%e6%9d%a1%e4%bb%b6 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程间通信/竞争条件"
+        title="两个进程同时想访问共享内存" /></p>
+<p>怎样避免竞争条件？实际上凡涉及共享内存、共享文件以及共享任何资源的情况都会引发与前面类似的错误，要避免这种错误，关键是要找出某种途径来阻止多个进程同时读写共享的数据。</p>
+<blockquote>
+<p>换言之，我们需要的是互斥（mutual exclusion），即以某种手段确保当一个进程在使用一个共享变量或文件时，其他进程不能做同样的操作。</p>
+</blockquote>
+<h3 id="临界区">临界区</h3>
+<blockquote>
+<p>我们把对共享内存进行访问的程序片段称作临界区域（critical region）或临界区（critical section）</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e4%b8%b4%e7%95%8c%e5%8c%ba"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e4%b8%b4%e7%95%8c%e5%8c%ba, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e4%b8%b4%e7%95%8c%e5%8c%ba 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e4%b8%b4%e7%95%8c%e5%8c%ba 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程间通信/临界区"
+        title="使用临界区的互斥" />
+对于一个好的解决方案，需要满足以下4个条件：</p>
+<ul>
+<li>任何两个进程不能同时处于其临界区。</li>
+<li>不应对CPU的速度和数量做任何假设。</li>
+<li>临界区外运行的进程不得阻塞其他进程。</li>
+<li>不得使进程无限期等待进入临界区。</li>
+</ul>
+<h3 id="忙等待的互斥">忙等待的互斥</h3>
+<h4 id="屏蔽中断">屏蔽中断</h4>
+<ul>
+<li>意义</li>
+</ul>
+<p>在单处理器系统中，最简单的方法是使每个进程在刚刚进入临界区后立即屏蔽所有中断，并在就要离开之前再打开中断。屏蔽中断后，时钟中断也被屏蔽。CPU只有发生时钟中断或其他中断时才会进行进程切换，这样，在屏蔽中断之后CPU将不会被切换到其他进程。于是，一旦某个进程屏蔽中断之后，它就可以检查和修改共享内存，而不必担心其他进程介入。</p>
+<ul>
+<li>缺陷</li>
+</ul>
+<p>把屏蔽中断的权力交给用户进程是不明智的。设想一下，若一个进程屏蔽中断后不再打开中断，其结果将会如何？整个系统可能会因此终止。而且，如果系统是多处理器（有两个或可能更多的处理器），则屏蔽中断仅仅对执行disable指令的那个CPU有效。其他CPU仍将继续运行，并可以访问共享内存。<strong>屏蔽一个CPU的中断不会阻止其他CPU干预第一个CPU所做的操作</strong>。结果是人们需要更加复杂的计划。</p>
+<blockquote>
+<p>所以结论是：屏蔽中断对于操作系统本身而言是一项很有用的技术，但对于用户进程则不是一种合适的通用互斥机制。</p>
+</blockquote>
+<h4 id="锁变量">锁变量</h4>
+<ul>
+<li>意义</li>
+</ul>
+<p>设想有一个共享（锁）变量，其初始值为0。当一个进程想进入其临界区时，它首先测试这把锁。如果该锁的值为0，则该进程将其设置为1并进入临界区。若这把锁的值已经为1，则该进程将等待直到其值变为0。于是，0就表示临界区内没有进程，1表示已经有某个进程进入临界区。</p>
+<ul>
+<li>缺陷</li>
+</ul>
+<p>这种想法也包含了与假脱机目录一样的疏漏。假设一个进程读出锁变量的值并发现它为0，而恰好在它将其值设置为1之前，另一个进程被调度运行，将该锁变量设置为1。当第一个进程再次能运行时，它同样也将该锁设置为1，则此时同时有两个进程进入临界区中。同样还会发生竞争条件。</p>
+<h4 id="严格轮换法">严格轮换法</h4>
+<p>整型变量turn，初始值为0，用于记录轮到哪个进程进入临界区，并检查或更新共享内存。开始时，进程0检查turn，发现其值为0，于是进入临界区。进程1也发现其值为0，所以在一个等待循环中不停地测试turn，看其值何时变为1。连续测试一个变量直到某个值出现为止，称为忙等待（busy waiting）。由于这种方式浪费CPU时间，所以通常应该避免。</p>
+<blockquote>
+<p>只有在有理由认为等待时间是非常短的情形下，才使用忙等待。用于忙等待的锁，称为自旋锁（spin lock）。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e8%bd%ae%e6%8d%a2%e6%b3%95"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e8%bd%ae%e6%8d%a2%e6%b3%95, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e8%bd%ae%e6%8d%a2%e6%b3%95 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e8%bd%ae%e6%8d%a2%e6%b3%95 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程间通信/轮换法"
+        title="临界区问题的一种解法（在两种情况下请注意分号终止了while语句）：a)进程0；b)进程1" /></p>
+<p>进程0离开临界区时，它将turn的值设置为1，以便允许进程1进入其临界区。假设进程1很快便离开了临界区，则此时两个进程都处于临界区之外，turn的值又被设置为0。现在进程0很快就执行完其整个循环，它退出临界区，并将turn的值设置为1。此时，turn的值为1，两个进程都在其临界区外执行。</p>
+<p>突然，进程0结束了非临界区的操作并且返回到循环的开始。但是，这时它不能进入临界区，因为turn的当前值为1，而此时进程1还在忙于非临界区的操作，进程0只有继续while循环，直到进程1把turn的值改为0。这说明，在一个进程比另一个慢了很多的情况下，轮流进入临界区并不是一个好办法。</p>
+<p>尽管该算法的确避免了所有的竞争条件，但由于它违反了条件3，所以不能作为一个很好的备选方案。</p>
+<h4 id="peterson解法">Peterson解法</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e8%a7%a3%e6%b3%95"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e8%a7%a3%e6%b3%95, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e8%a7%a3%e6%b3%95 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e8%a7%a3%e6%b3%95 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程间通信/解法"
+        title="完成互斥的Peterson解法" /></p>
+<p>在使用共享变量（即进入其临界区）之前，各个进程使用其进程号0或1作为参数来调用enter_region。该调用在需要时将使进程等待，直到能安全地进入临界区。在完成对共享变量的操作之后，进程将调用leave_region，表示操作已完成，若其他的进程希望进入临界区，则现在就可以进入。</p>
+<p>一开始，没有任何进程处于临界区中，现在进程0调用enter_region。它通过设置其数组元素和将turn置为0来标识它希望进入临界区。由于进程1并不想进入临界区，所以enter_region很快便返回。如果进程1现在调用enter_region，进程1将在此处挂起直到interested[0]变成FALSE，该事件只有在进程0调用leave_region退出临界区时才会发生。</p>
+<p>现在考虑两个进程几乎同时调用enter_region的情况。它们都将自己的进程号存入turn，但只有后被保存进去的进程号才有效，前一个因被重写而丢失。假设进程1是后存入的，则turn为1。当两个进程都运行到while语句时，进程0将循环0次并进入临界区，而进程1则将不停地循环且不能进入临界区，直到进程0退出临界区为止。</p>
+<h4 id="tsl指令">TSL指令</h4>
+<blockquote>
+<p>TSL RX,LOCK</p>
+</blockquote>
+<p>称为测试并加锁（Test and Set Lock），它将一个内存字lock读到寄存器RX中，然后在该内存地址上存一个非零值。读字和写字操作保证是不可分割的，即该指令结束之前其他处理器均不允许访问该内存字。执行TSL指令的CPU将锁住内存总线，以禁止其他CPU在本指令结束之前访问内存。</p>
+<blockquote>
+<p>注意</p>
+</blockquote>
+<p>锁住存储总线不同于屏蔽中断。屏蔽中断，然后在读内存字之后跟着写操作并不能阻止总线上的第二个处理器在读操作和写操作之间访问该内存字。事实上，在处理器1上屏蔽中断对处理器2根本没有任何影响。让处理器2远离内存直到处理器1完成的惟一方法就是锁住总线，这需要一个特殊的硬件设施（基本上，一根总线就可以确保总线由锁住它的处理器使用，而其他的处理器不能用）。</p>
+<h3 id="睡眠与唤醒">睡眠与唤醒</h3>
+<blockquote>
+<p>Peterson解法和TSL或XCHG解法都是正确的，但它们都有忙等待的缺点。这些解法在本质上是这样的：当一个进程想进入临界区时，先检查是否允许进入，若不允许，则该进程将原地等待，直到允许为止。</p>
+</blockquote>
+<p>考虑一台计算机有两个进程，H优先级较高，L优先级较低。调度规则规定，只要H处于就绪态它就可以运行。在某一时刻，L处于临界区中，此时H变到就绪态，准备运行（例如，一条I/O操作结束）。现在H开始忙等待，但由于当H就绪时L不会被调度，也就无法离开临界区，所以H将永远忙等待下去。这种情况有时被称作<strong>优先级反转问题（priority inversion problem）</strong>。</p>
+<blockquote>
+<p>生产者-消费者（producer-consumer）问题，也称作有界缓冲区（bounded-buffer）问题。</p>
+</blockquote>
+<p>两个进程共享一个公共的固定大小的缓冲区。其中一个是生产者，将信息放入缓冲区；另一个是消费者，从缓冲区中取出信息。（也可以把这个问题一般化为m个生产者和n个消费者问题，但是我们只讨论一个生产者和一个消费者的情况，这样可以简化解决方案。）</p>
+<p>问题在于当缓冲区已满，而此时生产者还想向其中放入一个新的数据项的情况。其解决办法是让生产者睡眠，待消费者从缓冲区中取出一个或多个数据项时再唤醒它。同样地，当消费者试图从缓冲区中取数据而发现缓冲区为空时，消费者就睡眠，直到生产者向其中放入一些数据时再将其唤醒。</p>
+<blockquote>
+<p>这个方法听起来很简单，但它包含与前边假脱机目录问题一样的竞争条件。为了跟踪缓冲区中的数据项数，我们需要一个变量count。</p>
+</blockquote>
+<p>如果缓冲区最多存放N个数据项，则生产者代码将首先检查count是否达到N，若是，则生产者睡眠；否则生产者向缓冲区中放入一个数据项并增量count的值。消费者的代码与此类似：首先测试count是否为0，若是，则睡眠；否则从中取走一个数据项并递减count的值。每个进程同时也检测另一个进程是否应被唤醒，若是则唤醒之。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e7%94%9f%e4%ba%a7%e6%b6%88%e8%b4%b9%e8%80%85"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e7%94%9f%e4%ba%a7%e6%b6%88%e8%b4%b9%e8%80%85, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e7%94%9f%e4%ba%a7%e6%b6%88%e8%b4%b9%e8%80%85 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e7%94%9f%e4%ba%a7%e6%b6%88%e8%b4%b9%e8%80%85 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程间通信/生产消费者"
+        title="含有严重竞争条件的生产者-消费者问题" /></p>
+<p>现在回到竞争条件的问题。这里有可能会出现竞争条件，其原因是对count的访问未加限制。有可能出现以下情况：缓冲区为空，消费者刚刚读取count的值发现它为0。此时调度程序决定暂停消费者并启动运行生产者。生产者向缓冲区中加入一个数据项，count加1。现在count的值变成了1。它推断认为由于count刚才为0，所以消费者此时一定在睡眠，于是生产者调用wakeup来唤醒消费者。但是，消费者此时在逻辑上并未睡眠，所以wakeup信号丢失。当消费者下次运行时，它将测试先前读到的count值，发现它为0，于是睡眠。生产者迟早会填满整个缓冲区，然后睡眠。这样一来，两个进程都将永远睡眠下去。</p>
+<blockquote>
+<p>问题的实质在于发给一个（尚）未睡眠进程的wakeup信号丢失了。如果它没有丢失，则一切都很正常。</p>
+</blockquote>
+<p>一种快速的弥补方法是修改规则，加上一个唤醒等待位。当一个wakeup信号发送给一个清醒的进程信号时，将该位置1。随后，当该进程要睡眠时，如果唤醒等待位为1，则将该位清除，而该进程仍然保持清醒。唤醒等待位实际上就是wakeup信号的一个小仓库。</p>
+<h3 id="信号量">信号量</h3>
+<blockquote>
+<p>信号量是E.W.Dijkstra在1965年提出的一种方法，它使用一个整型变量来累计唤醒次数，供以后使用。在他的建议中引入了一个新的变量类型，称作信号量（semaphore）。一个信号量的取值可以为0（表示没有保存下来的唤醒操作）或者为正值（表示有一个或多个唤醒操作）。</p>
+</blockquote>
+<p>检查数值、修改变量值以及可能发生的睡眠操作均作为一个单一的、不可分割的原子操作完成。保证一旦一个信号量操作开始，则在该操作完成或阻塞之前，其他进程均不允许访问该信号量。</p>
+<blockquote>
+<p>所谓原子操作，是指一组相关联的操作要么都不间断地执行，要么都不执行。原子操作在计算机科学的其他领域也是非常重要的。</p>
+</blockquote>
+<p>读者必须搞清楚，使用TSL或XCHG指令来防止几个CPU同时访问一个信号量，这与生产者或消费者使用忙等待来等待对方腾出或填充缓冲区是完全不同的。信号量操作仅需几个毫秒，而生产者或消费者则可能需要任意长的时间。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e4%bf%a1%e5%8f%b7%e9%87%8f"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e4%bf%a1%e5%8f%b7%e9%87%8f, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e4%bf%a1%e5%8f%b7%e9%87%8f 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e4%bf%a1%e5%8f%b7%e9%87%8f 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程间通信/信号量"
+        title="使用信号量的生产者-消费者问题" /></p>
+<blockquote>
+<p>信号量的另一种用途是用于实现同步（synchronization）。信号量full和empty用来保证某种事件的顺序发生或不发生。在本例中，它们保证当缓冲区满的时候生产者停止运行，以及当缓冲区空的时候消费者停止运行。这种用法与互斥是不同的。</p>
+</blockquote>
+<h3 id="互斥量">互斥量</h3>
+<blockquote>
+<p>如果不需要信号量的计数能力，有时可以使用信号量的一个简化版本，称为互斥量（mutex）。互斥量仅仅适用于管理共享资源或一小段代码。由于互斥量在实现时既容易又有效，这使得互斥量在实现用户空间线程包时非常有用。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e4%ba%92%e6%96%a5%e9%87%8f"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e4%ba%92%e6%96%a5%e9%87%8f, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e4%ba%92%e6%96%a5%e9%87%8f 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e4%ba%92%e6%96%a5%e9%87%8f 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程间通信/互斥量"
+        title="mutex_lock和mutex_unlock的实现" /></p>
+<p>互斥量是一个可以处于两态之一的变量：解锁和加锁。这样，只需要一个二进制位表示它，不过实际上，常常使用一个整型量，0表示解锁，而其他所有的值则表示加锁。互斥量使用两个过程。当一个线程（或进程）需要访问临界区时，它调用mutex_lock。如果该互斥量当前是解锁的（即临界区可用），此调用成功，调用线程可以自由进入该临界区。</p>
+<p>另一方面，如果该互斥量已经加锁，调用线程被阻塞，直到在临界区中的线程完成并调用mutex_unlock。如果多个线程被阻塞在该互斥量上，将随机选择一个线程并允许它获得锁。</p>
+<blockquote>
+<p>Pthread中的互斥</p>
+</blockquote>
+<p><strong>Pthread提供许多可以用来同步线程的函数。其基本机制是使用一个可以被锁定和解锁的互斥量来保护每个临界区。</strong></p>
+<blockquote>
+<p>除互斥量之外，pthread提供了另一种同步机制：条件变量。互斥量在允许或阻塞对临界区的访问上是很有用的，条件变量则允许线程由于一些未达到的条件而阻塞。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e4%ba%92%e6%96%a5%e8%b0%83%e7%94%a8"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e4%ba%92%e6%96%a5%e8%b0%83%e7%94%a8, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e4%ba%92%e6%96%a5%e8%b0%83%e7%94%a8 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e4%ba%92%e6%96%a5%e8%b0%83%e7%94%a8 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程间通信/互斥调用"
+        title="一些与互斥量相关的pthread调用" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e6%9d%a1%e4%bb%b6%e8%b0%83%e7%94%a8"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e6%9d%a1%e4%bb%b6%e8%b0%83%e7%94%a8, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e6%9d%a1%e4%bb%b6%e8%b0%83%e7%94%a8 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e6%9d%a1%e4%bb%b6%e8%b0%83%e7%94%a8 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程间通信/条件调用"
+        title="一些与条件变量相关的pthread调用" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e5%88%a9%e7%94%a8%e7%ba%bf%e7%a8%8b%e8%a7%a3%e5%86%b3"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e5%88%a9%e7%94%a8%e7%ba%bf%e7%a8%8b%e8%a7%a3%e5%86%b3, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e5%88%a9%e7%94%a8%e7%ba%bf%e7%a8%8b%e8%a7%a3%e5%86%b3 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e5%88%a9%e7%94%a8%e7%ba%bf%e7%a8%8b%e8%a7%a3%e5%86%b3 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程间通信/利用线程解决"
+        title="利用线程解决生产者-消费者问题" /></p>
+<h3 id="管道">管道</h3>
+<blockquote>
+<p>为了更易于编写正确的程序，Brinch Hansen（1973）和Hoare（1974）提出了一种高级同步原语，称为管程（monitor）</p>
+</blockquote>
+<p>管道有一个很重要的特性，即任一时刻管道中只能有一个活跃进程，这一特性使管道能有效地完成互斥。管道是编程语言的组成部分，编译器知道它们的特殊性，因此可以采用与其他过程调用不同的方法来处理对管道的调用。</p>
+<p>进入管程时的互斥由编译器负责，但通常的做法是用<strong>一个互斥量或二元信号量</strong>。因为是由编译器而非程序员来安排互斥，所以出错的可能性要小得多。在任一时刻，写管程的人无须关心编译器是如何实现互斥的。他只需知道将所有的临界区转换成管程过程即可，决不会有两个进程同时执行临界区中的代码。</p>
+<blockquote>
+<p>与管程和信号量有关的另一个问题是，这些机制都是设计用来解决访问公共内存的一个或多个CPU上的互斥问题的。通过将信号量放在共享内存中并用TSL或XCHG指令来保护它们，可以避免竞争。</p>
+</blockquote>
+<p>如果一个分布式系统具有多个CPU，并且每个CPU拥有自己的私有内存，它们通过一个局域网相连，那么这些原语将失效。这里的结论是：信号量太低级了，而管程在少数几种编程语言之外又无法使用，并且，这些原语均未提供机器间的信息交换方法。所以还需要其他的方法。</p>
+<h3 id="消息传递">消息传递</h3>
+<blockquote>
+<p>。这种进程间通信的方法使用两条原语send和receive，它们像信号量而不像管程，是系统调用而不是语言成分。因此，可以很容易地将它们加入到库例程中去。例如：<strong>send(destination,＆message);receive(source,＆message);</strong></p>
+</blockquote>
+<p>前一个调用向一个给定的目标发送一条消息，后一个调用从一个给定的源（或者是任意源，如果接收者不介意的话）接收一条消息。如果没有消息可用，则接收者可能被阻塞，直到一条消息到达，或者，带着一个错误码立即返回。</p>
+<h3 id="屏障">屏障</h3>
+<blockquote>
+<p>最后一个同步机制是准备用于进程组而不是用于双进程的生产者-消费者类情形的。在有些应用中划分了若干阶段，并且规定，除非所有的进程都就绪准备着手下一个阶段，否则任何进程都不能进入下一个阶段。可以通过在每个阶段的结尾安置屏障（barrier）来实现这种行为。当一个进程到达屏障时，它就被屏障阻拦，直到所有进程都到达该屏障为止。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e5%b1%8f%e9%9a%9c"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e5%b1%8f%e9%9a%9c, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e5%b1%8f%e9%9a%9c 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e9%97%b4%e9%80%9a%e4%bf%a1/%e5%b1%8f%e9%9a%9c 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程间通信/屏障"
+        title="屏障的使用" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-03-22</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/" data-title="进程间通信" data-hashtags="操作系统"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/" data-hashtag="操作系统"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/" data-title="进程间通信"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/" data-title="进程间通信"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Instapaper" data-sharer="instapaper" data-url="/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/" data-title="进程间通信" data-description="ココの通信"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/instapaper.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/" data-title="进程间通信"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%BA%BF%E7%A8%8B%E7%AF%87/" class="prev" rel="prev" title="进程与线程～线程篇"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>进程与线程～线程篇</a>
+            <a href="/posts/thinking/wireshark_use/" class="next" rel="next" title="Wireshark的使用">Wireshark的使用<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">良い夢 - coding....</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="15816034825" target="_blank">ココ也叫CoCo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"ココのブログ - coding","id-2":"ココのブログ - coding"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

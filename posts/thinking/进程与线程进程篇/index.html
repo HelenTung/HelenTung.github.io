@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>进程与线程～进程篇 - ココのブログ</title><meta name="Description" content="ココの进程"><meta property="og:title" content="进程与线程～进程篇" />
+<meta property="og:description" content="ココの进程" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87/" /><meta property="og:image" content="/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-03-20T15:58:26+08:00" />
+<meta property="article:modified_time" content="2021-03-20T15:58:26+08:00" /><meta property="og:site_name" content="ココのブログ" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/logo.png"/>
+
+<meta name="twitter:title" content="进程与线程～进程篇"/>
+<meta name="twitter:description" content="ココの进程"/>
+<meta name="application-name" content="ココのブログ">
+<meta name="apple-mobile-web-app-title" content="ココのブログ"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87/" /><link rel="prev" href="/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/" /><link rel="next" href="/posts/thinking/wireshark_use/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "进程与线程～进程篇",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/thinking\/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87\/"
+        },"genre": "posts","wordcount":  3538 ,
+        "url": "\/posts\/thinking\/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87\/","datePublished": "2021-03-20T15:58:26+08:00","dateModified": "2021-03-20T15:58:26+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ココ"
+            },"description": "ココの进程"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ココのブログ"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> Me </a><a class="menu-item" href="/posts/coding/" title="算法"> Coding </a><a class="menu-item" href="/posts/thinking/" title="思考"> Thinking </a><a class="menu-item" href="/tags/" title="标签"> Label </a><a class="menu-item" href="/categories/" title="分类"> Category </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ココのブログ"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">Me</a><a class="menu-item" href="/posts/coding/" title="算法">Coding</a><a class="menu-item" href="/posts/thinking/" title="思考">Thinking</a><a class="menu-item" href="/tags/" title="标签">Label</a><a class="menu-item" href="/categories/" title="分类">Category</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">进程与线程～进程篇</h1><h2 class="single-subtitle">进程篇</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="15816034825" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ココ</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-03-20">2021-03-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3538 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#进程与线程进程篇">进程与线程～进程篇</a>
+      <ul>
+        <li><a href="#进程">进程</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="进程与线程进程篇">进程与线程～进程篇</h2>
+<h3 id="进程">进程</h3>
+<h4 id="进程模型">进程模型</h4>
+<blockquote>
+<p>一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值。从概念上说，每个进程拥有它自己的虚拟CPU。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e7%a8%8b%e5%ba%8f%e8%ae%a1%e6%95%b0%e5%99%a8.png"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e7%a8%8b%e5%ba%8f%e8%ae%a1%e6%95%b0%e5%99%a8.png, /images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e7%a8%8b%e5%ba%8f%e8%ae%a1%e6%95%b0%e5%99%a8.png 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e7%a8%8b%e5%ba%8f%e8%ae%a1%e6%95%b0%e5%99%a8.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程与线程/程序计数器.png"
+        title="/images/thinking/进程与线程/程序计数器.png" /></p>
+<p>在一台多道程序计算机的内存中有4道程序。在图2-1b中，这4道程序被抽象为4个各自拥有自己控制流程（即每个程序自己的逻辑程序计数器）的进程，并且每个程序都独立地运行。当然，实际上只有一个物理程序计数器，所以在每个程序运行时，它的逻辑程序计数器被装入实际的程序计数器中。当该程序执行结束（或暂停执行）时，物理程序计数器被保存在内存中该进程的逻辑程序计数器中</p>
+<p>在观察足够长的一段时间后，所有的进程都运行了，但在任何一个给定的瞬间仅有一个进程真正在运行。</p>
+<blockquote>
+<p>一个进程是某种类型的一个活动，它有程序、输入、输出以及状态。单个处理器可以被若干进程共享，它使用某种调度算法决定何时停止一个进程的工作，并转而为另一个进程提供服务。</p>
+</blockquote>
+<h4 id="创建进程">创建进程</h4>
+<blockquote>
+<p>有4种主要事件导致进程的创建：</p>
+</blockquote>
+<ul>
+<li>系统初始化。</li>
+</ul>
+<blockquote>
+<p>启动操作系统时，通常会创建若干个进程。</p>
+</blockquote>
+<ul>
+<li>执行了正在运行的进程所调用的进程创建系统调用。</li>
+</ul>
+<blockquote>
+<p>除了在启动阶段创建进程之外，新的进程也可以以后创建。一个正在运行的进程经常发出系统调用，以便创建一个或多个新进程协助其工作。</p>
+</blockquote>
+<ul>
+<li>用户请求创建一个新进程。</li>
+</ul>
+<blockquote>
+<p>在交互式系统中，键入一个命令或者点（双）击一个图标就可以启动一个程序。在基于命令行的UNIX系统中运行程序X，新的进程会从该进程接管开启它的窗口。</p>
+</blockquote>
+<ul>
+<li>一个批处理作业的初始化。</li>
+</ul>
+<blockquote>
+<p>最后一种创建进程的情形仅在大型机的批处理系统中应用。用户在这种系统中（可能是远程地）提交批处理作业。在操作系统认为有资源可运行另一个作业时，它创建一个新的进程，并运行其输入队列中的下一个作业。</p>
+</blockquote>
+<p>在UNIX和Windows中，进程创建之后，父进程和子进程有各自不同的地址空间。如果其中某个进程在其地址空间中修改了一个字，这个修改对其他进程而言是不可见的。在UNIX中，子进程的初始地址空间是父进程的一个副本，但是这里涉及两个不同的地址空间。</p>
+<blockquote>
+<p>停留在后台处理诸如电子邮件、Web页面、新闻、打印之类活动的进程称为守护进程（daemon）</p>
+</blockquote>
+<h4 id="进程的终止">进程的终止</h4>
+<ul>
+<li>正常退出（自愿的）</li>
+</ul>
+<blockquote>
+<p>多数进程是由于完成了它们的工作而终止。当编译器完成了所给定程序的编译之后，编译器执行一个系统调用，通知操作系统它的工作已经完成。在UNIX中该调用是exit，而在Windows中，相关的调用是ExitProcess。</p>
+</blockquote>
+<ul>
+<li>出错退出（自愿的）</li>
+</ul>
+<blockquote>
+<p>进程终止的第二个原因是进程发现了严重错误。例如，如果用户键入命令cc foo.c、要编译程序foo.c，但是该文件并不存在，于是编译器就会退出。</p>
+</blockquote>
+<ul>
+<li>严重错误（非自愿）</li>
+</ul>
+<blockquote>
+<p>进程终止的第三个原因是由进程引起的错误，通常是由于程序中的错误所致。例如，执行了一条非法指令、引用不存在的内存，或除数是零等。有些系统中（如UNIX），进程可以通知操作系统，它希望自行处理某些类型的错误，在这类错误中，进程会收到信号（被中断），而不是在这类错误出现时终止。</p>
+</blockquote>
+<ul>
+<li>被其他进程杀死（非自愿）</li>
+</ul>
+<blockquote>
+<p>第四种终止进程的原因是，某个进程执行一个系统调用通知操作系统杀死某个其他进程。在UNIX中，这个系统调用是kill。在Win32中对应的函数是TerminateProcess。在这两种情形中，“杀手”都必须获得确定的授权以便进行动作。</p>
+</blockquote>
+<h4 id="进程的层次结构">进程的层次结构</h4>
+<blockquote>
+<p>某些系统中，当进程创建了另一个进程后，父进程和子进程就以某种形式继续保持关联。子进程自身可以创建更多的进程，组成一个进程的层次结构。进程只有一个父进程（但是可以有零个、一个、两个或多个子进程）。</p>
+</blockquote>
+<p><strong>在UNIX中，进程和它的所有子女以及后裔共同组成一个进程组。</strong></p>
+<blockquote>
+<p>当用户从键盘发出一个信号时，该信号被送给当前与键盘相关的进程组中的所有成员（它们通常是在当前窗口创建的所有活动进程）。每个进程可以分别捕获该信号、忽略该信号或采取默认的动作，即被该信号杀死。</p>
+</blockquote>
+<p>这里有另一个例子，可以用来说明进程层次的作用，考虑UNIX在启动时如何初始化自己。一个称为init的特殊进程出现在启动映像中。当它开始运行时，读入一个说明终端数量的文件。接着，为每个终端创建一个新进程。这些进程等待用户登录。如果有一个用户登录成功，该登录进程就执行一个shell准备接收命令。所接收的这些命令会启动更多的进程，以此类推。<strong>这样，在整个系统中，所有的进程都属于以init为根的一棵树。</strong></p>
+<blockquote>
+<p>相反，Windows中没有进程层次的概念，所有的进程都是地位相同的。惟一类似于进程层次的暗示是在创建进程的时侯，父进程得到一个特别的令牌（称为句柄），该句柄可以用来控制子进程。但是，它有权把这个令牌传送给某个其他进程，这样就不存在进程层次了。在UNIX中，进程就不能剥夺其子女的“继承权”。</p>
+</blockquote>
+<h4 id="进程的状态">进程的状态</h4>
+<ul>
+<li>运行态（该时刻进程实际占用CPU）</li>
+<li>就绪态（可运行，但因为其他进程正在运行而暂时停止）</li>
+<li>阻塞态（除非某种外部事件发生，否则进程不能运行）</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e8%bf%9b%e7%a8%8b%e7%8a%b6%e6%80%81.png"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e8%bf%9b%e7%a8%8b%e7%8a%b6%e6%80%81.png, /images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e8%bf%9b%e7%a8%8b%e7%8a%b6%e6%80%81.png 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e8%bf%9b%e7%a8%8b%e7%8a%b6%e6%80%81.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程与线程/进程状态.png"
+        title="/images/thinking/进程与线程/进程状态.png" /></p>
+<p>在操作系统发现进程不能继续运行下去时，发生转换1。转换2和3是由进程调度程序引起的，进程调度程序是操作系统的一部分，进程甚至感觉不到调度程序的存在。系统认为一个运行进程占用处理器的时间已经过长，决定让其他进程使用CPU时间时，会发生转换2。在系统已经让所有其他进程享有了它们应有的公平待遇而重新轮到第一个进程再次占用CPU运行时，会发生转换3。当进程等待的一个外部事件发生时（如一些输入到达），则发生转换4</p>
+<blockquote>
+<p>从这个观点引出了所示的模型、操作系统的最底层是调度程序，在它上面有许多进程。所有关于中断处理、启动进程和停止进程的具体细节都隐藏在调度程序中。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e8%b0%83%e5%ba%a6%e8%bf%9b%e7%a8%8b.png"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e8%b0%83%e5%ba%a6%e8%bf%9b%e7%a8%8b.png, /images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e8%b0%83%e5%ba%a6%e8%bf%9b%e7%a8%8b.png 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e8%b0%83%e5%ba%a6%e8%bf%9b%e7%a8%8b.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程与线程/调度进程.png"
+        title="以进程构造的操作系统最底层处理中断和调度，在该层之上是顺序进程" /></p>
+<h4 id="进程的实现">进程的实现</h4>
+<blockquote>
+<p>**为了实现进程模型，操作系统维护着一张表格（一个结构数组），即进程表（process table）。**每个进程占用一个进程表项。（有些作者称这些表项为进程控制块。）该表项包含了进程状态的重要信息，包括程序计数器、堆栈指针、内存分配状况、所打开文件的状态、账号和调度信息，以及其他在进程由运行态转换到就绪态或阻塞态时必须保存的信息，从而保证该进程随后能再次启动，就像从未被中断过一样。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e8%bf%9b%e7%a8%8b%e8%a1%a8.png"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e8%bf%9b%e7%a8%8b%e8%a1%a8.png, /images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e8%bf%9b%e7%a8%8b%e8%a1%a8.png 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e8%bf%9b%e7%a8%8b%e8%a1%a8.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程与线程/进程表.png"
+        title="/images/thinking/进程与线程/进程表.png" /></p>
+<blockquote>
+<p>第一列中的字段与进程管理有关。其他两列分别与存储管理和文件管理有关。</p>
+</blockquote>
+<p>在了解进程表后，就可以对在单个（或每一个）CPU上如何维持多个顺序进程的错觉做更多的阐述。与每一I/O类关联的是一个称作中断向量（interrupt vector）的位置（靠近内存底部的固定区域）。<strong>它包含中断服务程序的入口地址</strong>。假设<strong>当一个磁盘中断发生时，用户进程3正在运行，则中断硬件将程序计数器、程序状态字，有时还有一个或多个寄存器压入堆栈，计算机随即跳转到中断向量所指示的地址</strong>。这些是硬件完成的所有操作，<strong>然后软件，特别是中断服务例程就接管一切剩余的工作。</strong></p>
+<p><strong>所有的中断都从保存寄存器开始，对于当前进程而言，通常是在进程表项中</strong>。随后，<strong>会从堆栈中删除由中断硬件机制存入堆栈的那部分信息，并将堆栈指针指向一个由进程处理程序所使用的临时堆栈</strong>。一些诸如保存寄存器值和设置堆栈指针等操作，无法用C语言这一类高级语言描述，所以这些操作通过一个短小的汇编语言例程来完成，通常该例程可以供所有的中断使用，因为无论中断是怎样引起的，有关保存寄存器的工作则是完全一样的。</p>
+<p>当该例程结束后，<strong>它调用一个C过程处理某个特定的中断类型剩下的工作。</strong>（假定操作系统由C语言编写，通常这是所有真实操作系统的选择）。在完成有关工作之后，大概就会使某些进程就绪，<strong>接着调用调度程序，决定随后该运行哪个进程。随后将控制转给一段汇编语言代码，为当前的进程装入寄存器值以及内存映射并启动该进程运行</strong>。图2-5中总结了中断处理和调度的过程。值得注意的是，各种系统之间某些细节会有所不同。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e8%bf%9b%e7%a8%8b%e5%ae%9e%e7%8e%b0.png"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e8%bf%9b%e7%a8%8b%e5%ae%9e%e7%8e%b0.png, /images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e8%bf%9b%e7%a8%8b%e5%ae%9e%e7%8e%b0.png 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e8%bf%9b%e7%a8%8b%e5%ae%9e%e7%8e%b0.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程与线程/进程实现.png"
+        title="/images/thinking/进程与线程/进程实现.png" /></p>
+<h4 id="多道程序设计模型">多道程序设计模型</h4>
+<blockquote>
+<p>采用多道程序设计可以提高CPU的利用率。严格地说，如果进程用于计算的平均时间是进程在内存中停留时间的20%，且内存中同时有5个进程，则CPU将一直满负载运行。然而，这个模型在现实中过于乐观，因为它假设这5个进程不会同时等待I/O。</p>
+</blockquote>
+<p>更好的模型是从概率的角度来看CPU的利用率。假设一个进程等待I/O操作的时间与其停留在内存中时间的比为p。当内存中同时有n个进程时，则所有n个进程都在等待I/O（此时CPU空转）的概率是pn 。CPU的利用率由下面的公式给出：CPU利用率=1-p^n</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e5%a4%9a%e9%81%93%e7%a8%8b%e5%ba%8f%e8%ae%be%e8%ae%a1.png"
+        data-srcset="/images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e5%a4%9a%e9%81%93%e7%a8%8b%e5%ba%8f%e8%ae%be%e8%ae%a1.png, /images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e5%a4%9a%e9%81%93%e7%a8%8b%e5%ba%8f%e8%ae%be%e8%ae%a1.png 1.5x, /images/thinking/%e8%bf%9b%e7%a8%8b%e4%b8%8e%e7%ba%bf%e7%a8%8b/%e5%a4%9a%e9%81%93%e7%a8%8b%e5%ba%8f%e8%ae%be%e8%ae%a1.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/进程与线程/多道程序设计.png"
+        title="/images/thinking/进程与线程/多道程序设计.png" /></p>
+<blockquote>
+<p>从完全精确的角度考虑，应该指出此概率模型只是描述了一个大致的状况。它假设所有n个进程是独立的，即内存中的5个进程中，3个运行，2个等待，是完全可接受的。但在单CPU中，不能同时运行3个进程，所以当CPU忙时，已就绪的进程也必须等待CPU。因而，进程不是独立的。更精确的模型应该用排队论构造，但我们的模型（当进程就绪时，给进程分配CPU，否则让CPU空转）仍然是有效的</p>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-03-20</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87/" data-title="进程与线程～进程篇"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87/" data-title="进程与线程～进程篇"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87/" data-title="进程与线程～进程篇"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Instapaper" data-sharer="instapaper" data-url="/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87/" data-title="进程与线程～进程篇" data-description="ココの进程"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/instapaper.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87/" data-title="进程与线程～进程篇"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/" class="prev" rel="prev" title="操作系统结构"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>操作系统结构</a>
+            <a href="/posts/thinking/wireshark_use/" class="next" rel="next" title="Wireshark的使用">Wireshark的使用<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">良い夢 - coding....</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="15816034825" target="_blank">ココ也叫CoCo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"ココのブログ - coding","id-2":"ココのブログ - coding"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

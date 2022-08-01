@@ -39,6 +39,14 @@
     <description><![CDATA[Wireshark的使用与常见错误 wireshark的主要作用是为了诊断网络出现的问题，大致上比较重要的部分是过滤器与结果的表达，这两点是比]]></description>
 </item>
 <item>
+    <title>虚拟内存篇</title>
+    <link>/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/</link>
+    <pubDate>Thu, 01 Apr 2021 15:58:26 &#43;0800</pubDate>
+    <author>ココ</author>
+    <guid>/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/</guid>
+    <description><![CDATA[储存管理篇～虚拟内存技术 虚拟内存 尽管基址寄存器和界限寄存器可以用于创建地址空间的抽象，还有另一个问题需要解决：管理软件的膨胀（bloatwa]]></description>
+</item>
+<item>
     <title>存储管理篇</title>
     <link>/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/</link>
     <pubDate>Fri, 26 Mar 2021 15:58:26 &#43;0800</pubDate>
@@ -77,14 +85,6 @@
     <author>ココ</author>
     <guid>/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87/</guid>
     <description><![CDATA[进程与线程～进程篇 进程 进程模型 一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值。从概念上说，每个进程拥有它自己的虚拟]]></description>
-</item>
-<item>
-    <title>操作系统结构</title>
-    <link>/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/</link>
-    <pubDate>Wed, 17 Mar 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
-    <guid>/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/</guid>
-    <description><![CDATA[操作系统结构 这六种设计是，单体系统、层次系统、微内核、客户机-服务器系统、虚拟机和exokernels等 单体系统 需要一个主程序，用来处理服务]]></description>
 </item>
 </channel>
 </rss>

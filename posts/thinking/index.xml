@@ -21,6 +21,14 @@
     <description><![CDATA[Wireshark的使用与常见错误 wireshark的主要作用是为了诊断网络出现的问题，大致上比较重要的部分是过滤器与结果的表达，这两点是比]]></description>
 </item>
 <item>
+    <title>虚拟内存篇</title>
+    <link>/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/</link>
+    <pubDate>Thu, 01 Apr 2021 15:58:26 &#43;0800</pubDate>
+    <author>ココ</author>
+    <guid>/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/</guid>
+    <description><![CDATA[储存管理篇～虚拟内存技术 虚拟内存 尽管基址寄存器和界限寄存器可以用于创建地址空间的抽象，还有另一个问题需要解决：管理软件的膨胀（bloatwa]]></description>
+</item>
+<item>
     <title>存储管理篇</title>
     <link>/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/</link>
     <pubDate>Fri, 26 Mar 2021 15:58:26 &#43;0800</pubDate>

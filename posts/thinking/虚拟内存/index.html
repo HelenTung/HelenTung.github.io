@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>虚拟内存篇 - ココのブログ</title><meta name="Description" content="ココの虚拟内存篇"><meta property="og:title" content="虚拟内存篇" />
+<meta property="og:description" content="ココの虚拟内存篇" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" /><meta property="og:image" content="/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-04-01T15:58:26+08:00" />
+<meta property="article:modified_time" content="2021-04-01T15:58:26+08:00" /><meta property="og:site_name" content="ココのブログ" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/logo.png"/>
+
+<meta name="twitter:title" content="虚拟内存篇"/>
+<meta name="twitter:description" content="ココの虚拟内存篇"/>
+<meta name="application-name" content="ココのブログ">
+<meta name="apple-mobile-web-app-title" content="ココのブログ"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" /><link rel="prev" href="/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/" /><link rel="next" href="/posts/thinking/wireshark_use/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "虚拟内存篇",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/thinking\/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98\/"
+        },"genre": "posts","keywords": "操作系统","wordcount":  4316 ,
+        "url": "\/posts\/thinking\/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98\/","datePublished": "2021-04-01T15:58:26+08:00","dateModified": "2021-04-01T15:58:26+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ココ"
+            },"description": "ココの虚拟内存篇"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ココのブログ"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> Me </a><a class="menu-item" href="/posts/coding/" title="算法"> Coding </a><a class="menu-item" href="/posts/thinking/" title="思考"> Thinking </a><a class="menu-item" href="/tags/" title="标签"> Label </a><a class="menu-item" href="/categories/" title="分类"> Category </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ココのブログ"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">Me</a><a class="menu-item" href="/posts/coding/" title="算法">Coding</a><a class="menu-item" href="/posts/thinking/" title="思考">Thinking</a><a class="menu-item" href="/tags/" title="标签">Label</a><a class="menu-item" href="/categories/" title="分类">Category</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">虚拟内存篇</h1><h2 class="single-subtitle">储存管理～虚拟内存篇</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="15816034825" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ココ</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>操作系统</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-04-01">2021-04-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4316 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#储存管理篇虚拟内存技术">储存管理篇～虚拟内存技术</a>
+      <ul>
+        <li><a href="#虚拟内存">虚拟内存</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="储存管理篇虚拟内存技术">储存管理篇～虚拟内存技术</h2>
+<hr>
+<h3 id="虚拟内存">虚拟内存</h3>
+<blockquote>
+<p>尽管基址寄存器和界限寄存器可以用于创建地址空间的抽象，还有另一个问题需要解决：管理软件的膨胀（bloatware）。虽然存储器容量增长快速，但是软件大小的增长更快。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>虚拟内存的基本思想是：每个程序拥有自己的地址空间，这个空间被分割成多个块，每一块称作一页或页面（page）。每一页有连续的地址范围。</p>
+</blockquote>
+<p><strong>这些页被映射到物理内存，但并不是所有的页都必须在内存中才能运行程序</strong>。当程序引用到一部分在物理内存中的地址空间时，由硬件立刻执行必要的映射。<strong>当程序引用到一部分不在物理内存中的地址空间时，由操作系统负责将缺失的部分装入物理内存并重新执行失败的指令。</strong></p>
+<blockquote>
+<p>从某个角度来讲，虚拟内存是对基址寄存器和界限寄存器的一种综合。</p>
+</blockquote>
+<hr>
+<h4 id="分页">分页</h4>
+<blockquote>
+<p>由程序产生的这些地址称为虚拟地址（virtual address），它们构成了一个虚拟地址空间（virtual address space）。</p>
+</blockquote>
+<p>在没有虚拟内存的计算机上，系统直接将虚拟地址送到内存总线上，读写操作使用具有同样地址的物理内存字；而在使用虚拟内存的情况下，虚拟地址不是被直接送到内存总线上，而是被送到内存管理单元（Memory Management Unit，MMU），MMU把虚拟地址映射为物理内存地址。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/MMU"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/MMU, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/MMU 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/MMU 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/MMU"
+        title="MMU的位置和功能。这里MMU作为CPU芯片的一部分，因为通常就是这样做的。" /></p>
+<blockquote>
+<p>MMU的位置和功能。这里MMU作为CPU芯片的一部分，因为通常就是这样做的。不过从逻辑上看，它可以是一片单独的芯片，并且早就已经这样了</p>
+</blockquote>
+<hr>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%98%a0%e5%b0%84"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%98%a0%e5%b0%84, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%98%a0%e5%b0%84 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%98%a0%e5%b0%84 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/映射"
+        title="页表给出虚拟地址与物理内存地址之间的映射关系。" /></p>
+<blockquote>
+<p>虚拟地址空间按照固定大小划分成称为页面（page）的若干单元。在物理内存中对应的单元称为页框（page frame）。页面和页框的大小通常是一样的。<strong>RAM和磁盘之间的交换总是以整个页面为单元进行的。</strong></p>
+</blockquote>
+<p>通过恰当地设置MMU，可以把16个虚拟页面映射到8个页框中的任何一个。但是这并没有解决虚拟地址空间比物理内存大的问题。在图3-9中只有8个物理页框，于是只有8个虚拟页面被映射到了物理内存中，中用叉号表示的其他页并没有被映射。在实际的硬件中，用一个“在/不在”位（present/absent bit）记录页面在内存中的实际存在情况。</p>
+<p>当程序访问了一个未映射的页面，例如执行指令</p>
+<blockquote>
+<p><strong>MOV REG,32780</strong></p>
+</blockquote>
+<p>MMU注意到该页面没有被映射（在图中用叉号表示），于是使CPU陷入到操作系统，这个陷阱称为缺页中断（page fault）。操作系统找到一个很少使用的页框且把它的内容写入磁盘（如果它不在磁盘上）。随后把需要访问的页面读到刚才回收的页框中，修改映射关系，然后重新启动引起陷阱的指令。</p>
+<blockquote>
+<p>为什么我们选用的页面大小都是2的整数次幂。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e4%ba%86%e8%a7%a3"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e4%ba%86%e8%a7%a3, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e4%ba%86%e8%a7%a3 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e4%ba%86%e8%a7%a3 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/了解"
+        title="在16个4KB页面情况下MMU的内部操作" /></p>
+<p>可用<strong>页号作为页表（page table）的索引，以得出对应于该虚拟页面的页框号</strong>。如果“在/不在”位是0，则将引起一个操作系统陷阱。如果该位是1，则将在页表中查到的页框号复制到输出寄存器的高3位中，再加上输入虚拟地址中的低12位偏移量。如此就构成了15位的物理地址。输出寄存器的内容随即被作为物理地址送到内存总线。</p>
+<hr>
+<h4 id="页表">页表</h4>
+<blockquote>
+<p>作为一种最简单的实现，虚拟地址到物理地址的映射可以概括如下：虚拟地址被分成虚拟页号（高位部分）和偏移量（低位部分）两部分。</p>
+</blockquote>
+<p>对于16位地址和4KB的页面大小，高4位可以指定16个虚拟页面中的一页，而低12位接着确定了所选页面中的字节偏移量（0～4095）。</p>
+<p><strong>虚拟页号可用做页表的索引，以找到该虚拟页面对应的页表项</strong>。由页表项可以找到页框号（如果有的话）。然后把页框号拼接到偏移量的高位端，以替换掉虚拟页号，形成送往内存的物理地址。</p>
+<p><strong>页表的目的是把虚拟页面映射为页框</strong>。从数学角度说，页表是一个函数，它的参数是虚拟页号，结果是物理页框号。通过这个函数可以把虚拟地址中的虚拟页面域替换成页框域，从而形成物理地址。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e9%a1%b5%e8%a1%a8"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e9%a1%b5%e8%a1%a8, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e9%a1%b5%e8%a1%a8 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e9%a1%b5%e8%a1%a8 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/页表"
+        title="典型的页表项" /></p>
+<p>最重要的域是页框号。毕竟页映射的目的是找到这个值，其次是“在/不在”位，这一位是1时表示该表项是有效的，可以使用；如果是0，则表示该表项对应的虚拟页面现在不在内存中，访问该页面会引起一个缺页中断。</p>
+<p>“保护”（protection）位指出一个页允许什么类型的访问。最简单的形式是这个域只有一位，0表示读/写，1表示只读。一个更先进的方法是使用三位，各位分别对应是否启用读、写、执行该页面。</p>
+<blockquote>
+<p>为了记录页面的使用状况，引入了“修改”（modified）位和“访问”（referenced）位。</p>
+</blockquote>
+<p>在写入一页时由硬件自动设置修改位。该位在操作系统重新分配页框时是非常有用的。如果一个页面已经被修改过（即它是“脏”的），则必须把它写回磁盘。如果一个页面没有被修改过（即它是“干净”的），则只简单地把它丢弃就可以了，因为它在磁盘上的副本仍然是有效的。这一位有时也被称为脏位（dirty bit），因为它反映了该页面的状态。</p>
+<p>不论是读还是写，系统都会在该页面被访问时设置访问位。它的值被用来帮助操作系统在发生缺页中断时选择要被淘汰的页面。不再使用的页面要比正在使用的页面更适合淘汰。</p>
+<p>最后一位用于禁止该页面被高速缓存。对那些映射到设备寄存器而不是常规内存的页面而言，这个特性是非常重要的。通过这一位可以禁止高速缓存。具有独立的I/O空间而不使用内存映射I/O的机器不需要这一位。</p>
+<blockquote>
+<p>虚拟内存本质上是用来创造一个新的抽象概念——地址空间，这个概念是对物理内存的抽象，类似于进程是对物理机器（CPU）的抽象。虚拟内存的实现，是将虚拟地址空间分解成页，并将每一页映射到物理内存的某个页框或者（暂时）解除映射。</p>
+</blockquote>
+<hr>
+<h4 id="加速分页过程">加速分页过程</h4>
+<blockquote>
+<p>在任何分页式系统中，都需要考虑两个主要问题：</p>
+</blockquote>
+<ul>
+<li><strong>虚拟地址到物理地址的映射必须非常快。</strong></li>
+<li><strong>如果虚拟地址空间很大，页表也会很大。</strong></li>
+</ul>
+<blockquote>
+<p>第一个问题是由于每次访问内存，都需要进行虚拟地址到物理地址的映射。</p>
+</blockquote>
+<p>所有的指令最终都必须来自内存，并且很多指令也会访问内存中的操作数。因此，每条指令进行一两次或更多页表访问是必要的。如果执行一条指令需要1ns，页表查询必须在0.2ns之内完成，以避免映射成为一个主要瓶颈。</p>
+<blockquote>
+<p>第二个问题来自现代计算机使用至少32位的虚拟地址，而且64位变得越来越普遍。</p>
+</blockquote>
+<p>假设页长为4KB，32位的地址空间将有100万页，而64位地址空间简直多到超乎你的想象。如果虚拟地址空间中有100万个页，那么页表必然有100万条表项。另外请记住，每个进程都需要自己的页表（因为它有自己的虚拟地址空间）。</p>
+<p>对大而快速的页映射的需求成为了构建计算机的重要约束。最简单的设计（至少从概念上）是使用由一组“快速硬件寄存器”组成的单一页表，每一个表项对应一个虚页，虚页号作为索引，如图所示。</p>
+<p>另一种极端方法是，整个页表都在内存中。那时所需的硬件仅仅是一个指向页表起始位置的寄存器。。这样的设计使得在上下文切换时，进行“虚拟地址到物理地址”的映射只需重新装入一个寄存器。当然，这种做法的缺陷是在执行每条指令时，都需要一次或多次内存访问，以完成页表项的读入，速度非常慢。</p>
+<p>现在讨论加速分页机制和处理大的虚拟地址空间的实现方案，先介绍加速分页问题。大多数优化技术都是从内存中的页表开始的。这种设计对效率有着巨大的影响。例如，假设一条指令要把一个寄存器中的数据复制到另一个寄存器。在不分页的情况下，这条指令只访问一次内存，即从内存中取指令。有了分页后，则因为要访问页表而引起更多次的访问内存。由于执行速度通常被CPU从内存中取指令和数据的速度所限制，所以每次内存访问必须进行两次页表访问会降低一半的性能。在这种情况下，没人会采用分页机制。</p>
+<h5 id="转换检测缓冲区">转换检测缓冲区</h5>
+<p><strong>为计算机设置一个小型的硬件设备，将虚拟地址直接映射到物理地址，而不必再访问页表。这种设备称为转换检测缓冲区（Translation Lookaside Buffer，TLB），有时又称为相联存储器（associate memory）</strong></p>
+<blockquote>
+<p>这种解决方案的建立基于这样一种现象：大多数程序总是对少量的页面进行多次的访问，而不是相反的。因此，只有很少的页表项会被反复读取，而其他的页表项很少被访问。</p>
+</blockquote>
+<p>它通常在MMU中，包含少量的表项，在此例中为8个，在实际中很少会超过64个。每个表项记录了一个页面的相关信息，包括虚拟页号、页面的修改位、保护码（读/写/执行权限）和该页所对应的物理页框。除了虚拟页号（不是必须放在页表中的），这些域与页表中的域是一一对应的。另外还有一位用来记录这个表项是否有效（即是否在使用）。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%8a%a0%e9%80%9f%e5%88%86%e9%a1%b5"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%8a%a0%e9%80%9f%e5%88%86%e9%a1%b5, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%8a%a0%e9%80%9f%e5%88%86%e9%a1%b5 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%8a%a0%e9%80%9f%e5%88%86%e9%a1%b5 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/加速分页"
+        title="TLB加速分页" /></p>
+<blockquote>
+<p>TLB是如何工作的</p>
+</blockquote>
+<ul>
+<li>
+<p>将一个虚拟地址放入MMU中进行转换时，硬件首先通过将该虚拟页号与TLB中所有表项同时（即并行）进行匹配，判断虚拟页面是否在其中。如果发现了一个有效的匹配并且要进行的访问操作并不违反保护位，则将页框号直接从TLB中取出而不必再访问页表。如果虚拟页面号确实是在TLB中，但指令试图在一个只读页面上进行写操作，则会产生一个保护错误，就像对页表进行非法访问一样。</p>
+</li>
+<li>
+<p>当虚拟页号不在TLB中时发生的事情值得讨论。如果MMU检测到没有有效的匹配项时，就会进行正常的页表查询。接着从TLB中淘汰一个表项，然后用新找到的页表项代替它。这样，如果这一页面很快再被访问，第二次访问TLB时自然将会命中而不是不命中。当一个表项被清除出TLB时，将修改位复制到内存中的页表项，而除了访问位，其他的值不变。当页表项中从页表装入到TLB中时，所有的值都来自内存。</p>
+</li>
+</ul>
+<h5 id="软件tlb管理">软件TLB管理</h5>
+<p>许多现代的RISC机器，包括SPARC、MIPS以及HP PA，几乎所有的页面管理都是在软件中实现的。在这些机器上，TLB表项被操作系统显式地装载。当发生TLB访问失效，不再是由MMU到页表中查找并取出需要的页表项，而是<strong>生成一个TLB失效并将问题交给操作系统解决</strong>。系统必须先找到该页面，然后从TLB中删除一个项，接着装载一个新的项，最后再执行先前出错的指令。当然，所有这一切都必须在有限的几条指令中完成，因为TLB失效比缺页中断发生的更加频繁。</p>
+<p>无论是用硬件还是用软件来处理TLB失效，<strong>常见方法都是找到页表并执行索引操作以定位将要访问的页面</strong>。用软件做这样的搜索的问题是，页表可能不在TLB中，这就会导致处理过程中的额外的TLB失效。<strong>可以通过在内存中的固定位置维护一个大的（如4KB）TLB表项的软件高速缓存（该高速缓存的页面总是被保存在TLB中）来减少TLB失效</strong>。通过首先检查软件高速缓存，操作系统能够实质性地减少TLB失效。</p>
+<p>当使用软件TLB管理时，一个<strong>基本要求</strong>是要理解两种不同的TLB失效的区别在哪里。当一个页面访问在内存中而不在TLB中时，将产生<strong>软失效</strong>（soft miss）。那么此时所要做的就是更新一下TLB，不需要产生磁盘I/O。典型的处理需要10～20个机器指令并花费几个纳秒完成操作。相反，当页面本身不在内存中（当然也不在TLB中）时，将产生<strong>硬失效</strong>。此刻需要一次磁盘存取以装入该页面，这个过程大概需要几毫秒。<strong>硬失效的处理时间往往是软失效的百万倍</strong>。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-04-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-title="虚拟内存篇" data-hashtags="操作系统"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-hashtag="操作系统"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-title="虚拟内存篇"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-title="虚拟内存篇"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Instapaper" data-sharer="instapaper" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-title="虚拟内存篇" data-description="ココの虚拟内存篇"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/instapaper.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-title="虚拟内存篇"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/" class="prev" rel="prev" title="存储管理篇"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>存储管理篇</a>
+            <a href="/posts/thinking/wireshark_use/" class="next" rel="next" title="Wireshark的使用">Wireshark的使用<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">良い夢 - coding....</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="15816034825" target="_blank">ココ也叫CoCo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"ココのブログ - coding","id-2":"ココのブログ - coding"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

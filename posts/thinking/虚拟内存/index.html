@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>虚拟内存篇 - ココのブログ</title><meta name="Description" content="ココの虚拟内存篇"><meta property="og:title" content="虚拟内存篇" />
+        <title>储存管理～虚拟内存篇 - ココのブログ</title><meta name="Description" content="ココの虚拟内存篇"><meta property="og:title" content="储存管理～虚拟内存篇" />
 <meta property="og:description" content="ココの虚拟内存篇" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" /><meta property="og:image" content="/logo.png"/><meta property="article:section" content="posts" />
@@ -14,18 +14,18 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="/logo.png"/>
 
-<meta name="twitter:title" content="虚拟内存篇"/>
+<meta name="twitter:title" content="储存管理～虚拟内存篇"/>
 <meta name="twitter:description" content="ココの虚拟内存篇"/>
 <meta name="application-name" content="ココのブログ">
 <meta name="apple-mobile-web-app-title" content="ココのブログ"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" /><link rel="prev" href="/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/" /><link rel="next" href="/posts/thinking/wireshark_use/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" /><link rel="prev" href="/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/" /><link rel="next" href="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "虚拟内存篇",
+        "headline": "储存管理～虚拟内存篇",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -103,7 +103,7 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">虚拟内存篇</h1><h2 class="single-subtitle">储存管理～虚拟内存篇</h2><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">储存管理～虚拟内存篇</h1><h2 class="single-subtitle">储存管理～虚拟内存篇</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="15816034825" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ココ</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>操作系统</a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-04-01">2021-04-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5497 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
@@ -302,7 +302,7 @@
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-title="虚拟内存篇" data-hashtags="操作系统"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-hashtag="操作系统"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-title="虚拟内存篇"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-title="虚拟内存篇"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Instapaper" data-sharer="instapaper" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-title="虚拟内存篇" data-description="ココの虚拟内存篇"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/instapaper.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-title="虚拟内存篇"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-title="储存管理～虚拟内存篇" data-hashtags="操作系统"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-hashtag="操作系统"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-title="储存管理～虚拟内存篇"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-title="储存管理～虚拟内存篇"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Instapaper" data-sharer="instapaper" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-title="储存管理～虚拟内存篇" data-description="ココの虚拟内存篇"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/instapaper.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" data-title="储存管理～虚拟内存篇"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -314,8 +314,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/" class="prev" rel="prev" title="存储管理篇"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>存储管理篇</a>
-            <a href="/posts/thinking/wireshark_use/" class="next" rel="next" title="Wireshark的使用">Wireshark的使用<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/" class="prev" rel="prev" title="存储篇~交换技术"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>存储篇~交换技术</a>
+            <a href="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" class="next" rel="next" title="储存管理～页面置换算法篇">储存管理～页面置换算法篇<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"></div></article></div>
             </main><footer class="footer">

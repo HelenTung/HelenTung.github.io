@@ -39,7 +39,15 @@
     <description><![CDATA[Wireshark的使用与常见错误 wireshark的主要作用是为了诊断网络出现的问题，大致上比较重要的部分是过滤器与结果的表达，这两点是比]]></description>
 </item>
 <item>
-    <title>虚拟内存篇</title>
+    <title>储存管理～页面置换算法篇</title>
+    <link>/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/</link>
+    <pubDate>Sun, 04 Apr 2021 15:58:26 &#43;0800</pubDate>
+    <author>ココ</author>
+    <guid>/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/</guid>
+    <description><![CDATA[页面置换算法篇 当发生缺页中断时，操作系统必须在内存中选择一个页面将其换出内存，以便为即将调入的页面腾出空间。 如果要换出的页面在内存驻留期间已]]></description>
+</item>
+<item>
+    <title>储存管理～虚拟内存篇</title>
     <link>/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/</link>
     <pubDate>Thu, 01 Apr 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
@@ -47,7 +55,7 @@
     <description><![CDATA[储存管理篇～虚拟内存技术 虚拟内存 尽管基址寄存器和界限寄存器可以用于创建地址空间的抽象，还有另一个问题需要解决：管理软件的膨胀（bloatwa]]></description>
 </item>
 <item>
-    <title>存储管理篇</title>
+    <title>存储篇~交换技术</title>
     <link>/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/</link>
     <pubDate>Fri, 26 Mar 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
@@ -55,7 +63,7 @@
     <description><![CDATA[存储管理 操作系统中管理分层存储器体系的部分称为存储管理器（memory manager）。它的任务是有效地管理内存，即记录哪些内存是正在使用的]]></description>
 </item>
 <item>
-    <title>调度</title>
+    <title>进程与线程~调度</title>
     <link>/posts/thinking/%E8%B0%83%E5%BA%A6/</link>
     <pubDate>Thu, 25 Mar 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
@@ -63,7 +71,7 @@
     <description><![CDATA[调度 当计算机系统是多道程序设计系统时，通常就会有多个进程或线程同时竞争CPU。只要有两个或更多的进程处于就绪状态，这种情形就会发生。如果只有]]></description>
 </item>
 <item>
-    <title>进程间通信</title>
+    <title>进程与线程~进程间通信</title>
     <link>/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</link>
     <pubDate>Mon, 22 Mar 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
@@ -77,14 +85,6 @@
     <author>ココ</author>
     <guid>/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%BA%BF%E7%A8%8B%E7%AF%87/</guid>
     <description><![CDATA[进程与线程～线程篇 线程的使用 必要性 并行实体共享同一个地址空间和所有可用数据的能力。对于某些应用而言，这种能力是必需的，而这正是多进程模型（它]]></description>
-</item>
-<item>
-    <title>进程与线程～进程篇</title>
-    <link>/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87/</link>
-    <pubDate>Sat, 20 Mar 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
-    <guid>/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87/</guid>
-    <description><![CDATA[进程与线程～进程篇 进程 进程模型 一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值。从概念上说，每个进程拥有它自己的虚拟]]></description>
 </item>
 </channel>
 </rss>

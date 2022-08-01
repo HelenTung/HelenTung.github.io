@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>储存管理～页面置换算法篇 - ココのブログ</title><meta name="Description" content="ココの页面置换"><meta property="og:title" content="储存管理～页面置换算法篇" />
+<meta property="og:description" content="ココの页面置换" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" /><meta property="og:image" content="/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-04-04T15:58:26+08:00" />
+<meta property="article:modified_time" content="2021-04-04T15:58:26+08:00" /><meta property="og:site_name" content="ココのブログ" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/logo.png"/>
+
+<meta name="twitter:title" content="储存管理～页面置换算法篇"/>
+<meta name="twitter:description" content="ココの页面置换"/>
+<meta name="application-name" content="ココのブログ">
+<meta name="apple-mobile-web-app-title" content="ココのブログ"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" /><link rel="prev" href="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" /><link rel="next" href="/posts/thinking/wireshark_use/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "储存管理～页面置换算法篇",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/thinking\/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95\/"
+        },"genre": "posts","keywords": "操作系统","wordcount":  5649 ,
+        "url": "\/posts\/thinking\/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95\/","datePublished": "2021-04-04T15:58:26+08:00","dateModified": "2021-04-04T15:58:26+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ココ"
+            },"description": "ココの页面置换"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ココのブログ"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> Me </a><a class="menu-item" href="/posts/coding/" title="算法"> Coding </a><a class="menu-item" href="/posts/thinking/" title="思考"> Thinking </a><a class="menu-item" href="/tags/" title="标签"> Label </a><a class="menu-item" href="/categories/" title="分类"> Category </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ココのブログ"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">Me</a><a class="menu-item" href="/posts/coding/" title="算法">Coding</a><a class="menu-item" href="/posts/thinking/" title="思考">Thinking</a><a class="menu-item" href="/tags/" title="标签">Label</a><a class="menu-item" href="/categories/" title="分类">Category</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">储存管理～页面置换算法篇</h1><h2 class="single-subtitle">页面置换算法</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="15816034825" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ココ</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>操作系统</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-04-04">2021-04-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5649 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#页面置换算法篇">页面置换算法篇</a>
+      <ul>
+        <li><a href="#最优页面置换算法">最优页面置换算法</a></li>
+        <li><a href="#最近未使用页面置换算法">最近未使用页面置换算法</a></li>
+        <li><a href="#先进先出页面置换算法">先进先出页面置换算法</a></li>
+        <li><a href="#第二次机会页面置换算法">第二次机会页面置换算法</a></li>
+        <li><a href="#时钟页面置换算法">时钟页面置换算法</a></li>
+        <li><a href="#最近最少使用页面置换算法">最近最少使用页面置换算法</a></li>
+        <li><a href="#用软件模拟lru">用软件模拟LRU</a></li>
+        <li><a href="#工作集页面置换算法">工作集页面置换算法</a></li>
+        <li><a href="#工作集时钟页面置换算法">工作集时钟页面置换算法</a></li>
+        <li><a href="#页面置换算法小结">页面置换算法小结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="页面置换算法篇">页面置换算法篇</h2>
+<blockquote>
+<p>当发生缺页中断时，操作系统必须在内存中选择一个页面将其换出内存，以便为即将调入的页面腾出空间。</p>
+</blockquote>
+<p>如果要换出的页面在内存驻留期间已经被修改过，就必须把它写回磁盘以更新该页面在磁盘上的副本；如果该页面没有被修改过（如一个包含程序正文的页面），那么它在磁盘上的副本已经是最新的，不需要回写。直接用调入的页面覆盖掉被淘汰的页面就可以了。</p>
+<p>当发生<strong>缺页中断</strong>时，虽然可以<strong>随机</strong>地选择一个页面来置换，但是如果每次都选择不常使用的页面会提升系统的性能。如果一个被频繁使用的页面被置换出内存，很可能它在很短时间内又要被调入内存，这会带来不必要的开销。</p>
+<p>如果要换出的页面在内存驻留期间已经被修改过，就必须把它写回磁盘以更新该页面在磁盘上的副本；如果该页面没有被修改过（如一个包含程序正文的页面），那么它在磁盘上的副本已经是最新的，不需要回写。直接用调入的页面覆盖掉被淘汰的页面就可以了。</p>
+<blockquote>
+<p>在接下来讨论的所有页面置换算法中都存在一个问题：当需要从内存中换出某个页面时，它是否只能是缺页进程本身的页面？这个要换出的页面是否可以属于另外一个进程？</p>
+</blockquote>
+<p>在前一种情况下，可以有效地将每一个进程限定在固定的页面数目内；后一种情况则不能。这两种情况都是可能的。</p>
+<h3 id="最优页面置换算法">最优页面置换算法</h3>
+<p>在缺页中断发生时，有些页面在内存中，其中有一个页面（包含紧接着的下一条指令的那个页面）将很快被访问，其他页面则可能要到10、100或1000条指令后才会被访问，每个页面都可以用在该页面首次被访问前所要执行的指令数作为标记。</p>
+<blockquote>
+<p>最优页面置换算法规定应该置换标记最大的页面。如果一个页面在800万条指令内不会被使用，另外一个页面在600万条指令内不会被使用，则置换前一个页面，从而把因需要调入这个页面而发生的缺页中断推迟到将来，越久越好。</p>
+</blockquote>
+<p>这个算法惟一的问题就是它是无法实现的。当缺页中断发生时，操作系统无法知道各个页面下一次将在什么时候被访问。（在最短作业优先调度算法中，我们曾遇到同样的情况，即系统如何知道哪个作业是最短的呢？）当然，通过首先在仿真程序上运行程序，跟踪所有页面的访问情况，在第二次运行时利用第一次运行时收集的信息是可以实现最优页面置换算法的。</p>
+<h3 id="最近未使用页面置换算法">最近未使用页面置换算法</h3>
+<p>可以用R位和M位来构造一个简单的页面置换算法：当启动一个进程时，它的所有页面的两个位都由操作系统设置成0，R位被定期地（比如在每次时钟中断时）清零，以区别最近没有被访问的页面和被访问的页面。</p>
+<blockquote>
+<p>当发生缺页中断时，操作系统检查所有的页面并根据它们当前的R位和M位的值，把它们分为4类：</p>
+</blockquote>
+<ul>
+<li>没有被访问，没有被修改。</li>
+<li>没有被访问，已被修改。</li>
+<li>已被访问，没有被修改。</li>
+<li>已被访问，已被修改。</li>
+</ul>
+<blockquote>
+<p>NRU（Not Recently Used，最近未使用）算法随机地从类编号最小的非空类中挑选一个页面淘汰之。</p>
+</blockquote>
+<p>这个算法隐含的意思是，在最近一个时钟滴答中（典型的时间是大约20ms）<strong>淘汰一个没有被访问的已修改页面要比淘汰一个被频繁使用的“干净”页面好</strong>。<strong>NRU主要优点是易于理解和能够有效地被实现，虽然它的性能不是最好的，但是已经够用了</strong>。</p>
+<h3 id="先进先出页面置换算法">先进先出页面置换算法</h3>
+<blockquote>
+<p>另一种开销较小的页面置换算法是FIFO（First-In First-Out，先进先出）算法。</p>
+</blockquote>
+<p>由操作系统维护一个所有当前在内存中的页面的链表，最新进入的页面放在表尾，最久进入的页面放在表头。当发生缺页中断时，淘汰表头的页面并把新调入的页面加到表尾。</p>
+<h3 id="第二次机会页面置换算法">第二次机会页面置换算法</h3>
+<p>FIFO算法可能会把经常使用的页面置换出去，为了避免这一问题，对该算法做一个简单的修改：检查最老页面的R位。如果R位是0，那么这个页面既老又没有被使用，可以立刻置换掉；如果是1，就将R位清0，并把该页面放到链表的尾端，修改它的装入时间使它就像刚装入的一样，然后继续搜索。</p>
+<blockquote>
+<p>这一算法称为<strong>第二次机会（second chance）算法</strong></p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e7%ac%ac%e4%ba%8c%e6%ac%a1"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e7%ac%ac%e4%ba%8c%e6%ac%a1, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e7%ac%ac%e4%ba%8c%e6%ac%a1 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e7%ac%ac%e4%ba%8c%e6%ac%a1 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/第二次"
+        title="第二次机会算法的操作" /></p>
+<p>假设在时间20发生了一次缺页中断，这时最老的页面是A，它是在时刻0到达的。如果A的R位是0，则将它淘汰出内存，或者把它写回磁盘（如果它已被修改过），或者只是简单地放弃（如果它是“干净”的）；另一方面，如果其R位已经设置了，则将A放到链表的尾部并且重新设置“装入时间”为当前时刻（20），然后清除R位。然后从B页面开始继续搜索合适的页面。</p>
+<blockquote>
+<p>第二次机会算法就是寻找一个最近的时钟间隔以来没有被访问过的页面。如果所有的页面都被访问过了，该算法就简化为纯粹的FIFO算法。</p>
+</blockquote>
+<h3 id="时钟页面置换算法">时钟页面置换算法</h3>
+<p>尽管第二次机会算法是一个比较合理的算法，但它经常要在链表中移动页面，既降低了效率又不是很有必要。一个更好的办法是把所有的页面都保存在一个类似钟面的环形链表中，一个表针指向最老的页面。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%97%b6%e9%92%9f"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%97%b6%e9%92%9f, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%97%b6%e9%92%9f 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%97%b6%e9%92%9f 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/时钟"
+        title="时钟页面置换算法" /></p>
+<p>当发生缺页中断时，算法首先检查表针指向的页面，如果它的R位是0就淘汰该页面，并把新的页面插入这个位置，然后把表针前移一个位置；如果R位是1就清除R位并把表针前移一个位置，重复这个过程直到找到了一个R位为0的页面为止。</p>
+<h3 id="最近最少使用页面置换算法">最近最少使用页面置换算法</h3>
+<blockquote>
+<p>这个思想提示了一个可实现的算法：在缺页中断发生时，置换未使用时间最长的页面。这个策略称为LRU（Least Recently Used，最近最少使用）页面置换算法。</p>
+</blockquote>
+<p>在前面几条指令中频繁使用的页面很可能在后面的几条指令中被使用。反过来说，已经很久没有使用的页面很有可能在未来较长的一段时间内仍然不会被使用、为了完全实现LRU，需要在内存中维护一个<strong>所有页面的链表</strong>，<strong>最近最多使用的页面在表头，最近最少使用的页面在表尾</strong>。困难的是在每次访问内存时都必须要更新整个链表。在链表中找到一个页面，删除它，然后把它移动到表头是一个非常费时的操作，即使使用硬件实现也一样费时（假设有这样的硬件）。</p>
+<blockquote>
+<p>硬件LRU算法实现的两种可能</p>
+</blockquote>
+<p>有一些使用特殊硬件实现LRU的方法。我们先考虑<strong>一个最简单的方法</strong>。这个方法要求硬件有一个64位计数器C，它在每条指令执行完后自动加1，每个页表项必须有一个足够容纳这个计数器值的域。在每次访问内存后，将当前的C值保存到被访问页面的页表项中。一旦发生缺页中断，操作系统就检查所有页表项中计数器的值，找到值最小的一个页面，这个页面就是最近最少使用的页面。</p>
+<p><strong>二个硬件实现的LRU算法</strong>。在一个有n个页框的机器中，<strong>LRU硬件可以维持一个初值为0的n×n位的矩阵。当访问到页框k时，硬件首先把k行的位都设置成1，再把k列的位都设置成0</strong>。在任何时刻，<strong>二进制数值最小的行就是最近最少使用的</strong>，第二小的行是下一个最近最少使用的，以此类推。这个算法的工作过程可以用图3-17所示的实例说明，该实例中有4个页框，页面访问次序为：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/LUR"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/LUR, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/LUR 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/LUR 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/LUR"
+        title="使用矩阵的LRU，页面以0、1、2、3、2、1、0、3、2、3次序访问" /></p>
+<h3 id="用软件模拟lru">用软件模拟LRU</h3>
+<blockquote>
+<p>NFU（Not Frequently Used，最不常用）算法。该算法将每个页面与一个软件计数器相关联，计数器的初值为0。每次时钟中断时，由操作系统扫描内存中所有的页面，将每个页面的R位（它的值是0或1）加到它的计数器上。这个计数器大体上跟踪了各个页面被访问的频繁程度。发生缺页中断时，则置换计数器值最小的页面。</p>
+</blockquote>
+<p>NFU的<strong>主要问题是它从来不忘记任何事情</strong>。比如，<strong>在一个多次（扫描）编译器中，在第一次扫描中被频繁使用的页面在程序进入第二次扫描时，其计数器的值可能仍然很高</strong>。实际上，如果第一次扫描的执行时间恰好是各次扫描中最长的，含有以后各次扫描代码的页面的计数器可能总是比含有第一次扫描代码的页面小，结果是操作系统将置换有用的页面而不是不再使用的页面。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/NFC"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/NFC, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/NFC 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/NFC 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/NFC"
+        title="用软件模拟LRU的老化算法。图中所示是6个页面在5个时钟滴答的情况，5个时钟滴答分别由a～e表示" /></p>
+<p>只需对NFU做一个小小的修改就能使它很好地模拟LRU。其修改分为两部分：首先，在R位被加进之前先将计数器右移一位；其次，将R位加到计数器最左端的位而不是最右端的位。</p>
+<blockquote>
+<p>修改以后的算法称为老化（aging）算法，</p>
+</blockquote>
+<p>LRU和老化算法的第二个区别是老化算法的计数器只有有限位数，这就限制了其对以往页面的记录。如果两个页面的计数器都是0，我们只能在两个页面中随机选一个进行置换。时钟周期越长、要求位数越长、记录次数越多</p>
+<h3 id="工作集页面置换算法">工作集页面置换算法</h3>
+<blockquote>
+<p>一个进程当前正在使用的页面的集合称为它的工作集（working set）</p>
+</blockquote>
+<p>如果整个工作集都被装入到了内存中，那么进程在运行到下一运行阶段（例如，编译器的下一遍扫描）之前，不会产生很多缺页中断。若内存太小而无法容纳下整个工作集，那么进程的运行过程中会产生大量的缺页中断，导致运行速度也会变得很缓慢，因为通常只需要几个纳秒就能执行完一条指令，而通常需要十毫秒才能从磁盘上读入一个页面。</p>
+<p>不少分页系统都会设法跟踪进程的工作集，以确保在让进程运行以前，它的工作集就已在内存中了。该方法称为工作集模型（working set model）（Denning，1970），其目的在于大大减少缺页中断率。在让进程运行前预先装入其工作集页面也称为预先调页（prepaging）。请注意工作集是随着时间变化的。</p>
+<p>人们很早就发现大多数程序都不是均匀地访问它们的地址空间的，而访问往往是集中于一小部分页面。一次内存访问可能会取出一条指令，也可能会取数据，或者是存储数据。在任一时刻t，都存在一个集合，它包含所有最近k次内存访问所访问过的页面。这个集合w(k,t)就是工作集。因为最近k=1次访问肯定会访问最近k＞1次访问所访问过的页面，所以w(k,t)是k的单调非递减函数。随着k的变大，w(k,t)是不会无限变大的，因为程序不可能访问比它的地址空间所能容纳的页面数目上限还多的页面，并且几乎没有程序会使用每个页面。</p>
+<blockquote>
+<p>现在就可以这样定义：工作集即是过去10ms中的内存访问所用到的页面的集合。</p>
+</blockquote>
+<p>因此，如果一个进程在T时刻开始，在（T+100）ms的时刻使用了40ms CPU时间，对工作集而言，它的时间就是40ms。一个进程从它开始执行到当前所实际使用的CPU时间总数通常称作当前实际运行时间。通过这个近似的方法，进程的工作集可以被称为在过去的τ秒实际运行时间中它所访问过的页面的集合。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%b7%a5%e4%bd%9c%e9%9b%86"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%b7%a5%e4%bd%9c%e9%9b%86, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%b7%a5%e4%bd%9c%e9%9b%86 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%b7%a5%e4%bd%9c%e9%9b%86 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/工作集"
+        title="函数w(k,t)是在时刻t时工作集的大小" /></p>
+<blockquote>
+<p>工作集的页面置换算法、基本思路就是找出一个不在工作集中的页面并淘汰它。</p>
+</blockquote>
+<p>只有那些在内存中的页面才可以作为候选者被淘汰，所以该算法忽略了那些不在内存中的页面。每个表项至少包含两条信息：上次使用该页面的近似时间和R（访问）位。空白的矩形表示该算法不需要的其他域，如页框号、保护位、M（修改）位。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%b7%a5%e4%bd%9c%e9%9b%861"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%b7%a5%e4%bd%9c%e9%9b%861, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%b7%a5%e4%bd%9c%e9%9b%861 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%b7%a5%e4%bd%9c%e9%9b%861 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/工作集1"
+        title="函数w(k,t)是在时刻t时工作集的大小" /></p>
+<p>在处理每个表项时，都需要检查R位。如果它是1，就把当前实际时间写进页表项的“上次使用时间”域，以表示缺页中断发生时该页面正在被使用。既然该页面在当前时钟滴答中已经被访问过，那么很明显它应该出现在工作集中，并且不应该被删除（假定τ横跨多个时钟滴答）。</p>
+<p>如果R是0，那么表示在当前时钟滴答中，该页面还没有被访问过，则它就可以作为候选者被置换。为了知道它是否应该被置换，需要计算它的生存时间（即当前实际运行时间减去上次使用时间），然后与τ做比较。如果它的生存时间大于τ，那么这个页面就不再在工作集中，而用新的页面置换它。扫描会继续进行以更新剩余的表项。</p>
+<p>然而，如果R是0同时生存时间小于或等于τ，则该页面仍然在工作集中。这样就要把该页面临时保留下来，但是要记录生存时间最长（“上次使用时间”的最小值）的页面。如果扫描完整个页表却没有找到适合被淘汰的页面，也就意味着所有的页面都在工作集中。在这种情况下，如果找到了一个或者多个R=0的页面，就淘汰生存时间最长的页面。在最坏情况下，在当前时间滴答中，所有的页面都被访问过了（也就是都有R=1），因此就随机选择一个页面淘汰，如果有的话最好选一个干净页面。</p>
+<h3 id="工作集时钟页面置换算法">工作集时钟页面置换算法</h3>
+<blockquote>
+<p>当缺页中断发生后，需要扫描整个页表才能确定被淘汰的页面，因此基本工作集算法是比较费时的。有一种改进的算法，它基于时钟算法，并且使用了工作集信息，称为WSClock（工作集时钟）算法（Carr和Hennessey，1981）</p>
+</blockquote>
+<p>与时钟算法一样，所需的数据结构是一个以页框为元素的循环表。最初，该表是空的。当装入第一个页面后，把它加到该表中。随着更多的页面的加入，它们形成一个环。每个表项包含来自基本工作集算法的上次使用时间，以及R位（已标明）和M位（未标明）。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%b7%a5%e4%bd%9c%e9%9b%86%e6%97%b6%e9%92%9f"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%b7%a5%e4%bd%9c%e9%9b%86%e6%97%b6%e9%92%9f, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%b7%a5%e4%bd%9c%e9%9b%86%e6%97%b6%e9%92%9f 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%b7%a5%e4%bd%9c%e9%9b%86%e6%97%b6%e9%92%9f 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/工作集时钟"
+        title="工作集时钟页面置换算法的操作" /></p>
+<p>与时钟算法一样，每次缺页中断时，首先检查指针指向的页面。如果R位被置为1，该页面在当前时钟滴答中就被使用过，那么该页面就不适合被淘汰。然后把该页面的R位置为0，指针指向下一个页面，并重复该算法。</p>
+<p>如果指针经过一圈返回它的起始点会发生什么呢？这里有两种情况：</p>
+<ul>
+<li>至少调度了一次写操作。</li>
+</ul>
+<blockquote>
+<p>对于第一种情况，指针仅仅是不停地移动，寻找一个干净页面。既然已经调度了一个或者多个写操作，最终会有某个写操作完成，它的页面会被标记为干净。置换遇到的第一个干净页面，这个页面不一定是第一个被调度写操作的页面，因为硬盘驱动程序为了优化性能可能已经把写操作重排序了。</p>
+</blockquote>
+<ul>
+<li>没有调度过写操作。</li>
+</ul>
+<blockquote>
+<p>对于第二种情况，所有的页面都在工作集中，否则将至少调度了一个写操作。由于缺乏额外的信息，一个简单的方法就是随便置换一个干净的页面来使用，扫描中需要记录干净页面的位置。如果不存在干净页面，就选定当前页面并把它写回磁盘。</p>
+</blockquote>
+<h3 id="页面置换算法小结">页面置换算法小结</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%80%bb%e7%bb%93"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%80%bb%e7%bb%93, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%80%bb%e7%bb%93 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%80%bb%e7%bb%93 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/总结"
+        title="页面置换算法" /></p>
+<ul>
+<li>NRU算法根据R位和M位的状态把页面分为四类。从编号最小的类中随机选择一个页面置换。该算法易于实现，但是性能不是很好，还存在更好的算法。</li>
+<li>FIFO算法通过维护一个页面的链表来记录它们装入内存的顺序。淘汰的是最老的页面，但是该页面可能仍在使用，因此FIFO算法不是一个好的选择。</li>
+<li>第二次机会算法是对FIFO算法的改进，它在移出页面前先检查该页面是否正在被使用。如果该页面正在被使用，就保留该页面。这个改进大大提高了性能。时钟算法是第二次机会算法的另一种实现。它具有相同的性能特征，而且只需要更少的执行时间。</li>
+<li>LRU算法是一种非常优秀的算法，但是只能通过特定的硬件来实现。如果机器中没有该硬件，那么也无法使用该算法。NFU是一种近似于LRU的算法，它的性能不是非常好，然而，老化算法更近似于LRU并且可以更有效地实现，是一个很好的选择。</li>
+<li>最后两种算法都使用了工作集。工作集算法有合理的性能，但它的实现开销较大。工作集时钟算法是它的一种变体，不仅具有良好的性能，并且还能高效地实现。</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-04-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" data-title="储存管理～页面置换算法篇" data-hashtags="操作系统"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" data-hashtag="操作系统"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" data-title="储存管理～页面置换算法篇"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" data-title="储存管理～页面置换算法篇"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Instapaper" data-sharer="instapaper" data-url="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" data-title="储存管理～页面置换算法篇" data-description="ココの页面置换"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/instapaper.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" data-title="储存管理～页面置换算法篇"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" class="prev" rel="prev" title="储存管理～虚拟内存篇"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>储存管理～虚拟内存篇</a>
+            <a href="/posts/thinking/wireshark_use/" class="next" rel="next" title="Wireshark的使用">Wireshark的使用<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">良い夢 - coding....</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="15816034825" target="_blank">ココ也叫CoCo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"ココのブログ - coding","id-2":"ココのブログ - coding"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

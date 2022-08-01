@@ -30,7 +30,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "\/posts\/thinking\/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98\/"
-        },"genre": "posts","keywords": "操作系统","wordcount":  4316 ,
+        },"genre": "posts","keywords": "操作系统","wordcount":  5497 ,
         "url": "\/posts\/thinking\/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98\/","datePublished": "2021-04-01T15:58:26+08:00","dateModified": "2021-04-01T15:58:26+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -105,8 +105,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">虚拟内存篇</h1><h2 class="single-subtitle">储存管理～虚拟内存篇</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="15816034825" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ココ</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>操作系统</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-04-01">2021-04-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4316 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-04-01">2021-04-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5497 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -258,6 +258,41 @@
 <p>许多现代的RISC机器，包括SPARC、MIPS以及HP PA，几乎所有的页面管理都是在软件中实现的。在这些机器上，TLB表项被操作系统显式地装载。当发生TLB访问失效，不再是由MMU到页表中查找并取出需要的页表项，而是<strong>生成一个TLB失效并将问题交给操作系统解决</strong>。系统必须先找到该页面，然后从TLB中删除一个项，接着装载一个新的项，最后再执行先前出错的指令。当然，所有这一切都必须在有限的几条指令中完成，因为TLB失效比缺页中断发生的更加频繁。</p>
 <p>无论是用硬件还是用软件来处理TLB失效，<strong>常见方法都是找到页表并执行索引操作以定位将要访问的页面</strong>。用软件做这样的搜索的问题是，页表可能不在TLB中，这就会导致处理过程中的额外的TLB失效。<strong>可以通过在内存中的固定位置维护一个大的（如4KB）TLB表项的软件高速缓存（该高速缓存的页面总是被保存在TLB中）来减少TLB失效</strong>。通过首先检查软件高速缓存，操作系统能够实质性地减少TLB失效。</p>
 <p>当使用软件TLB管理时，一个<strong>基本要求</strong>是要理解两种不同的TLB失效的区别在哪里。当一个页面访问在内存中而不在TLB中时，将产生<strong>软失效</strong>（soft miss）。那么此时所要做的就是更新一下TLB，不需要产生磁盘I/O。典型的处理需要10～20个机器指令并花费几个纳秒完成操作。相反，当页面本身不在内存中（当然也不在TLB中）时，将产生<strong>硬失效</strong>。此刻需要一次磁盘存取以装入该页面，这个过程大概需要几毫秒。<strong>硬失效的处理时间往往是软失效的百万倍</strong>。</p>
+<hr>
+<h4 id="针对大内存的页表">针对大内存的页表</h4>
+<blockquote>
+<p>另一个问题是怎样处理巨大的虚拟地址空间。下面将讨论两种解决方法。</p>
+</blockquote>
+<h5 id="多级页表">多级页表</h5>
+<p>引入多级页表的原因是<strong>避免把全部页表一直保存在内存中</strong>。特别是那些从不需要的页表就不应该保留。比如一个需要12MB内存的进程，其最底端是4MB的程序正文段，后面是4MB的数据段，顶端是4MB的堆栈段，在数据段上方和堆栈段下方之间是大量根本没有使用的空闲区。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%a4%9a%e7%ba%a7%e9%a1%b5%e8%a1%a8"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%a4%9a%e7%ba%a7%e9%a1%b5%e8%a1%a8, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%a4%9a%e7%ba%a7%e9%a1%b5%e8%a1%a8 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%a4%9a%e7%ba%a7%e9%a1%b5%e8%a1%a8 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/多级页表"
+        title="a)一个有两个页表域的32位地位；b)二级页表" /></p>
+<p>顶级页表的表项0指向程序正文的页表，表项1指向数据的页表，表项1023指向堆栈的页表，其他的表项（用阴影表示的）未用。现在把PT2域作为访问选定的二级页表的索引，以便找到该虚拟页面的对应页框号。</p>
+<p>在左边是顶级页表，它具有1024个表项，对应于10位的PT1域。当一个虚拟地址被送到MMU时，MMU首先提取PT1域并把该值作为访问顶级页表的索引。因为整个4GB（32位）虚拟地址空间已经被分成1024个4MB的块，所以这1024个表项中的每一个都表示4MB的虚拟地址空间。</p>
+<blockquote>
+<p>二级页表可扩充为三级、四级或更多级。级别越多，灵活性就越大，但页表超过三级会带来更大的复杂性。</p>
+</blockquote>
+<h5 id="倒排页表">倒排页表</h5>
+<blockquote>
+<p>在这种设计中，在实际内存中每一个页框有一个表项，而不是每一个虚拟页面有一个表项</p>
+</blockquote>
+<p>虽然倒排页表节省了大量的空间（至少当虚拟地址空间比物理内存大得多的时候是这样的），但它也有严重的不足：<strong>从虚拟地址到物理地址的转换会变得很困难</strong>。<strong>当进程n访问虚拟页面p时，硬件不再能通过把p当作指向页表的一个索引来查找物理页框。取而代之的是，它必须搜索整个倒排页表来查找某一个表项（n，p）</strong>。此外，<strong>该搜索必须对每一个内存访问操作都要执行一次，而不仅仅是在发生缺页中断时执行</strong>。每一次内存访问操作都要查找一个256K的表是不会让你的机器运行得很快的。</p>
+<p>走出这种两难局面的办法是使用TLB。如果TLB能够记录所有频繁使用的页面，地址转换就可能变得像通常的页表一样快。但是，当发生TLB失效时，需要用软件搜索整个倒排页表。一个可行的实现该搜索的方法是建立一张散列表，用虚拟地址来散列。当前所有在内存中的具有相同散列值的虚拟页面被链接在一起。如果散列表中的槽数与机器中物理页面数一样多，那么散列表的冲突链的平均长度将会是1个表项，这将会大大提高映射速度。一旦页框号被找到，新的（虚拟页号，物理页框号）对就会被装载到TLB中。</p>
+<p>走出这种两难局面的办法是<strong>使用TLB</strong>。如果TLB能够<strong>记录所有频繁使用的页面</strong>，地址转换就可能变得像通常的页表一样快。但是，当发生TLB失效时，需要用软件搜索整个倒排页表。一个可行的实现该搜索的方法是<strong>建立一张散列表</strong>，用<strong>虚拟地址来散列</strong>。当前所有在内存中的具有相同散列值的虚拟页面被链接在一起。<strong>如果散列表中的槽数与机器中物理页面数一样多，那么散列表的冲突链的平均长度将会是1个表项，这将会大大提高映射速度</strong>。<strong>一旦页框号被找到，新的（虚拟页号，物理页框号）对就会被装载到TLB中</strong>。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%a4%9a%e7%ba%a7%e9%a1%b5%e8%a1%a8"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%a4%9a%e7%ba%a7%e9%a1%b5%e8%a1%a8, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%a4%9a%e7%ba%a7%e9%a1%b5%e8%a1%a8 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%a4%9a%e7%ba%a7%e9%a1%b5%e8%a1%a8 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/多级页表"
+        title="a)一个有两个页表域的32位地位；b)二级页表" /></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

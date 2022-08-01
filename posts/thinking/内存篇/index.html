@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>存储管理篇 - ココのブログ</title><meta name="Description" content="ココの内存"><meta property="og:title" content="存储管理篇" />
+<meta property="og:description" content="ココの内存" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/" /><meta property="og:image" content="/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-03-26T15:58:26+08:00" />
+<meta property="article:modified_time" content="2021-03-26T15:58:26+08:00" /><meta property="og:site_name" content="ココのブログ" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/logo.png"/>
+
+<meta name="twitter:title" content="存储管理篇"/>
+<meta name="twitter:description" content="ココの内存"/>
+<meta name="application-name" content="ココのブログ">
+<meta name="apple-mobile-web-app-title" content="ココのブログ"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/" /><link rel="prev" href="/posts/thinking/%E8%B0%83%E5%BA%A6/" /><link rel="next" href="/posts/thinking/wireshark_use/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "存储管理篇",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/thinking\/%E5%86%85%E5%AD%98%E7%AF%87\/"
+        },"genre": "posts","keywords": "操作系统","wordcount":  4242 ,
+        "url": "\/posts\/thinking\/%E5%86%85%E5%AD%98%E7%AF%87\/","datePublished": "2021-03-26T15:58:26+08:00","dateModified": "2021-03-26T15:58:26+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ココ"
+            },"description": "ココの内存"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ココのブログ"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> Me </a><a class="menu-item" href="/posts/coding/" title="算法"> Coding </a><a class="menu-item" href="/posts/thinking/" title="思考"> Thinking </a><a class="menu-item" href="/tags/" title="标签"> Label </a><a class="menu-item" href="/categories/" title="分类"> Category </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ココのブログ"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">Me</a><a class="menu-item" href="/posts/coding/" title="算法">Coding</a><a class="menu-item" href="/posts/thinking/" title="思考">Thinking</a><a class="menu-item" href="/tags/" title="标签">Label</a><a class="menu-item" href="/categories/" title="分类">Category</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">存储管理篇</h1><h2 class="single-subtitle">存储篇~交换技术</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="15816034825" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ココ</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>操作系统</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-03-26">2021-03-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4242 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#存储管理">存储管理</a>
+      <ul>
+        <li><a href="#无存储器抽象">无存储器抽象</a></li>
+        <li><a href="#存储器抽象地址空间">存储器抽象：地址空间</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="存储管理">存储管理</h2>
+<blockquote>
+<p>操作系统中管理分层存储器体系的部分称为存储管理器（memory manager）。它的任务是有效地管理内存，即记录哪些内存是正在使用的，哪些内存是空闲的；在进程需要时为其分配内存，在进程使用完后释放内存。</p>
+</blockquote>
+<h3 id="无存储器抽象">无存储器抽象</h3>
+<blockquote>
+<p>最简单的存储器抽象就是根本没有抽象。每一个程序都直接访问物理内存。</p>
+</blockquote>
+<p>在这种情况下，要想在内存中同时运行两个程序是不可能的。如果第一个程序在2000的位置写入一个新的值，将会擦掉第二个程序存放在相同位置上的所有内容，所以同时运行两个程序是根本行不通的，这两个程序会立刻崩溃。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%97%a0%e6%8a%bd%e8%b1%a1"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%97%a0%e6%8a%bd%e8%b1%a1, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%97%a0%e6%8a%bd%e8%b1%a1 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%97%a0%e6%8a%bd%e8%b1%a1 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/无抽象"
+        title="在只有操作系统和一个用户进程的情形下，组织内存的三种简单方法" /></p>
+<p>不过即使存储器模型就是物理内存，还是存在一些可行选项的。当按这种方式组织系统时，通常同一个时刻只能有一个进程在运行。一旦用户键入了一个命令，操作系统就把需要的程序从磁盘复制到内存中并执行；当进程运行结束后，操作系统在用户终端显示提示符并等待新的命令。收到新的命令后，它把新的程序装入内存，覆盖前一个程序。</p>
+<blockquote>
+<p>在没有内存抽象的系统中实现并行的一种方法是使用多线程来编程。</p>
+</blockquote>
+<p>虽然这个想法行得通，但却没有被广泛使用，因为人们通常希望能够在同一时间运行没有关联的程序，而这正是线程抽象所不能提供的。更进一步地，一个没有内存抽象的系统也不大可能具有线程抽象的功能。</p>
+<h4 id="在不使用内存抽象的情况下运行多道程序">在不使用内存抽象的情况下运行多道程序</h4>
+<p>但是，即使没有内存抽象，同时运行多个程序也是可能的。操作系统只需要把当前内存中所有内容保存到磁盘文件中，然后把下一个程序读入到内存中再运行即可。只要在某一个时间内存中只有一个程序，那么就不会发生冲突。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%97%a0%e6%8a%bd%e8%b1%a1"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%97%a0%e6%8a%bd%e8%b1%a1, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%97%a0%e6%8a%bd%e8%b1%a1 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e6%97%a0%e6%8a%bd%e8%b1%a1 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/无抽象"
+        title="重定位问题的说明" /></p>
+<blockquote>
+<p>a)一个16KB程序；b)另一个16KB程序；c)两个程序连续地装载到内存中</p>
+</blockquote>
+<p>但是，当第一个程序已经运行了一段时间后，操作系统可能会决定开始运行第二个程序，即装载在第一个程序之上的地址16 384处的程序。这个程序的第一条指令是JMP 28，这条指令会使程序跳转到第一个程序的ADD指令，而不是事先设定的跳转到CMP指令。由于对内存地址的不正确访问，这个程序很可能在1秒之内就崩溃了。</p>
+<blockquote>
+<p>这里关键的问题是这两个程序都引用了绝对物理地址，而这正是我们最需要避免的。我们希望每个程序都使用一套私有的本地地址来进行内存寻址。</p>
+</blockquote>
+<h3 id="存储器抽象地址空间">存储器抽象：地址空间</h3>
+<blockquote>
+<p>把物理地址暴露给进程会带来下面几个严重问题</p>
+</blockquote>
+<ul>
+<li>第一，如果用户程序可以寻址内存的每个字节，它们就可以很容易地（故意地或偶然地）破坏操作系统，从而使系统慢慢地停止运行</li>
+<li>第二，使用这种模型，想要同时（如果只有一个CPU就轮流执行）运行多个程序是很困难的。</li>
+</ul>
+<h4 id="地址空间的概念">地址空间的概念</h4>
+<blockquote>
+<p>要保证多个应用程序同时处于内存中并且不互相影响，则需要解决两个问题：保护和重定位</p>
+</blockquote>
+<p>一个更好的办法是创造一个新的内存抽象：地址空间。就像进程的概念创造了一类抽象的CPU以运行程序一样，地址空间为程序创造了一种抽象的内存。<strong>地址空间是一个进程可用于寻址内存的一套地址集合</strong>。每个进程都有一个自己的地址空间，并且这个地址空间独立于其他进程的地址空间（除了在一些特殊情况下进程需要共享它们的地址空间外）。</p>
+<blockquote>
+<p>比较难的是给每个程序一个自己的地址空间，使得一个程序中的地址28所对应的物理地址与另一个程序中的地址28所对应的物理地址不同。</p>
+</blockquote>
+<h4 id="基址寄存器与界限寄存器">基址寄存器与界限寄存器</h4>
+<blockquote>
+<p>这个简单的解决办法使用一种简单的动态重定位。它所做的是简单地把每个进程的地址空间映射到物理内存的不同部分。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%af%bb%e5%9d%80"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%af%bb%e5%9d%80, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%af%bb%e5%9d%80 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%af%bb%e5%9d%80 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/寻址"
+        title="基址寄存器和界限寄存器可用于为每个进程提供一个独立的地址空间" /></p>
+<p>每次一个进程访问内存，取一条指令，读或写一个数据字，CPU硬件会在把地址发送到内存总线前，自动把基址值加到进程发出的地址值上。同时，它检查程序提供的地址是否等于或大于界限寄存器里的值。如果访问的地址超过了界限，会产生错误并中止访问。</p>
+<blockquote>
+<p>使用基址寄存器和界限寄存器重定位的缺点是，每次访问内存都需要进行加法和比较运算。比较可以做得很快，但是加法由于进位传递时间的问题，在没有使用特殊电路的情况下会显得很慢。</p>
+</blockquote>
+<h4 id="交换技术">交换技术</h4>
+<blockquote>
+<p>如果计算机物理内存足够大，可以保存所有进程，那么之前提及的所有方案都或多或少是可行的。</p>
+</blockquote>
+<p>有两种处理内存超载的通用方法。<strong>最简单的策略是交换（swapping）技术</strong>，即把一个进程完整调入内存，使该进程运行一段时间，然后把它存回磁盘。空闲进程主要存储在磁盘上，所以当它们不运行时就不会占用内存（尽管它们的一些进程会周期性地被唤醒以完成相关工作，然后就又进入睡眠状态）。<strong>另一种策略是虚拟内存（virtual memory）</strong>，该策略甚至能使程序在只有一部分被调入内存的情况下运行。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e4%ba%a4%e6%8d%a2%e6%8a%80%e6%9c%af"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e4%ba%a4%e6%8d%a2%e6%8a%80%e6%9c%af, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e4%ba%a4%e6%8d%a2%e6%8a%80%e6%9c%af 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e4%ba%a4%e6%8d%a2%e6%8a%80%e6%9c%af 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/交换技术"
+        title="内存分配情况随着进程进出而变化，阴影区域表示未使用的内存" /></p>
+<p>交换在内存中产生了多个空闲区（hole，也称为空洞），通过把所有的进程尽可能向下移动，有可能将这些小的空闲区合成一大块。该技术称为内存紧缩（memory compaction）。</p>
+<blockquote>
+<p>有一个问题值得注意，即当进程被创建或换入时应该为它分配多大的内存。</p>
+</blockquote>
+<p>若<strong>进程创建时其大小是固定的并且不再改变</strong>，则分配很简单，操作系统准确地按其需要的大小进行分配，不多也不少。</p>
+<p>但是如果进程的数据段可以增长，例如，很多程序设计语言都允许从堆中动态地分配内存，那么当进程空间试图增长时，就会出现问题。若该<strong>进程与一个空闲区相邻，那么可把该空闲区分配给该进程让它在这个空闲区增大</strong>。</p>
+<p>另一方面，<strong>若进程相邻的是另一个进程，那么要么把需要增长的进程移到内存中一个足够大的区域中去</strong>，<strong>要么把一个或多个进程交换出去，以便生成一个足够大的空闲区</strong>。</p>
+<p><strong>若一个进程在内存中不能增长，而且磁盘上的交换区也已满了</strong>，那么这个进程<strong>只有挂起直到一些空间空闲（或者可以结束该进程）</strong>。</p>
+<blockquote>
+<p>如果大部分进程在运行时都要增长，为了减少因内存区域不够而引起的进程交换和移动所产生的开销，一种可用的方法是，当换入或移动进程时为它分配一些额外的内存。</p>
+</blockquote>
+<p>然而，当进程被换出到磁盘上时，应该只交换进程实际上使用的内存中的内容，将额外的内存交换出去是一种浪费</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%86%85%e5%ad%98%e5%88%86%e9%85%8d"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%86%85%e5%ad%98%e5%88%86%e9%85%8d, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%86%85%e5%ad%98%e5%88%86%e9%85%8d 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e5%86%85%e5%ad%98%e5%88%86%e9%85%8d 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/内存分配"
+        title="/images/thinking/存储管理/内存分配" /></p>
+<blockquote>
+<p>a)为可能增长的数据段预留空间；b)为可能增长的数据段和堆栈段预留空间</p>
+</blockquote>
+<p>如果进程有两个可增长的段，例如，供变量动态分配和释放的作为堆使用的一个数据段，以及存放普通局部变量与返回地址的一个堆栈段，则可使用另一种安排，在图中可以看到所示进程的堆栈段在进程所占内存的顶端并向下增长，紧接在程序段后面的数据段向上增长。在这两者之间的内存可以供两个段使用。如果用完了，进程或者必须移动到足够大的空闲区中（它可以被交换出内存直到内存中有足够的空间），或者结束该进程。</p>
+<h4 id="空闲内存管理">空闲内存管理</h4>
+<blockquote>
+<p>在动态分配内存时，操作系统必须对其进行管理。一般而言，有两种方式跟踪内存使用情况：位图和空闲链表。</p>
+</blockquote>
+<h5 id="使用位图的存储管理">使用位图的存储管理</h5>
+<blockquote>
+<p>使用位图方法时，内存可能被划分成小到几个字或大到几千字节的分配单元。每个分配单元对应于位图中的一位，0表示空闲，1表示占用（或者相反）</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e4%bd%8d%e5%9b%be"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e4%bd%8d%e5%9b%be, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e4%bd%8d%e5%9b%be 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e4%bd%8d%e5%9b%be 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/位图"
+        title="刻度表示内存分配的单元，阴影区域表示空闲" /></p>
+<p>a)一段有5个进程和3个空闲区的内存，刻度表示内存分配的单元，阴影区域表示空闲（在位图中用0表示）；b)对应的位图；c)用空闲表表示的同样的信息</p>
+<blockquote>
+<p>分配单元的大小是一个重要的设计因素。分配单元越小，位图越大。但若进程的大小不是分配单元的整数倍，那么在最后一个分配单元中就会有一定数量的内存被浪费了。</p>
+</blockquote>
+<p>因为内存的大小和分配单元的大小决定了位图的大小，所以它提供了一种简单的利用一块固定大小的内存区就能对内存使用情况进行记录的方法。这种方法的主要问题是，在决定把一个占k个分配单元的进程调入内存时，存储管理器必须搜索位图，在位图中找出有k个连续0的串。查找位图中指定长度的连续0串是耗时的操作（因为在位图中该串可能跨越字的边界），这是位图的缺点。</p>
+<h5 id="使用链表的存储管理">使用链表的存储管理</h5>
+<blockquote>
+<p>另一种记录内存使用情况的方法是，维护一个记录已分配内存段和空闲内存段的链表。其中链表中的一个结点或者包含一个进程，或者是两个进程间的一个空的空闲区。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e9%93%be%e8%a1%a8"
+        data-srcset="/images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e9%93%be%e8%a1%a8, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e9%93%be%e8%a1%a8 1.5x, /images/thinking/%e5%ad%98%e5%82%a8%e7%ae%a1%e7%90%86/%e9%93%be%e8%a1%a8 2x"
+        data-sizes="auto"
+        alt="/images/thinking/存储管理/链表"
+        title="结束进程X时与相邻区域的四种组合" /></p>
+<blockquote>
+<p>链表中的每一个结点都包含以下域：空闲区（H）或进程（P）的指示标志、起始地址、长度和指向下一结点的指针。段链表是按照地址排序的，其好处是当进程终止或被换出时链表的更新非常直接。</p>
+</blockquote>
+<p>当按照地址顺序在链表中存放进程和空闲区时，有几种算法可以用来为创建的进程（或从磁盘换入的已存在的进程）分配内存</p>
+<blockquote>
+<p>最简单的算法是首次适配（first fit）算法。</p>
+</blockquote>
+<ul>
+<li>存储管理器沿着段链表进行搜索，直到找到一个足够大的空闲区，除非空闲区大小和要分配的空间大小正好一样，否则将该空闲区分为两部分，一部分供进程使用，另一部分形成新的空闲区。首次适配算法是一种速度很快的算法，因为它尽可能少地搜索链表结点。</li>
+</ul>
+<blockquote>
+<p>下次适配（next fit）算法。</p>
+</blockquote>
+<ul>
+<li>它的工作方式和首次适配算法相同，不同点是每次找到合适的空闲区时都记录当时的位置。以便在下次寻找空闲区时从上次结束的地方开始搜索，而不是像首次适配算法那样每次都从头开始。下次适配算法的性能略低于首次适配算法。</li>
+</ul>
+<blockquote>
+<p>著名的并广泛应用的算法是最佳适配（best fit）算法。</p>
+</blockquote>
+<ul>
+<li>最佳适配算法搜索整个链表（从开始到结束），找出能够容纳进程的最小的空闲区。最佳适配算法试图找出最接近实际需要的空闲区，以最好地区配请求和可用空闲区，而不是先拆分一个以后可能会用到的大的空闲区。</li>
+<li>因为每次调用最佳适配算法时都要搜索整个链表，所以它要比首次适配算法慢。让人感到有点意外的是它比首次适配算法或下次适配算法浪费更多的内存，因为它会产生大量无用的小空闲区。</li>
+</ul>
+<blockquote>
+<p>最差适配（worst fit）算法</p>
+</blockquote>
+<ul>
+<li>即总是分配最大的可用空闲区，使新的空闲区比较大从而可以继续使用。仿真程序表明最差适配算法也不是一个好主意。</li>
+</ul>
+<blockquote>
+<p>快速适配（quick fit）算法</p>
+</blockquote>
+<ul>
+<li>它为那些常用大小的空闲区维护单独的链表。例如，有一个n项的表，该表的第一项是指向大小为4KB的空闲区链表表头的指针，第二项是指向大小为8KB的空闲区链表表头的指针，第三项是指向大小为12KB的空闲区链表表头的指针，以此类推。像21KB这样的空闲区既可以放在20KB的链表中，也可以放在一个专门存放大小比较特别的空闲区的链表中。</li>
+</ul>
+<blockquote>
+<p>如果为进程和空闲区维护各自独立的链表，那么这四个算法的速度都能得到提高。这样就能集中精力只检查空闲区而不是进程。</p>
+</blockquote>
+<p>但这种分配速度的提高的一个不可避免的代价就是增加复杂度和内存释放速度变慢，因为必须将一个回收的段从进程链表中删除并插入空闲区链表。</p>
+<blockquote>
+<p>如果进程和空闲区使用不同的链表，则可以按照大小对空闲区链表排序，以便提高最佳适配算法的速度。</p>
+</blockquote>
+<p>在使用最佳适配算法搜索由小到大排列的空闲区链表时，只要找到一个合适的空闲区，则这个空闲区就是能容纳这个作业的最小的空闲区，因此是最佳适配。因为空闲区链表以单链表形式组织，所以不需要进一步搜索。空闲区链表按大小排序时，首次适配算法与最佳适配算法一样快，而下次适配算法在这里则毫无意义。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-03-26</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/" data-title="存储管理篇" data-hashtags="操作系统"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/" data-hashtag="操作系统"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/" data-title="存储管理篇"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/" data-title="存储管理篇"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Instapaper" data-sharer="instapaper" data-url="/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/" data-title="存储管理篇" data-description="ココの内存"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/instapaper.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/" data-title="存储管理篇"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/thinking/%E8%B0%83%E5%BA%A6/" class="prev" rel="prev" title="调度"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>调度</a>
+            <a href="/posts/thinking/wireshark_use/" class="next" rel="next" title="Wireshark的使用">Wireshark的使用<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">良い夢 - coding....</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="15816034825" target="_blank">ココ也叫CoCo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"ココのブログ - coding","id-2":"ココのブログ - coding"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

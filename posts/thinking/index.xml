@@ -21,6 +21,14 @@
     <description><![CDATA[Wireshark的使用与常见错误 wireshark的主要作用是为了诊断网络出现的问题，大致上比较重要的部分是过滤器与结果的表达，这两点是比]]></description>
 </item>
 <item>
+    <title>存储管理篇</title>
+    <link>/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/</link>
+    <pubDate>Fri, 26 Mar 2021 15:58:26 &#43;0800</pubDate>
+    <author>ココ</author>
+    <guid>/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/</guid>
+    <description><![CDATA[存储管理 操作系统中管理分层存储器体系的部分称为存储管理器（memory manager）。它的任务是有效地管理内存，即记录哪些内存是正在使用的]]></description>
+</item>
+<item>
     <title>调度</title>
     <link>/posts/thinking/%E8%B0%83%E5%BA%A6/</link>
     <pubDate>Thu, 25 Mar 2021 15:58:26 &#43;0800</pubDate>

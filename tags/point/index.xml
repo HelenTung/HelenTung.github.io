@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Point - Tag - ココのブログ</title>
+        <title>Point - Tag - 霞诗子</title>
         <link>/tags/point/</link>
-        <description>Point - Tag - ココのブログ</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
-            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Tue, 04 Jun 2019 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/point/" rel="self" type="application/rss+xml" /><item>
+        <description>Point - Tag - 霞诗子</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (霞诗子)</managingEditor>
+            <webMaster>1635161916@qq.com (霞诗子)</webMaster><lastBuildDate>Tue, 04 Jun 2019 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/point/" rel="self" type="application/rss+xml" /><item>
     <title>C指针与多级指针</title>
     <link>/posts/coding/c_point/</link>
     <pubDate>Tue, 04 Jun 2019 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/coding/c_point/</guid>
     <description><![CDATA[c指针的多种情况具体分析]]></description>
 </item>

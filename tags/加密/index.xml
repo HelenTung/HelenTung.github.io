@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>加密 - Tag - ココのブログ</title>
+        <title>加密 - Tag - 霞诗子</title>
         <link>/tags/%E5%8A%A0%E5%AF%86/</link>
-        <description>加密 - Tag - ココのブログ</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
-            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Tue, 04 Jan 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/%E5%8A%A0%E5%AF%86/" rel="self" type="application/rss+xml" /><item>
+        <description>加密 - Tag - 霞诗子</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (霞诗子)</managingEditor>
+            <webMaster>1635161916@qq.com (霞诗子)</webMaster><lastBuildDate>Tue, 04 Jan 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/%E5%8A%A0%E5%AF%86/" rel="self" type="application/rss+xml" /><item>
     <title>RSA加密算法</title>
     <link>/posts/thinking/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</link>
     <pubDate>Tue, 04 Jan 2022 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/thinking/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</guid>
     <description><![CDATA[公钥非对称加密算法RSA篇]]></description>
 </item>

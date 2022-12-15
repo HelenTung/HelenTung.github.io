@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>All Posts - ココのブログ</title>
+        <title>All Posts - 霞诗子</title>
         <link>/posts/</link>
-        <description>All Posts | ココのブログ</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
-            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/posts/" rel="self" type="application/rss+xml" /><item>
+        <description>All Posts | 霞诗子</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (霞诗子)</managingEditor>
+            <webMaster>1635161916@qq.com (霞诗子)</webMaster><lastBuildDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/posts/" rel="self" type="application/rss+xml" /><item>
     <title>thinking</title>
     <link>/posts/thinking/</link>
     <pubDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</pubDate>
-    <author>ココ也叫CoCo</author>
+    <author>霞诗子</author>
     <guid>/posts/thinking/</guid>
     <description><![CDATA[私の考え]]></description>
 </item>
@@ -16,7 +16,7 @@
     <title>coding</title>
     <link>/posts/coding/</link>
     <pubDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</pubDate>
-    <author>ココ也叫CoCo</author>
+    <author>霞诗子</author>
     <guid>/posts/coding/</guid>
     <description><![CDATA[コード - Coding]]></description>
 </item>

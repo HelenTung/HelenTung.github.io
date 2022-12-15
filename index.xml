@@ -1,16 +1,16 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>ココのブログ</title>
+        <title>霞诗子</title>
         <link>/</link>
-        <description>ココの記録</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
-            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</lastBuildDate>
+        <description>霞诗子</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (霞诗子)</managingEditor>
+            <webMaster>1635161916@qq.com (霞诗子)</webMaster><lastBuildDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</lastBuildDate>
             <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
         <item>
     <title>ffmpeg&#43;v4l2内核模块-虚拟摄像头</title>
     <link>/posts/thinking/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4/</link>
     <pubDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/thinking/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4/</guid>
     <description><![CDATA[利用ffmpeg+v4l2内核模块捏造出虚拟摄像头]]></description>
 </item>
@@ -18,7 +18,7 @@
     <title>go并发的三种模式</title>
     <link>/posts/coding/go%E5%B9%B6%E5%8F%91%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/</link>
     <pubDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/coding/go%E5%B9%B6%E5%8F%91%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/</guid>
     <description><![CDATA[go并发的三种模式的具体代码示例]]></description>
 </item>
@@ -26,7 +26,7 @@
     <title>RSA加密算法</title>
     <link>/posts/thinking/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</link>
     <pubDate>Tue, 04 Jan 2022 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/thinking/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</guid>
     <description><![CDATA[公钥非对称加密算法RSA篇]]></description>
 </item>
@@ -34,7 +34,7 @@
     <title>gin入门</title>
     <link>/posts/coding/gin%E5%85%A5%E9%97%A8/</link>
     <pubDate>Sat, 04 Dec 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/coding/gin%E5%85%A5%E9%97%A8/</guid>
     <description><![CDATA[gin的几种用法与举例]]></description>
 </item>
@@ -42,7 +42,7 @@
     <title>输入输出～fmt标准库</title>
     <link>/posts/coding/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BAfmt%E6%A0%87%E5%87%86/</link>
     <pubDate>Mon, 03 May 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/coding/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BAfmt%E6%A0%87%E5%87%86/</guid>
     <description><![CDATA[fmt标准库、输入输出格式化学习]]></description>
 </item>
@@ -50,7 +50,7 @@
     <title>输入输出～ioutil标准库</title>
     <link>/posts/coding/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BAioutil%E6%A0%87%E5%87%86%E5%BA%93/</link>
     <pubDate>Sun, 02 May 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/coding/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BAioutil%E6%A0%87%E5%87%86%E5%BA%93/</guid>
     <description><![CDATA[ioutil标准库学习与了解]]></description>
 </item>
@@ -58,7 +58,7 @@
     <title>io.Reader接口示例</title>
     <link>/posts/coding/go~io.reader/</link>
     <pubDate>Sat, 01 May 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/coding/go~io.reader/</guid>
     <description><![CDATA[io.Reader接口的一个具体代码示例]]></description>
 </item>
@@ -66,7 +66,7 @@
     <title>输入输出～go标准库</title>
     <link>/posts/coding/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BAgo%E6%A0%87%E5%87%86%E5%BA%93/</link>
     <pubDate>Sat, 01 May 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/coding/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BAgo%E6%A0%87%E5%87%86%E5%BA%93/</guid>
     <description><![CDATA[输入输出标准库了解与学习]]></description>
 </item>
@@ -74,7 +74,7 @@
     <title>储存管理～页面置换算法篇</title>
     <link>/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/</link>
     <pubDate>Sun, 04 Apr 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/</guid>
     <description><![CDATA[操作系统，内存页面置换算法]]></description>
 </item>
@@ -82,7 +82,7 @@
     <title>储存管理～虚拟内存篇</title>
     <link>/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/</link>
     <pubDate>Thu, 01 Apr 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/</guid>
     <description><![CDATA[操作系统虚拟内存详解]]></description>
 </item>

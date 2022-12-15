@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Categories - Category - ココのブログ</title>
+        <title>Categories - Category - 霞诗子</title>
         <link>/categories/</link>
-        <description>Categories - Category - ココのブログ</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
-            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/categories/" rel="self" type="application/rss+xml" /><item>
+        <description>Categories - Category - 霞诗子</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (霞诗子)</managingEditor>
+            <webMaster>1635161916@qq.com (霞诗子)</webMaster><lastBuildDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/categories/" rel="self" type="application/rss+xml" /><item>
     <title>arch</title>
     <link>/categories/arch/</link>
     <pubDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</pubDate>
-    <author>ココ也叫CoCo</author>
+    <author>霞诗子</author>
     <guid>/categories/arch/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -16,7 +16,7 @@
     <title>内核模块</title>
     <link>/categories/%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/</link>
     <pubDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</pubDate>
-    <author>ココ也叫CoCo</author>
+    <author>霞诗子</author>
     <guid>/categories/%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -24,7 +24,7 @@
     <title>Code</title>
     <link>/categories/code/</link>
     <pubDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</pubDate>
-    <author>ココ也叫CoCo</author>
+    <author>霞诗子</author>
     <guid>/categories/code/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -32,7 +32,7 @@
     <title>go</title>
     <link>/categories/go/</link>
     <pubDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</pubDate>
-    <author>ココ也叫CoCo</author>
+    <author>霞诗子</author>
     <guid>/categories/go/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -40,7 +40,7 @@
     <title>算法</title>
     <link>/categories/%E7%AE%97%E6%B3%95/</link>
     <pubDate>Tue, 04 Jan 2022 15:58:26 &#43;0800</pubDate>
-    <author>ココ也叫CoCo</author>
+    <author>霞诗子</author>
     <guid>/categories/%E7%AE%97%E6%B3%95/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -48,7 +48,7 @@
     <title>标准库</title>
     <link>/categories/%E6%A0%87%E5%87%86%E5%BA%93/</link>
     <pubDate>Mon, 03 May 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ也叫CoCo</author>
+    <author>霞诗子</author>
     <guid>/categories/%E6%A0%87%E5%87%86%E5%BA%93/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -56,7 +56,7 @@
     <title>操作系统</title>
     <link>/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
     <pubDate>Sun, 04 Apr 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ也叫CoCo</author>
+    <author>霞诗子</author>
     <guid>/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -64,7 +64,7 @@
     <title>network</title>
     <link>/categories/network/</link>
     <pubDate>Wed, 04 Dec 2019 15:58:26 &#43;0800</pubDate>
-    <author>ココ也叫CoCo</author>
+    <author>霞诗子</author>
     <guid>/categories/network/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -72,7 +72,7 @@
     <title>C</title>
     <link>/categories/c/</link>
     <pubDate>Tue, 04 Jun 2019 15:58:26 &#43;0800</pubDate>
-    <author>ココ也叫CoCo</author>
+    <author>霞诗子</author>
     <guid>/categories/c/</guid>
     <description><![CDATA[]]></description>
 </item>

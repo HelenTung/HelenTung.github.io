@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>操作系统 - Tag - ココのブログ</title>
+        <title>操作系统 - Tag - 霞诗子</title>
         <link>/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
-        <description>操作系统 - Tag - ココのブログ</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
-            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Sun, 04 Apr 2021 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="self" type="application/rss+xml" /><item>
+        <description>操作系统 - Tag - 霞诗子</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (霞诗子)</managingEditor>
+            <webMaster>1635161916@qq.com (霞诗子)</webMaster><lastBuildDate>Sun, 04 Apr 2021 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="self" type="application/rss+xml" /><item>
     <title>储存管理～页面置换算法篇</title>
     <link>/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/</link>
     <pubDate>Sun, 04 Apr 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/</guid>
     <description><![CDATA[操作系统，内存页面置换算法]]></description>
 </item>
@@ -16,7 +16,7 @@
     <title>储存管理～虚拟内存篇</title>
     <link>/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/</link>
     <pubDate>Thu, 01 Apr 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/</guid>
     <description><![CDATA[操作系统虚拟内存详解]]></description>
 </item>
@@ -24,7 +24,7 @@
     <title>存储篇~交换技术</title>
     <link>/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/</link>
     <pubDate>Fri, 26 Mar 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/</guid>
     <description><![CDATA[操作系统、内存交换技术详解]]></description>
 </item>
@@ -32,7 +32,7 @@
     <title>进程与线程~调度</title>
     <link>/posts/thinking/%E8%B0%83%E5%BA%A6/</link>
     <pubDate>Thu, 25 Mar 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/thinking/%E8%B0%83%E5%BA%A6/</guid>
     <description><![CDATA[进程与线程、调度算法]]></description>
 </item>
@@ -40,7 +40,7 @@
     <title>进程与线程~进程间通信</title>
     <link>/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</link>
     <pubDate>Mon, 22 Mar 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</guid>
     <description><![CDATA[进程与线程、进程间通信]]></description>
 </item>
@@ -48,7 +48,7 @@
     <title>进程与线程～线程篇</title>
     <link>/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%BA%BF%E7%A8%8B%E7%AF%87/</link>
     <pubDate>Sun, 21 Mar 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%BA%BF%E7%A8%8B%E7%AF%87/</guid>
     <description><![CDATA[操作系统线程详解]]></description>
 </item>
@@ -56,7 +56,7 @@
     <title>进程与线程～进程篇</title>
     <link>/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87/</link>
     <pubDate>Sat, 20 Mar 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87/</guid>
     <description><![CDATA[操作系统进程详解]]></description>
 </item>
@@ -64,17 +64,9 @@
     <title>操作系统结构</title>
     <link>/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/</link>
     <pubDate>Wed, 17 Mar 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/</guid>
     <description><![CDATA[操作系统概论]]></description>
-</item>
-<item>
-    <title>操作系统概念</title>
-    <link>/posts/thinking/%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/</link>
-    <pubDate>Thu, 04 Mar 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
-    <guid>/posts/thinking/%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/</guid>
-    <description><![CDATA[操作系统概念了解以及入门]]></description>
 </item>
 </channel>
 </rss>

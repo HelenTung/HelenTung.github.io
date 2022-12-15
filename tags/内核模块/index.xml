@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>内核模块 - Tag - ココのブログ</title>
+        <title>内核模块 - Tag - 霞诗子</title>
         <link>/tags/%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/</link>
-        <description>内核模块 - Tag - ココのブログ</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
-            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/" rel="self" type="application/rss+xml" /><item>
+        <description>内核模块 - Tag - 霞诗子</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (霞诗子)</managingEditor>
+            <webMaster>1635161916@qq.com (霞诗子)</webMaster><lastBuildDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/" rel="self" type="application/rss+xml" /><item>
     <title>ffmpeg&#43;v4l2内核模块-虚拟摄像头</title>
     <link>/posts/thinking/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4/</link>
     <pubDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/thinking/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4/</guid>
     <description><![CDATA[利用ffmpeg+v4l2内核模块捏造出虚拟摄像头]]></description>
 </item>

@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>gin - Tag - ココのブログ</title>
+        <title>gin - Tag - 霞诗子</title>
         <link>/tags/gin/</link>
-        <description>gin - Tag - ココのブログ</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
-            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Sat, 04 Dec 2021 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/gin/" rel="self" type="application/rss+xml" /><item>
+        <description>gin - Tag - 霞诗子</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (霞诗子)</managingEditor>
+            <webMaster>1635161916@qq.com (霞诗子)</webMaster><lastBuildDate>Sat, 04 Dec 2021 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/gin/" rel="self" type="application/rss+xml" /><item>
     <title>gin入门</title>
     <link>/posts/coding/gin%E5%85%A5%E9%97%A8/</link>
     <pubDate>Sat, 04 Dec 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/coding/gin%E5%85%A5%E9%97%A8/</guid>
     <description><![CDATA[gin的几种用法与举例]]></description>
 </item>

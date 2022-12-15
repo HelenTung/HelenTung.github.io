@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Code - Category - ココのブログ</title>
+        <title>Code - Category - 霞诗子</title>
         <link>/categories/code/</link>
-        <description>Code - Category - ココのブログ</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
-            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/categories/code/" rel="self" type="application/rss+xml" /><item>
+        <description>Code - Category - 霞诗子</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (霞诗子)</managingEditor>
+            <webMaster>1635161916@qq.com (霞诗子)</webMaster><lastBuildDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/categories/code/" rel="self" type="application/rss+xml" /><item>
     <title>go并发的三种模式</title>
     <link>/posts/coding/go%E5%B9%B6%E5%8F%91%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/</link>
     <pubDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/coding/go%E5%B9%B6%E5%8F%91%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/</guid>
     <description><![CDATA[go并发的三种模式的具体代码示例]]></description>
 </item>
@@ -16,7 +16,7 @@
     <title>C指针与多级指针</title>
     <link>/posts/coding/c_point/</link>
     <pubDate>Tue, 04 Jun 2019 15:58:26 &#43;0800</pubDate>
-    <author>ココ</author>
+    <author>霞诗子</author>
     <guid>/posts/coding/c_point/</guid>
     <description><![CDATA[c指针的多种情况具体分析]]></description>
 </item>

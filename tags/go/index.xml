@@ -10,7 +10,7 @@
     <pubDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/coding/go%E5%B9%B6%E5%8F%91%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/</guid>
-    <description><![CDATA[并发的三种模式 runner.go 主要为切片放置任务函数 package runner import ( &#34;errors&#34; &#34;os&#34; &#34;os/signal&#34; &#34;time&#34; ) type Runner struct { // interrupt 通道报告从操作系统发送的信号 interrupt chan os.Signal //complete通道报告处理任务已]]></description>
+    <description><![CDATA[go并发的三种模式的具体代码示例]]></description>
 </item>
 <item>
     <title>gin入门</title>
@@ -18,7 +18,7 @@
     <pubDate>Sat, 04 Dec 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/coding/gin%E5%85%A5%E9%97%A8/</guid>
-    <description><![CDATA[gin入门与学习 静态文件请求 //// 静态文件请求 func main() { r := gin.Default() r.Static(&#34;/assets&#34;,&#34;./assets&#34;) r.StaticFS(&#34;/static&#34;,http.Dir(&#34;static&#34;)) r.StaticFile(&#34;/favicon.ico&#34;,&#34;./favicon.ico&#34;) r.Run() } 路由方法 func main() { r := gin.Default() //定义GET方法 r.GET(&#34;/get&#34;,func (c *gin.Context) { c.String(200,&#34;get&#34;) }) // 定义POST方法 r.POST(&#34;/post&#34;,func (c *gin.Context) {]]></description>
+    <description><![CDATA[gin的几种用法与举例]]></description>
 </item>
 <item>
     <title>输入输出～fmt标准库</title>
@@ -26,7 +26,7 @@
     <pubDate>Mon, 03 May 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/coding/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BAfmt%E6%A0%87%E5%87%86/</guid>
-    <description><![CDATA[fmt 包实现了格式化I/O函数 //常见的格式控制符 type user struct { name string } func main() { u := user{&#34;tang&#34;} //占位符 fmt.Printf(&#34;% + v\\n&#34;, u) //格式化输出结构 fmt.Printf(&#34;%#v\\n&#34;, u) //输出值的 Go 语言表示方法 fmt.Printf(&#34;%T\\n&#34;,]]></description>
+    <description><![CDATA[fmt标准库、输入输出格式化学习]]></description>
 </item>
 <item>
     <title>输入输出～ioutil标准库</title>
@@ -34,7 +34,7 @@
     <pubDate>Sun, 02 May 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/coding/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BAioutil%E6%A0%87%E5%87%86%E5%BA%93/</guid>
-    <description><![CDATA[ioutil — 方便的IO操作函数集 NopCloser函数 tips 有时候我们需要传递一个 io.ReadCloser 的实例，而我们现在有一个 io.Reader 的实例，比如：strings.Reader]]></description>
+    <description><![CDATA[ioutil标准库学习与了解]]></description>
 </item>
 <item>
     <title>io.Reader接口示例</title>
@@ -42,7 +42,7 @@
     <pubDate>Sat, 01 May 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/coding/go~io.reader/</guid>
-    <description><![CDATA[io.Reader 接口示例 // io.Reader 接口示例 package main import ( &#34;fmt&#34; &#34;io&#34; &#34;os&#34; &#34;strings&#34; &#34;util&#34; ) func ReaderExample() { FOREND: for { readerMenu() var ch string fmt.Scanln(&amp;ch) var ( data []byte err error ) switch strings.ToLower(ch) { case &#34;1&#34;: fmt.Println(&#34;请输入不多于9个字]]></description>
+    <description><![CDATA[io.Reader接口的一个具体代码示例]]></description>
 </item>
 <item>
     <title>输入输出～go标准库</title>
@@ -50,7 +50,7 @@
     <pubDate>Sat, 01 May 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/coding/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BAgo%E6%A0%87%E5%87%86%E5%BA%93/</guid>
-    <description><![CDATA[输入输出 基本的 IO 接口 Reader 接口: type Reader interface{ Read(p []byte)(n int, err error) } Read 将 len(p) 个字节读取到 p 中。它返回读取的字节数 n（0 &lt;= n &lt;= len(p)） 以及任何遇到的错误。即使 Read]]></description>
+    <description><![CDATA[输入输出标准库了解与学习]]></description>
 </item>
 </channel>
 </rss>

@@ -10,7 +10,7 @@
     <pubDate>Sun, 04 Apr 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/</guid>
-    <description><![CDATA[页面置换算法篇 当发生缺页中断时，操作系统必须在内存中选择一个页面将其换出内存，以便为即将调入的页面腾出空间。 如果要换出的页面在内存驻留期间已]]></description>
+    <description><![CDATA[操作系统，内存页面置换算法]]></description>
 </item>
 <item>
     <title>储存管理～虚拟内存篇</title>
@@ -18,7 +18,7 @@
     <pubDate>Thu, 01 Apr 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/</guid>
-    <description><![CDATA[储存管理篇～虚拟内存技术 虚拟内存 尽管基址寄存器和界限寄存器可以用于创建地址空间的抽象，还有另一个问题需要解决：管理软件的膨胀（bloatwa]]></description>
+    <description><![CDATA[操作系统虚拟内存详解]]></description>
 </item>
 <item>
     <title>存储篇~交换技术</title>
@@ -26,7 +26,7 @@
     <pubDate>Fri, 26 Mar 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/</guid>
-    <description><![CDATA[存储管理 操作系统中管理分层存储器体系的部分称为存储管理器（memory manager）。它的任务是有效地管理内存，即记录哪些内存是正在使用的]]></description>
+    <description><![CDATA[操作系统、内存交换技术详解]]></description>
 </item>
 <item>
     <title>进程与线程~调度</title>
@@ -34,7 +34,7 @@
     <pubDate>Thu, 25 Mar 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/thinking/%E8%B0%83%E5%BA%A6/</guid>
-    <description><![CDATA[调度 当计算机系统是多道程序设计系统时，通常就会有多个进程或线程同时竞争CPU。只要有两个或更多的进程处于就绪状态，这种情形就会发生。如果只有]]></description>
+    <description><![CDATA[进程与线程、调度算法]]></description>
 </item>
 <item>
     <title>进程与线程~进程间通信</title>
@@ -42,7 +42,7 @@
     <pubDate>Mon, 22 Mar 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</guid>
-    <description><![CDATA[进程间通信 简要地说，有三个问题。 第一个问题与上面的叙述有关，即一个进程如何把信息传递给另一个。 第二个要处理的问题是，确保两个或更多的进程在关]]></description>
+    <description><![CDATA[进程与线程、进程间通信]]></description>
 </item>
 <item>
     <title>进程与线程～线程篇</title>
@@ -50,7 +50,7 @@
     <pubDate>Sun, 21 Mar 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%BA%BF%E7%A8%8B%E7%AF%87/</guid>
-    <description><![CDATA[进程与线程～线程篇 线程的使用 必要性 并行实体共享同一个地址空间和所有可用数据的能力。对于某些应用而言，这种能力是必需的，而这正是多进程模型（它]]></description>
+    <description><![CDATA[操作系统线程详解]]></description>
 </item>
 <item>
     <title>进程与线程～进程篇</title>
@@ -58,7 +58,7 @@
     <pubDate>Sat, 20 Mar 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87/</guid>
-    <description><![CDATA[进程与线程～进程篇 进程 进程模型 一个进程就是一个正在执行程序的实例，包括程序计数器、寄存器和变量的当前值。从概念上说，每个进程拥有它自己的虚拟]]></description>
+    <description><![CDATA[操作系统进程详解]]></description>
 </item>
 <item>
     <title>操作系统结构</title>
@@ -66,7 +66,7 @@
     <pubDate>Wed, 17 Mar 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/</guid>
-    <description><![CDATA[操作系统结构 这六种设计是，单体系统、层次系统、微内核、客户机-服务器系统、虚拟机和exokernels等 单体系统 需要一个主程序，用来处理服务]]></description>
+    <description><![CDATA[操作系统概论]]></description>
 </item>
 <item>
     <title>操作系统概念</title>
@@ -74,7 +74,7 @@
     <pubDate>Thu, 04 Mar 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/thinking/%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/</guid>
-    <description><![CDATA[现代操作系统概念 进程 进程本质上是正在执行的一个程序。 与每个进程相关的是进程的地址空间（address space），这是从某个最小值的存储位置]]></description>
+    <description><![CDATA[操作系统概念了解以及入门]]></description>
 </item>
 </channel>
 </rss>

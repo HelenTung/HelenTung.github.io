@@ -10,7 +10,7 @@
     <pubDate>Sat, 04 Dec 2021 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/coding/gin%E5%85%A5%E9%97%A8/</guid>
-    <description><![CDATA[gin入门与学习 静态文件请求 //// 静态文件请求 func main() { r := gin.Default() r.Static(&#34;/assets&#34;,&#34;./assets&#34;) r.StaticFS(&#34;/static&#34;,http.Dir(&#34;static&#34;)) r.StaticFile(&#34;/favicon.ico&#34;,&#34;./favicon.ico&#34;) r.Run() } 路由方法 func main() { r := gin.Default() //定义GET方法 r.GET(&#34;/get&#34;,func (c *gin.Context) { c.String(200,&#34;get&#34;) }) // 定义POST方法 r.POST(&#34;/post&#34;,func (c *gin.Context) {]]></description>
+    <description><![CDATA[gin的几种用法与举例]]></description>
 </item>
 </channel>
 </rss>

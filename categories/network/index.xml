@@ -4,13 +4,13 @@
         <link>/categories/network/</link>
         <description>network - Category - ココのブログ</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
-            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Mon, 04 Apr 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/categories/network/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Wed, 04 Dec 2019 15:58:26 &#43;0800</lastBuildDate><atom:link href="/categories/network/" rel="self" type="application/rss+xml" /><item>
     <title>Wireshark的使用</title>
     <link>/posts/thinking/wireshark_use/</link>
-    <pubDate>Mon, 04 Apr 2022 15:58:26 &#43;0800</pubDate>
+    <pubDate>Wed, 04 Dec 2019 15:58:26 &#43;0800</pubDate>
     <author>ココ</author>
     <guid>/posts/thinking/wireshark_use/</guid>
-    <description><![CDATA[Wireshark的使用与常见错误 wireshark的主要作用是为了诊断网络出现的问题，大致上比较重要的部分是过滤器与结果的表达，这两点是比]]></description>
+    <description><![CDATA[利用wireshark抓包的一些步骤]]></description>
 </item>
 </channel>
 </rss>

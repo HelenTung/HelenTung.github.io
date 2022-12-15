@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>ffmpeg&#43;v4l2内核模块-虚拟摄像头 - ココのブログ</title><meta name="Description" content="ココの"><meta property="og:title" content="ffmpeg&#43;v4l2内核模块-虚拟摄像头" />
+<meta property="og:description" content="ココの" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/thinking/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4/" /><meta property="og:image" content="/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-11-04T15:58:26+08:00" />
+<meta property="article:modified_time" content="2022-11-04T15:58:26+08:00" /><meta property="og:site_name" content="ココのブログ" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/logo.png"/>
+
+<meta name="twitter:title" content="ffmpeg&#43;v4l2内核模块-虚拟摄像头"/>
+<meta name="twitter:description" content="ココの"/>
+<meta name="application-name" content="ココのブログ">
+<meta name="apple-mobile-web-app-title" content="ココのブログ"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/thinking/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4/" /><link rel="prev" href="/posts/thinking/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "ffmpeg+v4l2内核模块-虚拟摄像头",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/thinking\/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4\/"
+        },"genre": "posts","keywords": "内核模块, arch","wordcount":  893 ,
+        "url": "\/posts\/thinking\/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4\/","datePublished": "2022-11-04T15:58:26+08:00","dateModified": "2022-11-04T15:58:26+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ココ"
+            },"description": "ココの"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ココのブログ"><span id="id-3" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="主页"> Me </a><a class="menu-item" href="/posts/coding/" title="算法"> Coding </a><a class="menu-item" href="/posts/thinking/" title="思考"> Thinking </a><a class="menu-item" href="/tags/" title="标签"> Label </a><a class="menu-item" href="/categories/" title="分类"> Category </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ココのブログ"><span id="id-4" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="ねえ、ここに結果が来る" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/" title="主页">Me</a><a class="menu-item" href="/posts/coding/" title="算法">Coding</a><a class="menu-item" href="/posts/thinking/" title="思考">Thinking</a><a class="menu-item" href="/tags/" title="标签">Label</a><a class="menu-item" href="/categories/" title="分类">Category</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">ffmpeg+v4l2内核模块-虚拟摄像头</h1><h2 class="single-subtitle">ffmpeg&#43;v4l2内核模块</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="15816034825" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ココ</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>内核模块</a>&nbsp;<a href="/categories/arch/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>arch</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-04">2022-11-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;893 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#安装依赖以及内核模块">安装依赖以及内核模块</a></li>
+        <li><a href="#将视频流链接到虚拟摄像头">将视频流链接到虚拟摄像头</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="安装依赖以及内核模块">安装依赖以及内核模块</h3>
+<div class="typeit"><h4 id="id-1"></h4></div>
+
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>这需要安装ffmpeg以及<strong>v4l2loopback</strong>内核模块:</p>
+<ol>
+<li>其中<strong>ffmpeg能够将我们想要的视频作为可以安装的网络摄像头源进行流式传输</strong>。</li>
+<li><strong>v4l2loopback模块允许您创建“虚拟视频设备”</strong>。普通v4l2应用程序将像普通设备一样读取这些设备 视频设备，但视频不从捕获卡中读取，而是相反，它是由另一个应用程序生成的。</li>
+</ol>
+</div>
+        </div>
+    </div>
+<div class="typeit"><div id="id-2" class="highlight"></div></div>
+
+<blockquote>
+<p>若官方源无该软件包，则需要自己进行下载并且编译</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">//安装内核模块，若v4l2loopback-dkms-git安装成功则跳过
+</span></span><span class="line"><span class="cl">git clone https://github.com/umlaeute/v4l2loopback.git
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">## 编译</span>
+</span></span><span class="line"><span class="cl">make clean
+</span></span><span class="line"><span class="cl">make <span class="o">&amp;&amp;</span> sudo make install
+</span></span><span class="line"><span class="cl"><span class="c1">##加载内核依赖关系</span>
+</span></span><span class="line"><span class="cl">sudo depmod -a
+</span></span></code></pre></div><hr>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">## 将用户添加到video用户组</span>
+</span></span><span class="line"><span class="cl">sudo gpasswd -a <span class="nv">$USER</span> video
+</span></span><span class="line"><span class="cl"><span class="c1">## 添加内核模块，其中devices表示只创建一个环路设备，exclusive_caps为故障排查选项，card_label为设备名称。</span>
+</span></span><span class="line"><span class="cl">sudo modprobe v4l2loopback <span class="nv">devices</span><span class="o">=</span><span class="m">1</span> <span class="nv">max_buffers</span><span class="o">=</span><span class="m">2</span> <span class="nv">exclusive_caps</span><span class="o">=</span><span class="m">1</span> <span class="nv">card_label</span><span class="o">=</span><span class="s2">&#34;VirtualCam #0&#34;</span> 
+</span></span></code></pre></div><p>若该命令可以正确列出所创建的设备，则内核模块加载完成</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">## 判断加载是否完成，记住此摄像头设备，例如为video2</span>
+</span></span><span class="line"><span class="cl">ls -l /sys/devices/virtual/video4linux
+</span></span><span class="line"><span class="cl"><span class="c1">## 查看设备属性</span>
+</span></span><span class="line"><span class="cl">v4l2-ctl -d /dev/video0 -l
+</span></span></code></pre></div><hr>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">## 创建新设备 /dev/video7有标签“loopy doopy”的，使用：</span>
+</span></span><span class="line"><span class="cl">sudo v4l2loopback-ctl add -n <span class="s2">&#34;loopy doopy&#34;</span> /dev/video7
+</span></span><span class="line"><span class="cl"><span class="c1">## 删除设备，若提示设备忙碌则需要先卸载设备</span>
+</span></span><span class="line"><span class="cl">sudo v4l2loopback-ctl delete /dev/video7
+</span></span></code></pre></div><h3 id="将视频流链接到虚拟摄像头">将视频流链接到虚拟摄像头</h3>
+<blockquote>
+<p>在完成以上软件安装以及内核加载之后、准备一份视频、同时测试可用摄像头。</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">## 列出所有摄像头设备</span>
+</span></span><span class="line"><span class="cl">ls -l /dev/video*
+</span></span><span class="line"><span class="cl"><span class="c1">## 测试可用摄像头，X可以是0,1,2...</span>
+</span></span><span class="line"><span class="cl">ffplay /dev/videoX 
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">## 此处的video2是生成的虚拟设备名称</span>
+</span></span><span class="line"><span class="cl">ffmpeg -stream_loop -1 -re -i ./Documents/2022-12-13<span class="se">\ </span>20-47-48.mkv -vcodec rawvideo -threads <span class="m">0</span> -f v4l2 /dev/video2
+</span></span></code></pre></div><div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>几个参数的作用以及举例：</p>
+<ol>
+<li>-re为自适应帧率，-i为指定输入文件路径。</li>
+<li>-stream_loop -1：这决定了视频应该循环播放的次数、为其分配负值 -1 让它无限循环、直到我们继续播放close我们的程序。</li>
+<li>-vcodec：这指定了视频编解码器，也就是流处理。</li>
+<li>rawvideo这个告诉 ffmpeg 使用原始视频解复用器、该多路分配器允许读取原始视频数据。</li>
+<li>-threads 要使用的线程数、通常设置为0被认为是最优的。</li>
+<li>-f 此标志用于强制输入/输出文件的格式、我们强制输出v4l2格式</li>
+</ol>
+</div>
+        </div>
+    </div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">## 使用以下命令删除先前加载的内核模块：</span>
+</span></span><span class="line"><span class="cl">sudo modprobe --remove v4l2loopback
+</span></span></code></pre></div><blockquote>
+<p>注意：若linux内核版本小于2.6.27,则意味着此内核模块在该linux上无法运行和加载，需要另外寻求解决方法。</p>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-11-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4/" data-title="ffmpeg&#43;v4l2内核模块-虚拟摄像头" data-hashtags="内核模块,arch"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4/" data-hashtag="内核模块"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4/" data-title="ffmpeg&#43;v4l2内核模块-虚拟摄像头"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4/" data-title="ffmpeg&#43;v4l2内核模块-虚拟摄像头"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Instapaper" data-sharer="instapaper" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4/" data-title="ffmpeg&#43;v4l2内核模块-虚拟摄像头" data-description="ココの"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.0.0/icons/instapaper.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/posts/thinking/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4/" data-title="ffmpeg&#43;v4l2内核模块-虚拟摄像头"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/">内核模块</a>,&nbsp;<a href="/tags/arch/">arch</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/thinking/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="prev" rel="prev" title="RSA加密算法"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>RSA加密算法</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">良い夢 - coding....</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="15816034825" target="_blank">ココ也叫CoCo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"\u003cp\u003e测试安装本机环境：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003eos：Arch Linux x86_64\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003ekernel：6.0.12-zen1-1-zen\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n","id-2":["\u003cspan class=\"line\"\u003e\u003cspan class=\"cl\"\u003eyay -S ffmpeg v4l2loopback-dkms-git\u003c/span\u003e\u003c/span\u003e"],"id-3":"ココのブログ - coding","id-4":"ココのブログ - coding"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"],"id-3":["id-3"],"id-4":["id-4"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

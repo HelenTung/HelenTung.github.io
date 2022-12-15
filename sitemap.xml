@@ -2,19 +2,24 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>/categories/</loc><lastmod>2022-07-15T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/tags/arch/</loc><lastmod>2022-11-04T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/categories/arch/</loc><lastmod>2022-11-04T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/categories/</loc><lastmod>2022-11-04T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/posts/thinking/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4/</loc><lastmod>2022-11-04T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/posts/</loc><lastmod>2022-11-04T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/tags/</loc><lastmod>2022-11-04T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/posts/thinking/</loc><lastmod>2022-11-04T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/</loc><lastmod>2022-11-04T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/tags/%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/</loc><lastmod>2022-11-04T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/categories/%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/</loc><lastmod>2022-11-04T15:58:26&#43;08:00</lastmod></url><url>
             <loc>/tags/code/</loc><lastmod>2022-07-15T15:58:26&#43;08:00</lastmod></url><url>
             <loc>/categories/code/</loc><lastmod>2022-07-15T15:58:26&#43;08:00</lastmod></url><url>
             <loc>/posts/coding/</loc><lastmod>2022-07-15T15:58:26&#43;08:00</lastmod></url><url>
             <loc>/tags/go/</loc><lastmod>2022-07-15T15:58:26&#43;08:00</lastmod></url><url>
             <loc>/categories/go/</loc><lastmod>2022-07-15T15:58:26&#43;08:00</lastmod></url><url>
             <loc>/posts/coding/go%E5%B9%B6%E5%8F%91%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/</loc><lastmod>2022-07-15T15:58:26&#43;08:00</lastmod></url><url>
-            <loc>/posts/</loc><lastmod>2022-07-15T15:58:26&#43;08:00</lastmod></url><url>
-            <loc>/tags/</loc><lastmod>2022-07-15T15:58:26&#43;08:00</lastmod></url><url>
-            <loc>/</loc><lastmod>2022-07-15T15:58:26&#43;08:00</lastmod></url><url>
             <loc>/tags/rsa/</loc><lastmod>2022-07-04T15:58:26&#43;08:00</lastmod></url><url>
             <loc>/posts/thinking/rsa%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</loc><lastmod>2022-07-04T15:58:26&#43;08:00</lastmod></url><url>
-            <loc>/posts/thinking/</loc><lastmod>2022-07-04T15:58:26&#43;08:00</lastmod></url><url>
             <loc>/tags/%E5%8A%A0%E5%AF%86/</loc><lastmod>2022-07-04T15:58:26&#43;08:00</lastmod></url><url>
             <loc>/tags/%E7%AE%97%E6%B3%95/</loc><lastmod>2022-07-04T15:58:26&#43;08:00</lastmod></url><url>
             <loc>/categories/%E7%AE%97%E6%B3%95/</loc><lastmod>2022-07-04T15:58:26&#43;08:00</lastmod></url><url>
@@ -26,6 +31,13 @@
             <loc>/categories/network/</loc><lastmod>2022-04-04T15:58:26&#43;08:00</lastmod></url><url>
             <loc>/tags/wireshark/</loc><lastmod>2022-04-04T15:58:26&#43;08:00</lastmod></url><url>
             <loc>/posts/thinking/wireshark_use/</loc><lastmod>2022-04-04T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/tags/gin/</loc><lastmod>2021-12-04T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/posts/coding/gin%E5%85%A5%E9%97%A8/</loc><lastmod>2021-12-04T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/categories/%E6%A0%87%E5%87%86%E5%BA%93/</loc><lastmod>2021-05-03T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/posts/coding/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BAfmt%E6%A0%87%E5%87%86/</loc><lastmod>2021-05-03T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/posts/coding/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BAioutil%E6%A0%87%E5%87%86%E5%BA%93/</loc><lastmod>2021-05-02T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/posts/coding/go~io.reader/</loc><lastmod>2021-05-01T15:58:26&#43;08:00</lastmod></url><url>
+            <loc>/posts/coding/%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BAgo%E6%A0%87%E5%87%86%E5%BA%93/</loc><lastmod>2021-05-01T15:58:26&#43;08:00</lastmod></url><url>
             <loc>/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/</loc><lastmod>2021-04-04T15:58:26&#43;08:00</lastmod></url><url>
             <loc>/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc><lastmod>2021-04-04T15:58:26&#43;08:00</lastmod></url><url>
             <loc>/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc><lastmod>2021-04-04T15:58:26&#43;08:00</lastmod></url><url>

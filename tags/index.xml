@@ -4,7 +4,23 @@
         <link>/tags/</link>
         <description>Tags - Tag - ココのブログ</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (ココ也叫CoCo)</managingEditor>
-            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1635161916@qq.com (ココ也叫CoCo)</webMaster><lastBuildDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>arch</title>
+    <link>/tags/arch/</link>
+    <pubDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</pubDate>
+    <author>ココ也叫CoCo</author>
+    <guid>/tags/arch/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>内核模块</title>
+    <link>/tags/%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/</link>
+    <pubDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</pubDate>
+    <author>ココ也叫CoCo</author>
+    <guid>/tags/%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Code</title>
     <link>/tags/code/</link>
     <pubDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</pubDate>
@@ -13,7 +29,7 @@
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>Go</title>
+    <title>go</title>
     <link>/tags/go/</link>
     <pubDate>Fri, 15 Jul 2022 15:58:26 &#43;0800</pubDate>
     <author>ココ也叫CoCo</author>
@@ -66,22 +82,6 @@
     <pubDate>Mon, 04 Apr 2022 15:58:26 &#43;0800</pubDate>
     <author>ココ也叫CoCo</author>
     <guid>/tags/network/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>wireshark</title>
-    <link>/tags/wireshark/</link>
-    <pubDate>Mon, 04 Apr 2022 15:58:26 &#43;0800</pubDate>
-    <author>ココ也叫CoCo</author>
-    <guid>/tags/wireshark/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>操作系统</title>
-    <link>/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
-    <pubDate>Sun, 04 Apr 2021 15:58:26 &#43;0800</pubDate>
-    <author>ココ也叫CoCo</author>
-    <guid>/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

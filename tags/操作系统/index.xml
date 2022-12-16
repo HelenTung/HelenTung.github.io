@@ -77,12 +77,12 @@
     <description><![CDATA[操作系统实现文件系统的具体方法详解]]></description>
 </item>
 <item>
-    <title>操作系统-储存管理页面置换算法篇</title>
-    <link>/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/</link>
+    <title>操作系统-储存管理分页和分段</title>
+    <link>/posts/thinking/%E5%82%A8%E5%AD%98%E7%AE%A1%E7%90%86%E5%88%86%E9%A1%B5%E6%9C%BA%E5%88%B6/</link>
     <pubDate>Sun, 04 Apr 2021 15:58:26 &#43;0800</pubDate>
     <author>霞诗子</author>
-    <guid>/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/</guid>
-    <description><![CDATA[操作系统，内存页面置换算法]]></description>
+    <guid>/posts/thinking/%E5%82%A8%E5%AD%98%E7%AE%A1%E7%90%86%E5%88%86%E9%A1%B5%E6%9C%BA%E5%88%B6/</guid>
+    <description><![CDATA[操作系统、内存交换技术详解]]></description>
 </item>
 </channel>
 </rss>

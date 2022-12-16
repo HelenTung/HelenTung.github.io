@@ -10,7 +10,7 @@
     <pubDate>Sun, 25 Apr 2021 15:58:26 &#43;0800</pubDate>
     <author>霞诗子</author>
     <guid>/posts/thinking/%E6%AD%BB%E9%94%81%E9%A2%84%E9%98%B2/</guid>
-    <description><![CDATA[死锁避免 资源轨迹图 我们看到一个处理两个进程和两种资源（打印机和绘图仪）的模型。横轴表示进程A执行的指令，纵轴表示进程B执行的指令。进程A在I]]></description>
+    <description><![CDATA[死锁的产生与破坏死锁的条件]]></description>
 </item>
 <item>
     <title>操作系统-死锁与资源</title>
@@ -18,7 +18,7 @@
     <pubDate>Fri, 23 Apr 2021 15:58:26 &#43;0800</pubDate>
     <author>霞诗子</author>
     <guid>/posts/thinking/%E8%B5%84%E6%BA%90%E4%B8%8E%E6%AD%BB%E9%94%81/</guid>
-    <description><![CDATA[资源 需要排他性使用的对象称为资源（resource）。资源可以是硬件设备（如磁带机）或是一组信息（如数据库中一个加锁的记录）。通常在计算机中]]></description>
+    <description><![CDATA[资源与死锁之间的关系]]></description>
 </item>
 <item>
     <title>操作系统-IO输入输出</title>
@@ -43,6 +43,14 @@
     <author>霞诗子</author>
     <guid>/posts/thinking/io%E8%BD%AF%E4%BB%B6%E5%8E%9F%E7%90%86/</guid>
     <description><![CDATA[操作系统在IO软件层次的作用详解]]></description>
+</item>
+<item>
+    <title>操作系统-IO硬件原理</title>
+    <link>/posts/thinking/io%E7%A1%AC%E4%BB%B6%E5%8E%9F%E7%90%86/</link>
+    <pubDate>Sat, 10 Apr 2021 15:58:26 &#43;0800</pubDate>
+    <author>霞诗子</author>
+    <guid>/posts/thinking/io%E7%A1%AC%E4%BB%B6%E5%8E%9F%E7%90%86/</guid>
+    <description><![CDATA[操作系统在IO硬件层次的作用详解]]></description>
 </item>
 <item>
     <title>操作系统-储存管理页面置换算法篇</title>
@@ -75,14 +83,6 @@
     <author>霞诗子</author>
     <guid>/posts/thinking/%E8%B0%83%E5%BA%A6/</guid>
     <description><![CDATA[进程与线程、调度算法]]></description>
-</item>
-<item>
-    <title>操作系统-进程间通信</title>
-    <link>/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</link>
-    <pubDate>Mon, 22 Mar 2021 15:58:26 &#43;0800</pubDate>
-    <author>霞诗子</author>
-    <guid>/posts/thinking/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/</guid>
-    <description><![CDATA[进程与线程、进程间通信]]></description>
 </item>
 </channel>
 </rss>

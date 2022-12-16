@@ -76,7 +76,7 @@
     <pubDate>Sun, 25 Apr 2021 15:58:26 &#43;0800</pubDate>
     <author>霞诗子</author>
     <guid>/posts/thinking/%E6%AD%BB%E9%94%81%E9%A2%84%E9%98%B2/</guid>
-    <description><![CDATA[死锁避免 资源轨迹图 我们看到一个处理两个进程和两种资源（打印机和绘图仪）的模型。横轴表示进程A执行的指令，纵轴表示进程B执行的指令。进程A在I]]></description>
+    <description><![CDATA[死锁的产生与破坏死锁的条件]]></description>
 </item>
 <item>
     <title>操作系统-死锁与资源</title>
@@ -84,7 +84,7 @@
     <pubDate>Fri, 23 Apr 2021 15:58:26 &#43;0800</pubDate>
     <author>霞诗子</author>
     <guid>/posts/thinking/%E8%B5%84%E6%BA%90%E4%B8%8E%E6%AD%BB%E9%94%81/</guid>
-    <description><![CDATA[资源 需要排他性使用的对象称为资源（resource）。资源可以是硬件设备（如磁带机）或是一组信息（如数据库中一个加锁的记录）。通常在计算机中]]></description>
+    <description><![CDATA[资源与死锁之间的关系]]></description>
 </item>
 </channel>
 </rss>

@@ -26,7 +26,15 @@
     <pubDate>Thu, 22 Apr 2021 15:58:26 &#43;0800</pubDate>
     <author>霞诗子</author>
     <guid>/posts/thinking/io-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/</guid>
-    <description><![CDATA[磁盘 磁盘格式化 在磁盘能够使用之前，每个盘片必须经受由软件完成的低级格式化（low-level format）。该格式包含一系列同心的磁道，每个]]></description>
+    <description><![CDATA[操作系统在输入输出与IO之间的关系详解]]></description>
+</item>
+<item>
+    <title>操作系统-IO物理设备</title>
+    <link>/posts/thinking/io-%E7%A3%81%E7%9B%98%E8%AE%BE%E5%A4%87%E7%AF%87/</link>
+    <pubDate>Tue, 20 Apr 2021 15:58:26 &#43;0800</pubDate>
+    <author>霞诗子</author>
+    <guid>/posts/thinking/io-%E7%A3%81%E7%9B%98%E8%AE%BE%E5%A4%87%E7%AF%87/</guid>
+    <description><![CDATA[操作系统一些IO设备的详解]]></description>
 </item>
 <item>
     <title>储存管理～页面置换算法篇</title>
@@ -75,14 +83,6 @@
     <author>霞诗子</author>
     <guid>/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%BA%BF%E7%A8%8B%E7%AF%87/</guid>
     <description><![CDATA[操作系统线程详解]]></description>
-</item>
-<item>
-    <title>进程与线程～进程篇</title>
-    <link>/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87/</link>
-    <pubDate>Sat, 20 Mar 2021 15:58:26 &#43;0800</pubDate>
-    <author>霞诗子</author>
-    <guid>/posts/thinking/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E7%AF%87/</guid>
-    <description><![CDATA[操作系统进程详解]]></description>
 </item>
 </channel>
 </rss>

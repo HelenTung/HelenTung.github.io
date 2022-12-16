@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>操作系统-IO物理设备 - 霞诗子</title><meta name="Description" content="霞诗子"><meta property="og:title" content="操作系统-IO物理设备" />
+<meta property="og:description" content="霞诗子" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/thinking/io-%E7%A3%81%E7%9B%98%E8%AE%BE%E5%A4%87%E7%AF%87/" /><meta property="og:image" content="/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-04-20T15:58:26+08:00" />
+<meta property="article:modified_time" content="2021-04-20T15:58:26+08:00" /><meta property="og:site_name" content="霞诗子" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/logo.png"/>
+
+<meta name="twitter:title" content="操作系统-IO物理设备"/>
+<meta name="twitter:description" content="霞诗子"/>
+<meta name="application-name" content="霞诗子">
+<meta name="apple-mobile-web-app-title" content="霞诗子"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/thinking/io-%E7%A3%81%E7%9B%98%E8%AE%BE%E5%A4%87%E7%AF%87/" /><link rel="prev" href="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" /><link rel="next" href="/posts/thinking/io-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "操作系统-IO物理设备",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/thinking\/io-%E7%A3%81%E7%9B%98%E8%AE%BE%E5%A4%87%E7%AF%87\/"
+        },"genre": "posts","keywords": "操作系统","wordcount":  4170 ,
+        "url": "\/posts\/thinking\/io-%E7%A3%81%E7%9B%98%E8%AE%BE%E5%A4%87%E7%AF%87\/","datePublished": "2021-04-20T15:58:26+08:00","dateModified": "2021-04-20T15:58:26+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "霞诗子"
+            },"description": "霞诗子"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="霞诗子"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/favicon-32x32.png"
+        data-srcset="/favicon-32x32.png, /favicon-32x32.png 1.5x, /favicon-32x32.png 2x"
+        data-sizes="auto"
+        alt="/favicon-32x32.png"
+        title="/favicon-32x32.png" /><span id="id-3" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="about me"> Me </a><a class="menu-item" href="/posts/coding/" title="some codes"> Coding </a><a class="menu-item" href="/posts/thinking/" title="my thinking"> Thinking </a><a class="menu-item" href="/tags/" title="some tags"> Label </a><a class="menu-item" href="/categories/" title="some categorys"> Category </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="title、tags or category" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="霞诗子"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/favicon-32x32.png"
+        data-srcset="/favicon-32x32.png, /favicon-32x32.png 1.5x, /favicon-32x32.png 2x"
+        data-sizes="auto"
+        alt="/favicon-32x32.png"
+        title="/favicon-32x32.png" /><span id="id-4" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="title、tags or category" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/" title="about me">Me</a><a class="menu-item" href="/posts/coding/" title="some codes">Coding</a><a class="menu-item" href="/posts/thinking/" title="my thinking">Thinking</a><a class="menu-item" href="/tags/" title="some tags">Label</a><a class="menu-item" href="/categories/" title="some categorys">Category</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">操作系统-IO物理设备</h1><h2 class="single-subtitle">IO物理设备</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="15816034825" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>霞诗子</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>操作系统</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-04-20">2021-04-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4170 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#磁盘">磁盘</a></li>
+        <li><a href="#raid">RAID</a></li>
+        <li><a href="#cd-rom">CD-ROM</a></li>
+        <li><a href="#可刻录cd">可刻录CD</a></li>
+        <li><a href="#可重写cd">可重写CD</a></li>
+        <li><a href="#dvd">DVD</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="磁盘">磁盘</h3>
+<blockquote>
+<p>磁盘被组织成柱面，每一个柱面包含若干磁道，磁道数与垂直堆叠的磁头个数相同。磁道又被分成若干扇区，软盘上大约每条磁道有8～32个扇区，硬盘上每条磁道上扇区的数目可以多达几百个。磁头数大约是1～16个。</p>
+</blockquote>
+<p>老式的磁盘只有少量的电子设备，它们只是传送简单的串行位流。在这些磁盘上，控制器做了大部分的工作。在其他磁盘上，特别是在IDE（Integrated Drive Electronics，集成驱动电子设备）和SATA（Serial ATA，串行ATA）盘上，磁盘驱动器本身包含一个微控制器，该微控制器承担了大量的工作并且允许实际的控制器发出一组高级命令。控制器经常做磁道高速缓存、坏块重映射以及更多的工作。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/IO/%e7%a3%81%e7%9b%98.png"
+        data-srcset="/images/thinking/IO/%e7%a3%81%e7%9b%98.png, /images/thinking/IO/%e7%a3%81%e7%9b%98.png 1.5x, /images/thinking/IO/%e7%a3%81%e7%9b%98.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/IO/磁盘.png"
+        title="/images/thinking/IO/磁盘.png" /></p>
+<blockquote>
+<p>对磁盘驱动程序有重要意义的一个设备特性是：<strong>控制器是否可以同时控制两个或多个驱动器进行寻道，这就是重叠寻道（overlapped seek）</strong>。</p>
+</blockquote>
+<ol>
+<li>
+<p>当控制器和软件<strong>等待一个驱动器完成寻道时，控制器可以同时启动另一个驱动器进行寻道</strong>。许多控制器也可以在一个驱动器上进行读写操作，与此同时再对另一个或多个其他驱动器进行寻道，但是软盘控制器不能在两个驱动器上同时进行读写操作。（读写数据要求控制器在微秒级时间尺度传输数据，所以一次传输就用完了控制器大部分的计算能力。）</p>
+</li>
+<li>
+<p>对于具有集成控制器的硬盘而言情况就不同了，在具有一个以上这种硬盘驱动器的系统上，它们能够同时操作，至少在磁盘与控制器的缓冲存储器之间进行数据传输的限度之内是这样。然而，在控制器与主存之间可能同时只有一次传输。同时执行两个或多个操作的能力极大地降低了平均存取时间。</p>
+</li>
+</ol>
+<h3 id="raid">RAID</h3>
+<blockquote>
+<p>RAID背后的基本思想是将一个装满了磁盘的盒子安装到计算机（通常是一个大型服务器）上，用RAID控制器替换磁盘控制器卡，将数据复制到整个RAID上，然后继续常规的操作。</p>
+</blockquote>
+<div class="typeit"><h4 id="id-1"></h4></div>
+
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/IO/raid.png"
+        data-srcset="/images/thinking/IO/raid.png, /images/thinking/IO/raid.png 1.5x, /images/thinking/IO/raid.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/IO/raid.png"
+        title="/images/thinking/IO/raid" /></p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>RAID分级总结<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ol>
+<li>
+<p>RAID 0亦称为带区卷。它将两个以上的磁盘并联起来，成为一个大容量的磁盘。在存放数据时，分段后分散存储在这些磁盘中，因为读写时都可以<strong>并行处理</strong>，<strong>所以在所有的级别中，RAID 0的速度是最快的。但是RAID 0既没有冗余功能，也不具备容错能力，如果一个磁盘（物理）损坏，所有数据都会丢失，危险程度与JBOD相当</strong>。</p>
+</li>
+<li>
+<p><strong>两组以上的N个磁盘相互作镜像，在一些多线程操作系统中能有很好的读取速度，理论上读取速度等于硬盘数量的倍数，与RAID 0相同。另外写入速度有微小的降低</strong>。只要一个磁盘正常即可维持运作，可靠性最高。其原理为在主硬盘上存放数据的同时也在镜像硬盘上写一样的数据。当主硬盘（物理）损坏时，镜像硬盘则代替主硬盘的工作。因为有镜像硬盘做数据备份，所以RAID 1的数据安全性在所有的RAID级别上来说是最好的。但无论用多少磁盘做RAID</p>
+</li>
+<li>
+<p>仅算一个磁盘的容量，是所有RAID中<strong>磁盘利用率最低的一个级别</strong>。<strong>RAID 1没有校验机制。用两个磁盘组成RAID 1阵列</strong>，如果两个硬盘上的数据出现差异，RAID 1会不知道该相信哪一个硬盘，这种情形称作大脑分裂。事实上，RAID 1的磁盘数量越多，越有可能其中某个磁盘的数据变得不一致（但仍然工作），RAID 1只会从第一个工作的硬盘里提供数据，没有办法检测到底哪个硬盘的数据不对。</p>
+</li>
+<li>
+<p>这是RAID 0的改良版，以汉明码（Hamming Code）的方式将数据进行编码后分割为独立的比特，并将数据分别写入硬盘中。因为<strong>在数据中加入错误修正码（ECC，Error Correction Code），所以数据整体的容量会比原始数据大一些</strong>。RAID 2最少要三台磁盘驱动器方能运作。</p>
+</li>
+<li>
+<p><strong>采用Bit－interleaving（数据交错存储）技术，它需要通过编码再将数据比特分割后分别存在硬盘中</strong>，而将<strong>同比特检查后单独存在一个硬盘中</strong>，但<strong>由于数据内的比特分散在不同的硬盘上，因此就算要读取一小段数据资料都可能需要所有的硬盘进行工作</strong>，所以这种规格比较<strong>适于读取大量数据时使用</strong>。</p>
+</li>
+<li>
+<p><strong>RAID 5是一种储存性能、数据安全和存储成本兼顾的存储解决方案</strong>。它<strong>使用的是Disk Striping（硬盘分割）技术</strong>。RAID 5<strong>使用“奇偶校验位”</strong>。与 RAID-4 一样，<strong>有效大小是 N-1 个磁盘的大小</strong>。 然而，由于奇偶校验信息也在 N 个驱动器之间均匀分布，因此避免了每次写入都必须更新奇偶校验磁盘的瓶颈。防止单个磁盘故障，而且访问速度快[2]。RAID 5不是对存储的数据进行备份，而是把数据和相对应的奇偶校验信息存储到组成RAID 5的各个磁盘上，<strong>并且奇偶校验信息和相对应的数据分别存储于不同的磁盘上</strong>。<strong>当RAID 5的一个磁盘数据发生损坏后，可以利用剩下的数据和相应的奇偶校验信息去恢复被损坏的数据</strong>。RAID 5可以理解为是RAID 0和RAID 1的折衷方案。RAID 5可以为系统提供数据安全保障，但保障程度要比镜像低而磁盘空间利用率要比镜像高。<strong>RAID 5具有和RAID 0相近似的数据读取速度，只是因为多了一个奇偶校验信息</strong>，</p>
+</li>
+</ol>
+</div>
+        </div>
+    </div>
+<h3 id="cd-rom">CD-ROM</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/IO/CD.png"
+        data-srcset="/images/thinking/IO/CD.png, /images/thinking/IO/CD.png 1.5x, /images/thinking/IO/CD.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/IO/CD.png"
+        title="/images/thinking/IO/CD" /></p>
+<blockquote>
+<p>黄皮书（Yellow Book），定义了现在称为CD-ROM（Compact Disc-Read Only Memory，压缩光盘-只读存储器）的光盘的确切标准。</p>
+</blockquote>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>CD-ROM<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>CD-ROM的<strong>基本格式是每个字节以14位的符号进行编码</strong>。正如我们在前面看到的，14位足以对一个8位的字节进行汉明编码，并且剩下2位。实际上，CD-ROM使用的是功能更为强大的编码系统 [2] 。对于读操作而言，14到8映射是通过查找表由硬件实现的。在下一个层次上，一组42个连续符号形成一个588位的帧（frame）。每一帧拥有192个数据位（24个字节），剩余的396位用于纠错和控制。在这396位中，252位是14位符号中的纠错位，而144位包含在8位符号的有效载荷中 [3] 。到目前为止，这一方案对于音频CD和CD-ROM是完全一致的。</p>
+<p>黄皮书定义了两种模式。<strong>模式1具有16字节的前导码</strong>、2048个数据字节和一个288字节的纠错码（横交叉Reed-Solomon码）。<strong>模式2将数据和ECC域合并成一个2336字节的数据域</strong>，用于不需要纠错（或者抽不出时间执行纠错）的应用，例如音频和视频。注意，为了提供优异的可靠性，在符号内部、帧内部和CD-ROM扇区内部使用了三种独立的纠错方案。单个位的错误在最低的层次上纠正，短暂的突发错误在帧的层次上纠正，任何残留的错误在扇区的层次上捕获。为这一可靠性付出的代价是花费98个588位的帧（7203字节）来容纳2048字节的有效载荷，效率只有28%。</p>
+<p><strong>单速CD-ROM驱动器以75扇区/秒的速度工作，提供的数据率在模式1下是153 600字节/秒，在模式2下是175 200字节/秒</strong>。双速驱动器快两倍，以此类推，直到最高的速度。因此，一个40倍速的驱动器能够以40×153 600字节/秒的速度传递数据，假设驱动器接口、总线以及操作系统都能够处理这样的数据率。一个标准的音频CD具有存放74分钟音乐的空间，如果将其用于在模式1下存放数据，提供的容量是681 984 000字节。这一数字通常被报告为650MB，这是因为1MB是220 字节（1 048 576字节），而不是1 000 000字节。</p>
+<p>注意，即使一个32倍速的CD-ROM驱动器（数据率为4 915 200字节/秒）也无法与速度为10MB/s的快速SCSI-2磁盘驱动器相配，尽管许多CD-ROM驱动器使用了SCSI接口（也存在IDE CD-ROM驱动器）。当你意识到寻道时间通常是几百毫秒时，就会清楚CD-ROM驱动器与磁盘驱动器在性能上不属于同样的范畴，尽管它们有非常大的容量。</p>
+</div>
+        </div>
+    </div>
+<h3 id="可刻录cd">可刻录CD</h3>
+<p>物理上，CD-R在开始的时候是像CD-ROM一样的120mm的聚碳酸酯空盘，不同的是CD-R包含一个0.6mm宽的凹槽来引导激光进行写操作。凹槽具有3mm的正弦振幅，频率精确地为22.05 kHz，以便提供连续的反馈，这样就可以正确地监视旋转速度并且在需要的时候对其进行调整。CD-R看上去就像是常规的CD-ROM，只是CD-R顶面是金色的而不是银色的。金色源于使用真金代替铝作为反射层。银色的CD在其上具有物理的凹陷，与此不同的是，在CD-R上，必须模拟凹痕和槽脊的不同反射率。这是通过在聚碳酸酯与反射金层之间添加一层染料而实现的。</p>
+<p>在初始状态下，染料层是透明的，能够让激光透过并且从金层反射回来。写入时，CD-R激光提升到高功率（8～16mW）。当光束遇到染料时，将其加热，从而破坏其化学结合力，这一分子结构的变化造成一个暗斑。当读回时（以0.5mW），光电探测器会识别出已经被烧过的染料处的暗斑与完好的透明区域之间的区别。这一区别被解释为凹痕与槽脊之间的差别，即使在常规的CD-ROM阅读器甚至在音频CD播放器上读回时，也是如此。</p>
+<p>如果没有一本有色的书，就没有CD的新类型能够骄傲地昂起头，所以CD-R具有橘皮书（Orange Book），出版于1989年。这份文档定义了CD-R和一个新格式CD-ROM XA，它允许CD-R被逐渐增长地写入，今天几个扇区，明天几个扇区，下个月几个扇区。一次写入的一组连续的扇区称为一个CD-ROM光轨（CD-ROM track）。</p>
+<h3 id="可重写cd">可重写CD</h3>
+<p>尽管人们习惯于使用其他一次性写的介质，例如纸张和摄影胶片，但是却存在着对可重写CD-ROM的需求。<strong>目前可用的一个技术是CD-RW（CD-ReWritable，可重写CD）</strong>、它使用与CD-ROM相同尺寸的介质。然而，CD-RW使用银、铟、锑和碲合金作为记录层，以取代花菁和酞菁染料。这一合金具有两个稳定的状态：结晶态和非结晶态，两种状态具有不同的反射率。</p>
+<div class="typeit"><h4 id="id-2"></h4></div>
+
+<h3 id="dvd">DVD</h3>
+<p>DVD采用与CD同样的总体设计，使用120 mm的注模聚碳酸酯盘片，包含凹痕和槽脊，它们由激光二极管照明并且由光电探测器读取。新特性包括使用了：</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>DVD<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>结构特点：</p>
+<ol>
+<li>更小的凹痕（0.4µm，CD是0.8µm）。</li>
+<li>更密的螺旋（轨迹间距0.74µm，CD是1.6µm）。</li>
+<li>红色激光（波长0.65µm，CD是0.78µm）。</li>
+</ol>
+<p>为追求容量定义了四种格式：</p>
+<ol start="4">
+<li>单面单层（4.7GB）。</li>
+<li>单面双层（8.5GB）。</li>
+<li>双面单层（9.4GB）。</li>
+<li>双面双层（17GB）。</li>
+</ol>
+</div>
+        </div>
+    </div>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/IO/dvd.png"
+        data-srcset="/images/thinking/IO/dvd.png, /images/thinking/IO/dvd.png 1.5x, /images/thinking/IO/dvd.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/IO/dvd.png"
+        title="/images/thinking/IO/dvd" /></p>
+<p>综合起来，这些改进将容量提高了7倍，达到4.7GB。一个1倍速的DVD驱动器以1.4 MB/s的速率运转（CD是150 KB/s）。但是，切换到红色激光意味着DVD播放器需要第二个激光器或者价格高昂的光学转换器才能够读取现有的CD和CD-ROM。随着激光器价格的下降，现在大多数驱动器都有两种激光器，所以它们能够读取两种类型的介质。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-04-20</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/posts/thinking/io-%E7%A3%81%E7%9B%98%E8%AE%BE%E5%A4%87%E7%AF%87/" data-title="操作系统-IO物理设备"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" class="prev" rel="prev" title="储存管理～页面置换算法篇"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>储存管理～页面置换算法篇</a>
+            <a href="/posts/thinking/io-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" class="next" rel="next" title="操作系统-IO输入输出">操作系统-IO输入输出<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">霞诗子 - coding....</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="15816034825" target="_blank">霞诗子</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"换言之，对操作系统而言一个RAID应该看起来就像是一个SLED，但是具有更好的性能和更好的可靠性。由于SCSI盘具有良好的性能、较低的价格并且在单个控制器上能够容纳多达7个驱动器（对宽型SCSI而言是15个），很自然地大多数RAID由一个RAID SCSI控制器加上一个装满了SCSI盘的盒子组成，而对操作系统而言这似乎就是一个大容量磁盘。","id-2":"CD-RW驱动器使用具有三种不同功率的激光。在高功率下，激光将合金融化，将其从高反射率的结晶态转化为低反射率的非结晶态，代表一个凹痕。在中功率下，激光将合金融化并重构其自然结晶状态以便再次成为一个槽脊。在低功率下，材料的状态被感知（用于读取），但是不发生状态的转化。CD-RW没有取代CD-R的原因是CD-RW空白盘比CD-R空白盘要昂贵得多。此外，对于涉及对硬盘进行备份的应用程序来说，实际情况就是一次性写入，CD-R不会被意外地擦除是一大好事。","id-3":"霞诗子 - coding","id-4":"霞诗子 - coding"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"],"id-3":["id-3"],"id-4":["id-4"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

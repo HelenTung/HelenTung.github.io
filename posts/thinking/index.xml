@@ -29,7 +29,7 @@
     <description><![CDATA[死锁避免 资源轨迹图 我们看到一个处理两个进程和两种资源（打印机和绘图仪）的模型。横轴表示进程A执行的指令，纵轴表示进程B执行的指令。进程A在I]]></description>
 </item>
 <item>
-    <title>操作系统-资源与死锁</title>
+    <title>操作系统-死锁与资源</title>
     <link>/posts/thinking/%E8%B5%84%E6%BA%90%E4%B8%8E%E6%AD%BB%E9%94%81/</link>
     <pubDate>Fri, 23 Apr 2021 15:58:26 &#43;0800</pubDate>
     <author>霞诗子</author>
@@ -51,6 +51,14 @@
     <author>霞诗子</author>
     <guid>/posts/thinking/io-%E7%A3%81%E7%9B%98%E8%AE%BE%E5%A4%87%E7%AF%87/</guid>
     <description><![CDATA[操作系统一些IO设备的详解]]></description>
+</item>
+<item>
+    <title>操作系统-IO软件原理</title>
+    <link>/posts/thinking/io%E8%BD%AF%E4%BB%B6%E5%8E%9F%E7%90%86/</link>
+    <pubDate>Sun, 11 Apr 2021 15:58:26 &#43;0800</pubDate>
+    <author>霞诗子</author>
+    <guid>/posts/thinking/io%E8%BD%AF%E4%BB%B6%E5%8E%9F%E7%90%86/</guid>
+    <description><![CDATA[操作系统在IO软件层次的作用详解]]></description>
 </item>
 <item>
     <title>操作系统-储存管理页面置换算法篇</title>
@@ -75,14 +83,6 @@
     <author>霞诗子</author>
     <guid>/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/</guid>
     <description><![CDATA[操作系统、内存交换技术详解]]></description>
-</item>
-<item>
-    <title>操作系统-进程与线程调度算法</title>
-    <link>/posts/thinking/%E8%B0%83%E5%BA%A6/</link>
-    <pubDate>Thu, 25 Mar 2021 15:58:26 &#43;0800</pubDate>
-    <author>霞诗子</author>
-    <guid>/posts/thinking/%E8%B0%83%E5%BA%A6/</guid>
-    <description><![CDATA[进程与线程、调度算法]]></description>
 </item>
 </channel>
 </rss>

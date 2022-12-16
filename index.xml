@@ -79,7 +79,7 @@
     <description><![CDATA[死锁避免 资源轨迹图 我们看到一个处理两个进程和两种资源（打印机和绘图仪）的模型。横轴表示进程A执行的指令，纵轴表示进程B执行的指令。进程A在I]]></description>
 </item>
 <item>
-    <title>操作系统-资源与死锁</title>
+    <title>操作系统-死锁与资源</title>
     <link>/posts/thinking/%E8%B5%84%E6%BA%90%E4%B8%8E%E6%AD%BB%E9%94%81/</link>
     <pubDate>Fri, 23 Apr 2021 15:58:26 &#43;0800</pubDate>
     <author>霞诗子</author>

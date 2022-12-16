@@ -53,6 +53,14 @@
     <description><![CDATA[操作系统在IO硬件层次的作用详解]]></description>
 </item>
 <item>
+    <title>操作系统-文件系统优化与管理</title>
+    <link>/posts/thinking/file_system%E4%BC%98%E5%8C%96/</link>
+    <pubDate>Tue, 06 Apr 2021 15:58:26 &#43;0800</pubDate>
+    <author>霞诗子</author>
+    <guid>/posts/thinking/file_system%E4%BC%98%E5%8C%96/</guid>
+    <description><![CDATA[操作系统在文件系统管理与优化方面的做法、列举了了著名的文件系统]]></description>
+</item>
+<item>
     <title>操作系统-储存管理页面置换算法篇</title>
     <link>/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/</link>
     <pubDate>Sun, 04 Apr 2021 15:58:26 &#43;0800</pubDate>
@@ -69,20 +77,12 @@
     <description><![CDATA[操作系统虚拟内存详解]]></description>
 </item>
 <item>
-    <title>操作系统-存储交换技术</title>
+    <title>操作系统-储存管理内存交换方法</title>
     <link>/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/</link>
     <pubDate>Fri, 26 Mar 2021 15:58:26 &#43;0800</pubDate>
     <author>霞诗子</author>
     <guid>/posts/thinking/%E5%86%85%E5%AD%98%E7%AF%87/</guid>
     <description><![CDATA[操作系统、内存交换技术详解]]></description>
-</item>
-<item>
-    <title>操作系统-进程与线程调度算法</title>
-    <link>/posts/thinking/%E8%B0%83%E5%BA%A6/</link>
-    <pubDate>Thu, 25 Mar 2021 15:58:26 &#43;0800</pubDate>
-    <author>霞诗子</author>
-    <guid>/posts/thinking/%E8%B0%83%E5%BA%A6/</guid>
-    <description><![CDATA[进程与线程、调度算法]]></description>
 </item>
 </channel>
 </rss>

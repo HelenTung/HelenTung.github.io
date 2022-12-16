@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>操作系统-文件系统优化与管理 - 霞诗子</title><meta name="Description" content="霞诗子"><meta property="og:title" content="操作系统-文件系统优化与管理" />
+<meta property="og:description" content="霞诗子" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/thinking/file_system%E4%BC%98%E5%8C%96/" /><meta property="og:image" content="/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-04-06T15:58:26+08:00" />
+<meta property="article:modified_time" content="2021-04-06T15:58:26+08:00" /><meta property="og:site_name" content="霞诗子" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/logo.png"/>
+
+<meta name="twitter:title" content="操作系统-文件系统优化与管理"/>
+<meta name="twitter:description" content="霞诗子"/>
+<meta name="application-name" content="霞诗子">
+<meta name="apple-mobile-web-app-title" content="霞诗子"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/thinking/file_system%E4%BC%98%E5%8C%96/" /><link rel="prev" href="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" /><link rel="next" href="/posts/thinking/io%E7%A1%AC%E4%BB%B6%E5%8E%9F%E7%90%86/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "操作系统-文件系统优化与管理",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/thinking\/file_system%E4%BC%98%E5%8C%96\/"
+        },"genre": "posts","keywords": "操作系统","wordcount":  5163 ,
+        "url": "\/posts\/thinking\/file_system%E4%BC%98%E5%8C%96\/","datePublished": "2021-04-06T15:58:26+08:00","dateModified": "2021-04-06T15:58:26+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "霞诗子"
+            },"description": "霞诗子"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="霞诗子"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/favicon-32x32.png"
+        data-srcset="/favicon-32x32.png, /favicon-32x32.png 1.5x, /favicon-32x32.png 2x"
+        data-sizes="auto"
+        alt="/favicon-32x32.png"
+        title="/favicon-32x32.png" /><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="about me"> Me </a><a class="menu-item" href="/posts/coding/" title="some codes"> Coding </a><a class="menu-item" href="/posts/thinking/" title="my thinking"> Thinking </a><a class="menu-item" href="/tags/" title="some tags"> Label </a><a class="menu-item" href="/categories/" title="some categorys"> Category </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="title、tags or category" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="霞诗子"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/favicon-32x32.png"
+        data-srcset="/favicon-32x32.png, /favicon-32x32.png 1.5x, /favicon-32x32.png 2x"
+        data-sizes="auto"
+        alt="/favicon-32x32.png"
+        title="/favicon-32x32.png" /><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="title、tags or category" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/" title="about me">Me</a><a class="menu-item" href="/posts/coding/" title="some codes">Coding</a><a class="menu-item" href="/posts/thinking/" title="my thinking">Thinking</a><a class="menu-item" href="/tags/" title="some tags">Label</a><a class="menu-item" href="/categories/" title="some categorys">Category</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">操作系统-文件系统优化与管理</h1><h2 class="single-subtitle">文件管理～文件系统优化与管理</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="15816034825" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>霞诗子</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>操作系统</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-04-06">2021-04-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5163 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#文件系统管理和优化">文件系统管理和优化</a>
+      <ul>
+        <li><a href="#磁盘空间管理">磁盘空间管理</a></li>
+        <li><a href="#文件系统备份">文件系统备份</a></li>
+        <li><a href="#文件系统的一致性">文件系统的一致性</a></li>
+        <li><a href="#文件系统性能">文件系统性能</a></li>
+      </ul>
+    </li>
+    <li><a href="#磁盘碎片整理">磁盘碎片整理</a></li>
+    <li><a href="#文件系统实例">文件系统实例</a>
+      <ul>
+        <li><a href="#cd-rom文件系统">CD-ROM文件系统</a></li>
+        <li><a href="#ms-dos文件系统">MS-DOS文件系统</a></li>
+        <li><a href="#unix-v7文件系统">UNIX V7文件系统</a></li>
+      </ul>
+    </li>
+    <li><a href="#小结">小结</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="文件系统管理和优化">文件系统管理和优化</h2>
+<h3 id="磁盘空间管理">磁盘空间管理</h3>
+<p>文件通常存放在磁盘上，所以对磁盘空间的管理是系统设计者要考虑的一个主要问题。存储n个字节的文件可以有两种策略：<strong>分配n个字节的连续磁盘空间，或者把文件分成很多个连续（或并不一定连续）的块</strong>。在存储管理系统中，分段处理和分页处理之间也要进行同样的权衡。</p>
+<h4 id="块大小">块大小</h4>
+<p>一旦决定把文件按固定大小的块来存储，就会出现一个问题：<strong>块的大小应该是多少？按照磁盘组织方式，扇区、磁道和柱面显然都可以作为分配单位</strong>（虽然它们都与设备相关，这是一种负面因素）。</p>
+<p><strong>拥有大的块尺寸意味着每个文件，甚至一个1字节的文件</strong>，都要占用一整个柱面，也就是说小的文件浪费了大量的磁盘空间。另一方面，<strong>小的块尺寸意味着大多数文件会跨越多个块</strong>，因此需要多次寻道与旋转延迟才能读出它们，从而降低了性能。</p>
+<blockquote>
+<p>因此，如果分配的单元太大，则浪费了空间；如果太小，则浪费时间。</p>
+</blockquote>
+<h4 id="记录空闲块">记录空闲块</h4>
+<blockquote>
+<p>第一种方法是采用磁盘块链表，每个块中包含尽可能多的空闲磁盘块号。通常情况下，采用空闲块存放空闲表，这样存储器基本上是空的。另一种空闲磁盘空间管理的方法是采用位图。只有在磁盘快满时（即几乎没有空闲块时）链表方案需要的块才比位图少。</p>
+</blockquote>
+<h4 id="磁盘配额">磁盘配额</h4>
+<p>为了防止人们贪心而占有太多的磁盘空间，多用户操作系统常常提供<strong>一种强制性磁盘配额机制</strong>。其思想是系统管理员分给每个用户拥有文件和块的最大数量，<strong>操作系统确保每个用户不超过分给他们的配额</strong>。</p>
+<p>当用户打开一个文件时，系统找到文件属性和磁盘地址，并把它们送入内存中的打开文件表。其中一个属性告诉文件所有者是谁。任何有关该文件大小的增长都记到所有者的配额上。</p>
+<blockquote>
+<p>每一次往文件中添加一块时，文件所有者所用数据块的总数也增加，引发对配额硬限制和软限制检查。可以超出软限制，但硬限制不可以超出。当已达到硬限制时，再往文件中添加内容将引发错误。同时，对文件数目也存在着类似的检查。</p>
+</blockquote>
+<p>当用户试图登录时，系统核查配额文件，查看该用户文件数目或磁盘块数目是否超过软限制。如果超过了任一限制，则显示一个警告，保存的警告计数减1。如果该计数已为0，表示用户多次忽略该警告，因而将不允许该用户登录。要想再得到登录的许可，就必须与系统管理员协商。</p>
+<p>这一方法具有一种性质，即只要用户在退出系统前消除所超过的部分，他们就可以在一次终端会话期间超过其软限制；<strong>但无论什么情况下都不能超过硬限制。</strong></p>
+<h3 id="文件系统备份">文件系统备份</h3>
+<blockquote>
+<p>做磁带备份主要是要处理好两个潜在问题中的一个：</p>
+</blockquote>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ol>
+<li>
+<p><strong>从意外的灾难中恢复。</strong></p>
+</li>
+<li>
+<p><strong>从错误的操作中恢复。</strong></p>
+</li>
+</ol>
+</div>
+        </div>
+    </div>
+<p><strong>第一个问题主要是由磁盘破裂、火灾、洪水等自然灾害引起的</strong>。事实上这些情形并不多见，所以许多人也就不以为然。这些人往往也是以同样的原因忽略了自家的火灾保险。</p>
+<p><strong>第二个原因主要是用户意外地删除了原本还需要的文件</strong>。</p>
+<blockquote>
+<p>为文件做备份既耗时间又费空间，所以需要做得又快又好，这一点很重要。</p>
+</blockquote>
+<p>对前一次备份以来没有更改过的文件再做备份是一种浪费，因而产生了<strong>增量转储的思想</strong>。最简单的增量转储形式就是<strong>周期性地（每周一次或每月一次）做全面的转储（备份），而每天只对当天更改的数据做备份</strong>。稍微好一点的做法<strong>只备份自最近一次转储以来更改过的文件</strong>。当然了，这种做法极大地缩减了转储时间，但操作起来却更复杂，因为最近的全面转储先要全部恢复，随后按逆序进行<strong>增量转储</strong>。为了方便，人们往往使用更复杂的<strong>增量转储模式</strong>。</p>
+<p>既然待转储的往往是海量数据，那么在将其写入磁带之前对文件进行压缩就很有必要。对许多压缩算法而言，备份磁带上的单个坏点就能破坏解压缩算法，并导致整个文件甚至整个磁带无法阅读。所以是否要对备份文件流进行压缩必须慎重考虑。</p>
+<p>对活动文件系统做备份是很难的。因为在转储过程中添加、删除或修改文件和目录可能会导致文件系统的不一致性。</p>
+<blockquote>
+<p>转储磁盘到磁带上有两种方案：<strong>物理转储和逻辑转储</strong>。</p>
+</blockquote>
+<p>物理转储是从磁盘的第0块开始，将全部的磁盘块按序输出到磁带上，直到最后一块复制完毕。此程序很简单，可以确保万无一失，这是其他任何实用程序所不能比的。物理转储的主要优点是简单、极为快速（基本上是以磁盘的速度运行）。主要缺点是，既不能跳过选定的目录，也无法增量转储，还不能满足恢复个人文件的请求。正因如此，绝大多数配置都使用逻辑转储。</p>
+<p>逻辑转储从一个或几个指定的目录开始，递归地转储其自给定基准日期（例如，最近一次增量转储或全面系统转储的日期）后有所更改的全部文件和目录。所以，在逻辑转储中，转储磁带上会有一连串精心标识的目录和文件，这样就很容易满足恢复特定文件或目录的请求。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e6%96%87%e4%bb%b6/%e9%80%bb%e8%be%91.png"
+        data-srcset="/images/thinking/%e6%96%87%e4%bb%b6/%e9%80%bb%e8%be%91.png, /images/thinking/%e6%96%87%e4%bb%b6/%e9%80%bb%e8%be%91.png 1.5x, /images/thinking/%e6%96%87%e4%bb%b6/%e9%80%bb%e8%be%91.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/文件/逻辑.png"
+        title="/images/thinking/文件/逻辑" /></p>
+<blockquote>
+<p>逻辑转储算法要维持一个以i节点号为索引的位图，每个i节点包含了几位。</p>
+</blockquote>
+<p>随着算法的执行，位图中的这些位会被设置或清除。算法的执行分为四个阶段。第一阶段从起始目录（本例中为根目录）开始检查其中的所有目录项。对每一个修改过的文件，该算法将在位图中标记其i节点。算法还标记并递归检查每一个目录（不管是否修改过）。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e6%96%87%e4%bb%b6/%e4%bd%8d%e5%9b%be.png"
+        data-srcset="/images/thinking/%e6%96%87%e4%bb%b6/%e4%bd%8d%e5%9b%be.png, /images/thinking/%e6%96%87%e4%bb%b6/%e4%bd%8d%e5%9b%be.png 1.5x, /images/thinking/%e6%96%87%e4%bb%b6/%e4%bd%8d%e5%9b%be.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/文件/位图.png"
+        title="/images/thinking/文件/位图" /></p>
+<p>从转储磁带上恢复文件系统很容易办到。首先要在磁盘上创建一个空的文件系统，然后恢复最近一次的完整转储。由于磁带上最先出现目录，所以首先恢复目录，给出文件系统的框架；然后恢复文件本身。在完整转储之后的是增量转储，重复这一过程，以此类推。</p>
+<p>一个问题是关于连接。如果一个文件被连接到两个或多个目录中，要注意在恢复时只对该文件恢复一次，然后要恢复所有指向该文件的目录。</p>
+<h3 id="文件系统的一致性">文件系统的一致性</h3>
+<blockquote>
+<p>影响文件系统可靠性的另一个问题是文件系统的一致性。</p>
+</blockquote>
+<p>很多文件系统读取磁盘块，进行修改后，再写回磁盘。如果在修改过的磁盘块全部写回之前系统崩溃，则文件系统有可能处于不一致状态。如果一些未被写回的块是i节点块、目录块或者是包含有空闲表的块时，这个问题尤为严重。</p>
+<p>一致性检查分为两种：<strong>块的一致性检查和文件的一致性检查</strong>。在检查块的一致性时，程序构造两张表，每张表中为每个块设立一个计数器，都初始化为0。第一个表中的计数器跟踪该块在文件中的出现次数，第二个表中的计数器跟踪该块在空闲表中的出现次数。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e6%96%87%e4%bb%b6/%e6%96%87%e4%bb%b6%e4%b8%80%e8%87%b4%e6%80%a7.png"
+        data-srcset="/images/thinking/%e6%96%87%e4%bb%b6/%e6%96%87%e4%bb%b6%e4%b8%80%e8%87%b4%e6%80%a7.png, /images/thinking/%e6%96%87%e4%bb%b6/%e6%96%87%e4%bb%b6%e4%b8%80%e8%87%b4%e6%80%a7.png 1.5x, /images/thinking/%e6%96%87%e4%bb%b6/%e6%96%87%e4%bb%b6%e4%b8%80%e8%87%b4%e6%80%a7.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/文件/文件一致性.png"
+        title="/images/thinking/文件/文件一致性" /></p>
+<blockquote>
+<p>a)一致；b)块丢失；c)空闲表中有重复块；d)重复数据块</p>
+</blockquote>
+<p>尽管块丢失不会造成实际的损害，但它的确浪费了磁盘空间，减少了磁盘容量。块丢失问题的解决很容易：<strong>文件系统检验程序把它们加到空闲表中即可。</strong></p>
+<p>其中，块4在空闲表中出现了2次（只在空闲表是真正意义上的一张表时，才会出现重复，在位图中，不会发生这类情况）。解决方法也很简单：<strong>只要重新建立空闲表即可。</strong></p>
+<p>最糟的情况是，在两个或多个文件中出现同一个数据块，如果其中一个文件被删除，块5会添加到空闲表中，导致一个块同时处于使用和空闲两种状态。若删除这两个文件，那么在空闲表中这个磁盘块会出现两次。文件系统检验程序可以采取相应的<strong>处理方法</strong>是，<strong>先分配一空闲块，把块5中的内容复制到空闲块中，然后把它插到其中一个文件之中</strong>。这样文件的内容未改变（虽然这些内容几乎可以肯定是不对的），但至少保持了文件系统的一致性。这一错误应该报告，由用户检查文件受损情况。</p>
+<h3 id="文件系统性能">文件系统性能</h3>
+<h4 id="高速缓存">高速缓存</h4>
+<blockquote>
+<p><strong>最常用的减少磁盘访问次数技术是块高速缓存（block cache）或者缓冲区高速缓存（buffer cache）。</strong></p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e6%96%87%e4%bb%b6/%e7%bc%93%e5%ad%98.png"
+        data-srcset="/images/thinking/%e6%96%87%e4%bb%b6/%e7%bc%93%e5%ad%98.png, /images/thinking/%e6%96%87%e4%bb%b6/%e7%bc%93%e5%ad%98.png 1.5x, /images/thinking/%e6%96%87%e4%bb%b6/%e7%bc%93%e5%ad%98.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/文件/缓存.png"
+        title="/images/thinking/文件/缓存" /></p>
+<p>管理高速缓存有不同的算法，常用的算法是：<strong>检查全部的读请求，查看在高速缓存中是否有所需要的块。如果存在，可执行读操作而无须访问磁盘。如果该块不在高速缓存中，首先要把它读到高速缓存，再复制到所需地方</strong>。之后，<strong>对同一个块的请求都通过高速缓存完成。</strong></p>
+<p>由于在高速缓存中有许多块（通常有上千块），所以需要有某种方法快速确定所需要的块是否存在。<strong>常用方法是将设备和磁盘地址进行散列操作，然后，在散列表中查找结果</strong>。<strong>具有相同散列值的块在一个链表中连接在一起，这样就可以沿着冲突链查找其他块</strong>。</p>
+<blockquote>
+<p>例如FIFO算法、第二次机会算法、LRU算法等，它们都适用于高速缓存。</p>
+</blockquote>
+<p>近来使用最少的块在该链表的前端，而近来使用最多的块在该链表的后端。当引用某个块时，该块可以从双向链表中移走，并放置到该表的尾部去。</p>
+<blockquote>
+<p>基于这些考虑需要修改LRU方案，并应注意如下两点：</p>
+</blockquote>
+<p><strong>这一块是否不久后会再次使用？</strong> <strong>这一块是否关系到文件系统的一致性？</strong></p>
+<p>如果一个关键块（比如i节点块）读进了高速缓存并做过修改，但是没有写回磁盘，这时，<strong>系统崩溃会导致文件系统的不一致</strong>。如果把i节点块放在LRU链的尾部，在它到达链首并写回磁盘前，有可能需要相当长的一段时间。</p>
+<p>把有可能最近<strong>不再需要的块放在LRU链表的前部</strong>，而不是LRU链表的后端，于是它们所占用的缓冲区可以很快被重用。对很快就可能再次使用的块，比如<strong>正在写入的部分满数据块，可放在链表的尾部</strong>，这样它们能在高速缓存中保存较长的一段时间。</p>
+<p>第二个问题独立于前一个问题。<strong>如果关系到文件系统一致性（除数据块之外，其他块基本上都是这样）的某块被修改，都应立即将该块写回磁盘，不管它是否被放在LRU链表尾部。</strong></p>
+<h4 id="块提前读">块提前读</h4>
+<blockquote>
+<p>明显提高文件系统性能的技术是：在需要用到块之前，试图提前将其写入高速缓存，从而提高命中率。</p>
+</blockquote>
+<p>特别地，许多文件都是顺序读的。如果请求文件系统在某个文件中生成块k，文件系统执行相关操作且在完成之后，会在用户不察觉的情形下检查高速缓存，以便确定块k+1是否已经在高速缓存。如果还不在，文件系统会为块k+1安排一个预读，因为文件系统希望在需要用到该块时，它已经在高速缓存或者至少马上就要在高速缓存中了。</p>
+<blockquote>
+<p>当然，块提前读策略只适用于顺序读取的文件。对随机存取文件，提前读丝毫不起作用。</p>
+</blockquote>
+<h4 id="减少磁盘臂运动">减少磁盘臂运动</h4>
+<blockquote>
+<p>高速缓存和块提前读并不是提高文件系统性能的惟一方法。另一种重要技术是把<strong>有可能顺序存取的块放在一起，当然最好是在同一个柱面上，从而减少磁盘臂的移动次数。</strong></p>
+</blockquote>
+<p>在使用i节点或任何类似i节点的系统中，另一个性能瓶颈是，读取一个很短的文件也需要两次磁盘访问：<strong>一次是访问i节点，另一次是访问块。</strong></p>
+<p>一个简单的改进方法是，在磁盘中部而不是开始处存放i节点，此时，在i节点和第一块之间的平均寻道时间减为原来的一半。另一种做法是：<strong>将磁盘分成多个柱面组，每个柱面组有自己的i节点、数据块和空闲表</strong>（McKusick等人，1984）。在文件创建时，可选取任一i节点，但首先在该i节点所在的柱面组上查找块。如果在该柱面组中没有空闲的块，就选用与之相邻的柱面组的一个块。</p>
+<h2 id="磁盘碎片整理">磁盘碎片整理</h2>
+<blockquote>
+<p>磁盘性能可以通过如下方式恢复：移动文件使它们相邻，并把所有的（至少是大部分的）空闲空间放在一个或多个大的连续的区域内。</p>
+</blockquote>
+<p>磁盘碎片整理程序会在一个在<strong>分区末端的连续区域内有适量空闲空间的文件系统上很好地运行</strong>。这段空间会允许磁盘碎片整理程序选择在分区开始端的碎片文件，并复制它们所有的块放到空闲空间内。这个动作在磁盘开始处释放出一个连续的块空间，这样原始或其他的文件可以在其中相邻地存放。这个过程可以在下一大块的磁盘空间上重复，并继续下去。</p>
+<p>有些文件不能被移动，包括页文件、休眠文件以及日志，<strong>因为移动这些文件所需的管理成本要大于移动它们的价值</strong>。在一些系统中，这些文件是固定大小的连续的区域，因此它们不需要进行碎片整理。这类文件缺乏灵活性会造成一些问题，一种情况是，它们恰好在分区的末端附近并且用户想减小分区的大小。解决这种问题的惟一的方法是把它们一起删除，改变分区的大小，然后再重新建立它们。</p>
+<h2 id="文件系统实例">文件系统实例</h2>
+<h3 id="cd-rom文件系统">CD-ROM文件系统</h3>
+<blockquote>
+<p>CD-ROM的文件系统。因为这些文件系统是为一次性写介质设计的，所以非常简单。例如，该文件系统不需要记录空闲块，这是因为一旦光盘生产出来后，CD-ROM上的文件就不能被删除或者创建了。</p>
+</blockquote>
+<h3 id="ms-dos文件系统">MS-DOS文件系统</h3>
+<blockquote>
+<p>MS-DOS文件系统是第一个IBM PC系列所采用的文件系统。它也是Windows 98与Windows ME所采用的主要的文件系统。Windows 2000、Windows XP与Windows Vista上也支持它，虽然除了软盘以外，它现在已经不再是新的PC的标准了。</p>
+</blockquote>
+<h3 id="unix-v7文件系统">UNIX V7文件系统</h3>
+<blockquote>
+<p>V7文件系统，这是为PDP-11创建的一个文件系统，它也使得UNIX闻名于世</p>
+</blockquote>
+<h2 id="小结">小结</h2>
+<p><strong>从外部看，文件系统是一组文件和目录，以及对文件和目录的操作</strong>。文件可以被读写，目录可以被创建和删除，并可将文件从一个目录移到另一个目录中。大多数现代操作系统都支持层次目录系统，其中，目录中还有子目录，子目录中还可以有子目录，如此无限下去。</p>
+<p><strong>而在内部看，文件系统又是另一番景象</strong>。文件系统的设计者必须考虑存储区是如何分配的，系统如何记录哪个块分给了哪个文件。可能的方案有连续文件、链表、文件分配表和i节点等。不同的系统有不同的目录结构。属性可以存在目录中或存在别处（比如，在i节点中）。磁盘空间可以通过位图的空闲表来管理。通过增量转储以及用程序修复故障文件系统的方法，可以提高文件系统的可靠性。文件系统的性能非常重要，可以通过多种途径提高性能，包括高速缓存、预读取以及尽可能仔细地将一个文件中的块紧密地放置在一起等方法。日志结构文件系统通过大块单元写入的操作也可以改善性能。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-04-06</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/posts/thinking/file_system%E4%BC%98%E5%8C%96/" data-title="操作系统-文件系统优化与管理"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" class="prev" rel="prev" title="操作系统-储存管理页面置换算法篇"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>操作系统-储存管理页面置换算法篇</a>
+            <a href="/posts/thinking/io%E7%A1%AC%E4%BB%B6%E5%8E%9F%E7%90%86/" class="next" rel="next" title="操作系统-IO硬件原理">操作系统-IO硬件原理<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">霞诗子 - coding....</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="15816034825" target="_blank">霞诗子</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/twemoji@14.0.2/dist/twemoji.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"霞诗子 - coding","id-2":"霞诗子 - coding"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"twemoji":true,"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

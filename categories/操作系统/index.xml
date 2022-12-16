@@ -13,6 +13,14 @@
     <description><![CDATA[死锁避免 资源轨迹图 我们看到一个处理两个进程和两种资源（打印机和绘图仪）的模型。横轴表示进程A执行的指令，纵轴表示进程B执行的指令。进程A在I]]></description>
 </item>
 <item>
+    <title>操作系统-资源与死锁</title>
+    <link>/posts/thinking/%E8%B5%84%E6%BA%90%E4%B8%8E%E6%AD%BB%E9%94%81/</link>
+    <pubDate>Fri, 23 Apr 2021 15:58:26 &#43;0800</pubDate>
+    <author>霞诗子</author>
+    <guid>/posts/thinking/%E8%B5%84%E6%BA%90%E4%B8%8E%E6%AD%BB%E9%94%81/</guid>
+    <description><![CDATA[资源 需要排他性使用的对象称为资源（resource）。资源可以是硬件设备（如磁带机）或是一组信息（如数据库中一个加锁的记录）。通常在计算机中]]></description>
+</item>
+<item>
     <title>储存管理～页面置换算法篇</title>
     <link>/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/</link>
     <pubDate>Sun, 04 Apr 2021 15:58:26 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>霞诗子</author>
     <guid>/posts/thinking/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/</guid>
     <description><![CDATA[操作系统概论]]></description>
-</item>
-<item>
-    <title>操作系统概念</title>
-    <link>/posts/thinking/%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/</link>
-    <pubDate>Thu, 04 Mar 2021 15:58:26 &#43;0800</pubDate>
-    <author>霞诗子</author>
-    <guid>/posts/thinking/%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/</guid>
-    <description><![CDATA[操作系统概念了解以及入门]]></description>
 </item>
 </channel>
 </rss>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>操作系统-资源与死锁 - 霞诗子</title><meta name="Description" content="霞诗子"><meta property="og:title" content="操作系统-资源与死锁" />
+<meta property="og:description" content="霞诗子" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/thinking/%E8%B5%84%E6%BA%90%E4%B8%8E%E6%AD%BB%E9%94%81/" /><meta property="og:image" content="/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-04-23T15:58:26+08:00" />
+<meta property="article:modified_time" content="2021-04-23T15:58:26+08:00" /><meta property="og:site_name" content="霞诗子" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/logo.png"/>
+
+<meta name="twitter:title" content="操作系统-资源与死锁"/>
+<meta name="twitter:description" content="霞诗子"/>
+<meta name="application-name" content="霞诗子">
+<meta name="apple-mobile-web-app-title" content="霞诗子"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/thinking/%E8%B5%84%E6%BA%90%E4%B8%8E%E6%AD%BB%E9%94%81/" /><link rel="prev" href="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" /><link rel="next" href="/posts/thinking/%E6%AD%BB%E9%94%81%E9%A2%84%E9%98%B2/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "操作系统-资源与死锁",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/thinking\/%E8%B5%84%E6%BA%90%E4%B8%8E%E6%AD%BB%E9%94%81\/"
+        },"genre": "posts","keywords": "操作系统","wordcount":  2336 ,
+        "url": "\/posts\/thinking\/%E8%B5%84%E6%BA%90%E4%B8%8E%E6%AD%BB%E9%94%81\/","datePublished": "2021-04-23T15:58:26+08:00","dateModified": "2021-04-23T15:58:26+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "霞诗子"
+            },"description": "霞诗子"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="霞诗子"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/favicon-32x32.png"
+        data-srcset="/favicon-32x32.png, /favicon-32x32.png 1.5x, /favicon-32x32.png 2x"
+        data-sizes="auto"
+        alt="/favicon-32x32.png"
+        title="/favicon-32x32.png" /><span id="id-6" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="about me"> Me </a><a class="menu-item" href="/posts/coding/" title="some codes"> Coding </a><a class="menu-item" href="/posts/thinking/" title="my thinking"> Thinking </a><a class="menu-item" href="/tags/" title="some tags"> Label </a><a class="menu-item" href="/categories/" title="some categorys"> Category </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="title、tags or category" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="霞诗子"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/favicon-32x32.png"
+        data-srcset="/favicon-32x32.png, /favicon-32x32.png 1.5x, /favicon-32x32.png 2x"
+        data-sizes="auto"
+        alt="/favicon-32x32.png"
+        title="/favicon-32x32.png" /><span id="id-7" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="title、tags or category" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/" title="about me">Me</a><a class="menu-item" href="/posts/coding/" title="some codes">Coding</a><a class="menu-item" href="/posts/thinking/" title="my thinking">Thinking</a><a class="menu-item" href="/tags/" title="some tags">Label</a><a class="menu-item" href="/categories/" title="some categorys">Category</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">操作系统-资源与死锁</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="15816034825" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>霞诗子</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>操作系统</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-04-23">2021-04-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2336 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#资源">资源</a>
+      <ul>
+        <li><a href="#可抢占资源和不可抢占资源">可抢占资源和不可抢占资源</a></li>
+        <li><a href="#资源获取">资源获取</a></li>
+      </ul>
+    </li>
+    <li><a href="#死锁概述">死锁概述</a>
+      <ul>
+        <li><a href="#资源死锁的条件">资源死锁的条件</a></li>
+        <li><a href="#死锁建模">死锁建模</a></li>
+      </ul>
+    </li>
+    <li><a href="#鸵鸟算法">鸵鸟算法</a></li>
+    <li><a href="#死锁检测和死锁恢复">死锁检测和死锁恢复</a>
+      <ul>
+        <li><a href="#每种类型一个资源的死锁检测">每种类型一个资源的死锁检测</a></li>
+        <li><a href="#每种类型多个资源的死锁检测">每种类型多个资源的死锁检测</a></li>
+      </ul>
+    </li>
+    <li><a href="#从死锁中恢复">从死锁中恢复</a>
+      <ul>
+        <li><a href="#利用抢占恢复">利用抢占恢复</a></li>
+        <li><a href="#利用回滚恢复">利用回滚恢复</a></li>
+        <li><a href="#通过杀死进程恢复">通过杀死进程恢复</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="资源">资源</h2>
+<blockquote>
+<p>需要排他性使用的对象称为资源（resource）。资源可以是硬件设备（如磁带机）或是一组信息（如数据库中一个加锁的记录）。通常在计算机中有多种（可获取的）资源。一些类型的资源会有若干个相同的实例</p>
+</blockquote>
+<h3 id="可抢占资源和不可抢占资源">可抢占资源和不可抢占资源</h3>
+<blockquote>
+<p>资源分为两类：可抢占的和不可抢占的。可抢占资源（preemptable resource）可以从拥有它的进程中抢占而不会产生任何副作用。相反，不可抢占资源（nonpreemptable resource）是指在不引起相关的计算失败的情况下，无法把它从占有它的进程处抢占过来。</p>
+</blockquote>
+<p><strong>总的来说，死锁和不可抢占资源有关</strong>，有关可抢占资源的潜在死锁通常可以通过在进程之间重新分配资源而化解。</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>资源处理过程<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>使用一个资源所需要的事件顺序可以用抽象的形式表示如下：</p>
+<ol>
+<li>
+<p>请求资源。</p>
+</li>
+<li>
+<p>使用资源。</p>
+</li>
+<li>
+<p>释放资源。</p>
+</li>
+</ol>
+</div>
+        </div>
+    </div>
+<p>若请求时资源不可用，则请求进程被迫等待。在一些操作系统中，资源请求失败时进程会自动被阻塞，在资源可用时再唤醒它。在其他的系统中，资源请求失败会返回一个错误代码，请求的进程会等待一段时间，然后重试。</p>
+<p>当一个进程请求资源失败时，它通常会处于这样一个小循环中：<strong>请求资源，休眠，再请求</strong>。这个进程虽然没有被阻塞，但是从各角度来说，它不能做任何有价值的工作，实际和阻塞状态一样。在后面的讨论中，我们假设：如果某个进程请求资源失败，那么它就进入休眠状态。</p>
+<h3 id="资源获取">资源获取</h3>
+<blockquote>
+<p>现在考虑两个进程（A和B）以及两个资源的情况。</p>
+</blockquote>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>死锁<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>其中一个进程先于另一个进程获取资源。这个进程能够成功地获取第二个资源并完成它的任务。如果另一个进程想在第一个资源被释放之前获取该资源，那么它会由于资源加锁而被阻塞，直到该资源可用为止。</p>
+<p>可能其中一个进程获取了两个资源并有效地阻塞了另外一个进程，直到它使用完这两个资源为止。但是，也有可能进程A获取了资源1，进程B获取了资源2，每个进程如果都想请求另一个资源就会被阻塞，那么，每个进程都无法继续运行。这种情况就是<strong>死锁</strong>。</p>
+</div>
+        </div>
+    </div>
+<h2 id="死锁概述">死锁概述</h2>
+<blockquote>
+<p>如果一个进程集合中的<strong>每个进程都在等待只能由该进程集合中的其他进程才能引发的事件</strong>，那么，该<strong>进程集合就是死锁的</strong>。</p>
+</blockquote>
+<p>在大多数情况下，<strong>每个进程所等待的事件是释放该进程集合中其他进程所占有的资源</strong>。换言之，<strong>这个死锁进程集合中的每一个进程都在等待另一个死锁的进程已经占有的资源</strong>。但是由于所有进程都不能运行，它们中的任何一个都无法释放资源，所以没有一个进程可以被唤醒。</p>
+<h3 id="资源死锁的条件">资源死锁的条件</h3>
+<blockquote>
+<p>（资源）死锁的四个必要条件：</p>
+</blockquote>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>必要条件<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ol>
+<li>
+<p>互斥条件。每个资源要么已经分配给了一个进程，要么就是可用的。</p>
+</li>
+<li>
+<p>占有和等待条件。已经得到了某个资源的进程可以再请求新的资源。</p>
+</li>
+<li>
+<p>不可抢占条件。已经分配给一个进程的资源不能强制性地被抢占，它只能被占有它的进程显式地释放。</p>
+</li>
+<li>
+<p>环路等待条件。死锁发生时，系统中一定有由两个或两个以上的进程组成的一条环路，该环路中的每个进程都在等待着下一个进程所占有的资源。</p>
+</li>
+</ol>
+</div>
+        </div>
+    </div>
+<blockquote>
+<p>死锁发生时，以上<strong>四个条件一定是同时满足的</strong>。如果其中任何一个条件不成立，死锁就不会发生。</p>
+</blockquote>
+<h3 id="死锁建模">死锁建模</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%b5%84%e6%ba%90%e4%b8%8e%e6%ad%bb%e9%94%81/%e6%ad%bb%e9%94%81%e6%9d%a1%e4%bb%b6.png"
+        data-srcset="/images/thinking/%e8%b5%84%e6%ba%90%e4%b8%8e%e6%ad%bb%e9%94%81/%e6%ad%bb%e9%94%81%e6%9d%a1%e4%bb%b6.png, /images/thinking/%e8%b5%84%e6%ba%90%e4%b8%8e%e6%ad%bb%e9%94%81/%e6%ad%bb%e9%94%81%e6%9d%a1%e4%bb%b6.png 1.5x, /images/thinking/%e8%b5%84%e6%ba%90%e4%b8%8e%e6%ad%bb%e9%94%81/%e6%ad%bb%e9%94%81%e6%9d%a1%e4%bb%b6.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/资源与死锁/死锁条件.png"
+        title="/images/thinking/资源与死锁/死锁条件" /></p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>死锁与策略<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ol>
+<li>
+<p>忽略该问题。也许如果你忽略它，它也会忽略你。</p>
+</li>
+<li>
+<p>检测死锁并恢复。让死锁发生，检测它们是否发生，一旦发生死锁，采取行动解决问题。</p>
+</li>
+<li>
+<p>仔细对资源进行分配，动态地避免死锁。</p>
+</li>
+<li>
+<p>通过破坏引起死锁的四个必要条件之一，防止死锁的产生。</p>
+</li>
+</ol>
+</div>
+        </div>
+    </div>
+<h2 id="鸵鸟算法">鸵鸟算法</h2>
+<blockquote>
+<p>最简单的解决方法是鸵鸟算法：把头埋到沙子里，假装根本没有问题发生</p>
+</blockquote>
+<h2 id="死锁检测和死锁恢复">死锁检测和死锁恢复</h2>
+<blockquote>
+<p>在使用这种技术时，系统并不试图阻止死锁的产生，而是允许死锁发生，当检测到死锁发生后，采取措施进行恢复。</p>
+</blockquote>
+<h3 id="每种类型一个资源的死锁检测">每种类型一个资源的死锁检测</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%b5%84%e6%ba%90%e4%b8%8e%e6%ad%bb%e9%94%81/%e4%b8%80%e7%a7%8d%e8%b5%84%e6%ba%90.png"
+        data-srcset="/images/thinking/%e8%b5%84%e6%ba%90%e4%b8%8e%e6%ad%bb%e9%94%81/%e4%b8%80%e7%a7%8d%e8%b5%84%e6%ba%90.png, /images/thinking/%e8%b5%84%e6%ba%90%e4%b8%8e%e6%ad%bb%e9%94%81/%e4%b8%80%e7%a7%8d%e8%b5%84%e6%ba%90.png 1.5x, /images/thinking/%e8%b5%84%e6%ba%90%e4%b8%8e%e6%ad%bb%e9%94%81/%e4%b8%80%e7%a7%8d%e8%b5%84%e6%ba%90.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/资源与死锁/一种资源.png"
+        title="/images/thinking/资源与死锁/一种资源" /></p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>一种资源的死锁检测算法<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>通过执行下列步骤完成上述算法：</p>
+<ol>
+<li>
+<p>对图中的每一个节点N，将N作为起始点执行下面5个步骤。</p>
+</li>
+<li>
+<p>将L初始化为空表，并清除所有的有向边标记。</p>
+</li>
+<li>
+<p>将当前节点添加到L的尾部，并检测该节点是否在L中已出现过两次。如果是，那么该图包含了一个环（已列在L中），算法结束。</p>
+</li>
+<li>
+<p>从给定的节点开始，检测是否存在没有标记的从该节点出发的弧（有向边）。如果存在的话，做第5步；如果不存在，跳到第6步。</p>
+</li>
+<li>
+<p>随机选取一条没有标记的从该节点出发的弧（有向边），标记它。然后顺着这条弧线找到新的当前节点，返回到第3步。</p>
+</li>
+<li>
+<p>如果这一节点是起始节点，那么表明该图不存在任何环，算法结束。否则意味着我们走进了死胡同，所以需要移走该节点，返回到前一个节点，即当前节点前面的一个节点，并将它作为新的当前节点，同时转到第3步。</p>
+</li>
+</ol>
+</div>
+        </div>
+    </div>
+<div class="typeit"><h4 id="id-1"></h4></div>
+
+<h3 id="每种类型多个资源的死锁检测">每种类型多个资源的死锁检测</h3>
+<blockquote>
+<p>如果有多种相同的资源存在，就需要采用另一种方法来检测死锁。</p>
+</blockquote>
+<div class="typeit"><h4 id="id-2"></h4></div>
+
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/%e8%b5%84%e6%ba%90%e4%b8%8e%e6%ad%bb%e9%94%81/%e5%a4%9a%e7%a7%8d%e8%b5%84%e6%ba%90.png"
+        data-srcset="/images/thinking/%e8%b5%84%e6%ba%90%e4%b8%8e%e6%ad%bb%e9%94%81/%e5%a4%9a%e7%a7%8d%e8%b5%84%e6%ba%90.png, /images/thinking/%e8%b5%84%e6%ba%90%e4%b8%8e%e6%ad%bb%e9%94%81/%e5%a4%9a%e7%a7%8d%e8%b5%84%e6%ba%90.png 1.5x, /images/thinking/%e8%b5%84%e6%ba%90%e4%b8%8e%e6%ad%bb%e9%94%81/%e5%a4%9a%e7%a7%8d%e8%b5%84%e6%ba%90.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/资源与死锁/多种资源.png"
+        title="/images/thinking/资源与死锁/多种资源" /></p>
+<blockquote>
+<p>换言之，如果我们将所有已分配的资源j的数量加起来再和所有可供使用的资源数相加，结果就是该类资源的资源总数。</p>
+</blockquote>
+<div class="typeit"><h4 id="id-3"></h4></div>
+
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>死锁检测算法<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ol>
+<li>
+<p>寻找一个没有标记的进程Pi ，对于它而言R矩阵的第i行向量小于或等于A。</p>
+</li>
+<li>
+<p>如果找到了这样一个进程，那么将C矩阵的第i行向量加到A中，标记该进程，并转到第1步。</p>
+</li>
+<li>
+<p>如果没有这样的进程，那么算法终止。 算法结束时，所有没有标记过的进程（如果存在的话）都是死锁进程。</p>
+</li>
+</ol>
+</div>
+        </div>
+    </div>
+<h2 id="从死锁中恢复">从死锁中恢复</h2>
+<h3 id="利用抢占恢复">利用抢占恢复</h3>
+<blockquote>
+<p>在不通知原进程的情况下，将某一资源从一个进程强行取走给另一个进程使用，接着又送回，这种做法是否可行主要取决于该资源本身的特性。</p>
+</blockquote>
+<p>用这种方法恢复通常比较困难或者说不太可能。若选择挂起某个进程，则在很大程度上取决于哪一个进程拥有比较容易收回的资源</p>
+<h3 id="利用回滚恢复">利用回滚恢复</h3>
+<p>如果系统设计人员以及主机操作员了解到死锁有可能发生，他们就可以周期性地对进程进行检查点检查（checkpointed）。进程检查点检查就是将进程的状态写入一个文件以备以后重启。该检查点中不仅包括存储映像，还包括了资源状态，即哪些资源分配给了该进程。为了使这一过程更有效，新的检查点不应覆盖原有的文件，而应写到新文件中。这样，当进程执行时，将会有一系列的检查点文件被累积起来。</p>
+<div class="typeit"><h4 id="id-4"></h4></div>
+
+<h3 id="通过杀死进程恢复">通过杀死进程恢复</h3>
+<div class="typeit"><h4 id="id-5"></h4></div>
+
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-04-23</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/posts/thinking/%E8%B5%84%E6%BA%90%E4%B8%8E%E6%AD%BB%E9%94%81/" data-title="操作系统-资源与死锁"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" class="prev" rel="prev" title="储存管理～页面置换算法篇"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>储存管理～页面置换算法篇</a>
+            <a href="/posts/thinking/%E6%AD%BB%E9%94%81%E9%A2%84%E9%98%B2/" class="next" rel="next" title="操作系统-死锁篇">操作系统-死锁篇<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">霞诗子 - coding....</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="15816034825" target="_blank">霞诗子</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"这一算法是依次将每一个节点作为一棵树的根节点，并进行深度优先搜索。如果再次碰到已经遇到过的节点，那么就算找到了一个环。如果从任何给定的节点出发的弧都被穷举了，那么就回溯到前面的节点。如果回溯到根并且不能再深入下去，那么从当前节点出发的子图中就不包含任何环。如果所有的节点都是如此，那么整个图就不存在环，也就是说系统不存在死锁。","id-2":"\u003cp\u003e现在我们提供一种基于矩阵的算法来检测从P1 到Pn 这n个进程中的死锁。假设资源的类型数为m，E1 代表资源类型1，E2 代表资源类型2，Ei 代表资源类型i(1≤i≤m)。E是现有资源向量（existing resource vector），代表每种已存在的资源总数。比如，如果资源类型1代表磁带机，那么E1 =2就表示系统有两台磁带机。\u003c/p\u003e\n\u003cp\u003e在任意时刻，某些资源已被分配所以不可用。假设A是可用资源向量（available resource vector），那么Ai 表示当前可供使用的资源数（即没有被分配的资源）。如果仅有的两台磁带机都已经分配出去了，那么A1 的值为0。\u003c/p\u003e\n\u003cp\u003e现在我们需要两个数组：C代表当前分配矩阵（current allocation matrix），R代表请求矩阵（request matrix）。C的第i行代表Pi 当前所持有的每一种类型资源的资源数。所以，Cij 代表进程i所持有的资源j的数量。同理，Rij 代表Pi 所需要的资源j的数量。\u003c/p\u003e\n","id-3":"死锁检测算法就是基于向量的比较。我们定义向量A和向量B之间的关系为A≤B以表明A的每一个分量要么等于要么小于和B向量相对应的分量。从数学上来说，A≤B当且仅当且Ai ≤Bi (0≤i≤m)。","id-4":"一旦检测到死锁，就很容易发现需要哪些资源。为了进行恢复，要从一个较早的检查点上开始，这样拥有所需要资源的进程会回滚到一个时间点，在此时间点之前该进程获得了一些其他的资源。在该检查点后所做的所有工作都丢失。（例如，检查点之后的输出必须丢弃，因为它们还会被重新输出。）实际上，是将该进程复位到一个更早的状态，那时它还没有取得所需的资源，接着就把这个资源分配给一个死锁进程。如果复位后的进程试图重新获得对该资源的控制，它就必须一直等到该资源可用时为止。","id-5":"最直接也是最简单的解决死锁的方法是杀死一个或若干个进程。一种方法是杀掉环中的一个进程。如果走运的话，其他进程将可以继续。如果这样做行不通的话，就需要继续杀死别的进程直到打破死锁环。","id-6":"霞诗子 - coding","id-7":"霞诗子 - coding"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"],"id-3":["id-3"],"id-4":["id-4"],"id-5":["id-5"],"id-6":["id-6"],"id-7":["id-7"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

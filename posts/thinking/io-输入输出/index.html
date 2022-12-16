@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>操作系统-IO输入输出 - 霞诗子</title><meta name="Description" content="霞诗子"><meta property="og:title" content="操作系统-IO输入输出" />
+<meta property="og:description" content="霞诗子" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/thinking/io-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" /><meta property="og:image" content="/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-04-22T15:58:26+08:00" />
+<meta property="article:modified_time" content="2021-04-22T15:58:26+08:00" /><meta property="og:site_name" content="霞诗子" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/logo.png"/>
+
+<meta name="twitter:title" content="操作系统-IO输入输出"/>
+<meta name="twitter:description" content="霞诗子"/>
+<meta name="application-name" content="霞诗子">
+<meta name="apple-mobile-web-app-title" content="霞诗子"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="/posts/thinking/io-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" /><link rel="prev" href="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" /><link rel="next" href="/posts/thinking/%E8%B5%84%E6%BA%90%E4%B8%8E%E6%AD%BB%E9%94%81/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "操作系统-IO输入输出",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "\/posts\/thinking\/io-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA\/"
+        },"genre": "posts","keywords": "操作系统","wordcount":  4823 ,
+        "url": "\/posts\/thinking\/io-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA\/","datePublished": "2021-04-22T15:58:26+08:00","dateModified": "2021-04-22T15:58:26+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "霞诗子"
+            },"description": "霞诗子"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="霞诗子"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/favicon-32x32.png"
+        data-srcset="/favicon-32x32.png, /favicon-32x32.png 1.5x, /favicon-32x32.png 2x"
+        data-sizes="auto"
+        alt="/favicon-32x32.png"
+        title="/favicon-32x32.png" /><span id="id-6" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/" title="about me"> Me </a><a class="menu-item" href="/posts/coding/" title="some codes"> Coding </a><a class="menu-item" href="/posts/thinking/" title="my thinking"> Thinking </a><a class="menu-item" href="/tags/" title="some tags"> Label </a><a class="menu-item" href="/categories/" title="some categorys"> Category </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="title、tags or category" id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="霞诗子"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/favicon-32x32.png"
+        data-srcset="/favicon-32x32.png, /favicon-32x32.png 1.5x, /favicon-32x32.png 2x"
+        data-sizes="auto"
+        alt="/favicon-32x32.png"
+        title="/favicon-32x32.png" /><span id="id-7" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="title、tags or category" id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/" title="about me">Me</a><a class="menu-item" href="/posts/coding/" title="some codes">Coding</a><a class="menu-item" href="/posts/thinking/" title="my thinking">Thinking</a><a class="menu-item" href="/tags/" title="some tags">Label</a><a class="menu-item" href="/categories/" title="some categorys">Category</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">操作系统-IO输入输出</h1><h2 class="single-subtitle">IO输入输出</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="15816034825" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>霞诗子</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>操作系统</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-04-22">2021-04-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4823 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#磁盘格式化">磁盘格式化</a></li>
+    <li><a href="#磁盘臂调度算法">磁盘臂调度算法</a>
+      <ul>
+        <li><a href="#先来先服务first-comefirst-servedfcfs">先来先服务（First-Come，First-Served，FCFS）</a></li>
+        <li><a href="#最短寻道优先shortest-seek-firstssf">最短寻道优先（Shortest Seek First，SSF）</a></li>
+        <li><a href="#电梯算法elevator-algorithm">电梯算法（elevator algorithm）</a></li>
+      </ul>
+    </li>
+    <li><a href="#错误处理">错误处理</a></li>
+    <li><a href="#稳定存储器">稳定存储器</a></li>
+    <li><a href="#时钟">时钟</a>
+      <ul>
+        <li><a href="#时钟硬件">时钟硬件</a></li>
+        <li><a href="#时钟软件">时钟软件</a></li>
+        <li><a href="#软定时器">软定时器</a></li>
+      </ul>
+    </li>
+    <li><a href="#用户界面键盘鼠标和监视器">用户界面：键盘、鼠标和监视器</a>
+      <ul>
+        <li><a href="#输入软件">输入软件</a></li>
+        <li><a href="#输出软件">输出软件</a></li>
+        <li><a href="#客户机">客户机</a></li>
+        <li><a href="#小结">小结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="磁盘">磁盘</h1>
+<h2 id="磁盘格式化">磁盘格式化</h2>
+<blockquote>
+<p>在磁盘能够使用之前，每个盘片必须经受由<strong>软件完成的低级格式化（low-level format）</strong>。该格式包含一系列同心的磁道，每个磁道包含若干数目的扇区，<strong>扇区间存在短的间隙</strong>。一个扇区的格式如图。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/IO/%e6%a0%bc%e5%bc%8f.png"
+        data-srcset="/images/thinking/IO/%e6%a0%bc%e5%bc%8f.png, /images/thinking/IO/%e6%a0%bc%e5%bc%8f.png 1.5x, /images/thinking/IO/%e6%a0%bc%e5%bc%8f.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/IO/格式.png"
+        title="/images/thinking/IO/格式.png" /></p>
+<p><strong>前导码以一定的位模式开始，位模式使硬件得以识别扇区的开始</strong>。前导码还包含柱面与扇区号以及某些其他信息。<strong>数据部分的大小是由低级格式化程序决定的，大多数磁盘使用512字节的扇区</strong>。<strong>ECC域包含冗余信息，可以用来恢复读错误</strong>。该域的大小和内容随生产商的不同而不同，它取决于设计者为了更高的可靠性愿意放弃多少磁盘空间以及控制器能够处理的ECC编码有多复杂。16字节的ECC域并不是罕见的。<strong>此外，所有硬盘都分配有某些数目的备用扇区，用来取代具有制造瑕疵的扇区</strong>。</p>
+<blockquote>
+<p>在设置低级格式时，每个磁道上第0扇区的位置与前一个磁道存在偏移。这一偏移称为柱面斜进（cylinder skew），这样做是为了改进性能、想法是让磁盘在一次连续的操作中读取多个磁道而不丢失数据。</p>
+</blockquote>
+<p>假设一个读请求需要最内侧磁道上从第0扇区开始的18个扇区，磁盘旋转一周可以读取前16个扇区，但是为了得到第17个扇区，则需要一次寻道操作以便磁头向外移动一个磁道。到磁头移动了一个磁道时，第0扇区已经转过了磁头，所以需要旋转一整周才能等到它再次经过磁头。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/IO/%e8%bf%9b%e9%87%8f.png"
+        data-srcset="/images/thinking/IO/%e8%bf%9b%e9%87%8f.png, /images/thinking/IO/%e8%bf%9b%e9%87%8f.png 1.5x, /images/thinking/IO/%e8%bf%9b%e9%87%8f.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/IO/进量.png"
+        title="/images/thinking/IO/进量.png" /></p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>格式化<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>柱面斜进量取决于驱动器的几何规格。例如，一个10 000rpm的驱动器每6ms旋转一周，<strong>如果一个磁道包含300个扇区，那么每20µs就有一个新扇区在磁头下通过</strong>。<strong>如果磁道到磁道的寻道时间是800µs，那么在寻道期间将有40个扇区通过，所以柱面斜进应该是40个扇区而不是图中的三个扇区</strong>。值得一提的是，像柱面斜进一样也存在着磁头斜进（head skew），但是磁头斜进不是非常大。</p>
+<p><strong>低级格式化的结果是磁盘容量减少，减少的量取决于前导码、扇区间间隙和ECC的大小以及保留的备用扇区的数目</strong>。通常格式化的容量比未格式化的容量低20%。<strong>备用扇区不计入格式化的容量</strong>，所以一种给定类型的所有磁盘在出厂时具有完全相同的容量，与它们实际具有多少坏扇区无关（<strong>如果坏扇区的数目超出了备用扇区的数目，则该驱动器是不合格的，不会出厂</strong>）。</p>
+<p>实际上，以这一速率连续地读磁盘要求控制器中有一个大容量的缓冲区。例如，考虑一个控制器，它具有一个扇区的缓冲区，该控制器接到一条命令要读两个连续的扇区。当从磁盘上读出第一个扇区并做了ECC计算之后，数据必须传送到主存中。就在传送正在进行时，下一个扇区将从磁头下通过。当完成了向主存的复制时，控制器将不得不等待几乎一整周的旋转时间才能等到第二个扇区再次回来。</p>
+<p>通过在格式化磁盘时以交错方式对扇区进行编号可以消除这一问题。在图a中，我们看到的是通常的编号模式（此处忽略柱面斜进）。在图b中，我们看到的是单交错（single interleaving），它可以在连续的扇区之间给控制器以喘息的空间以便将缓冲区复制到主存。</p>
+</div>
+        </div>
+    </div>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/IO/%e4%ba%a4%e9%94%99.png"
+        data-srcset="/images/thinking/IO/%e4%ba%a4%e9%94%99.png, /images/thinking/IO/%e4%ba%a4%e9%94%99.png 1.5x, /images/thinking/IO/%e4%ba%a4%e9%94%99.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/IO/交错.png"
+        title="/images/thinking/IO/交错.png" /></p>
+<blockquote>
+<p>在低级格式化完成之后，要对磁盘进行分区。在逻辑上，每个分区就像是一个独立的磁盘。分区对于多个操作系统共存是必需的。</p>
+</blockquote>
+<p><strong>在准备一块磁盘以便于使用的最后一步是对每一个分区分别执行一次高级格式化（high-level format）</strong>。这一操作要设置一个引导块、空闲存储管理（空闲列表或位图）、根目录和一个空文件系统。这一操作还要将一个代码设置在分区表项中，以表明在分区中使用的是哪个文件系统，因为许多操作系统支持多个兼容的文件系统（由于历史原因）。这时，系统就可以引导了。</p>
+<h2 id="磁盘臂调度算法">磁盘臂调度算法</h2>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>调度算法<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ol>
+<li>寻道时间（将磁盘臂移动到适当的柱面上所需的时间）。</li>
+<li>旋转延迟（等待适当扇区旋转到磁头下所需的时间）。</li>
+<li>实际数据传输时间。</li>
+</ol>
+</div>
+        </div>
+    </div>
+<h3 id="先来先服务first-comefirst-servedfcfs">先来先服务（First-Come，First-Served，FCFS）</h3>
+<blockquote>
+<p>磁盘驱动程序每次接收一个请求并按照接收顺序完成请求、缺陷：磁盘负载过重</p>
+</blockquote>
+<h3 id="最短寻道优先shortest-seek-firstssf">最短寻道优先（Shortest Seek First，SSF）</h3>
+<blockquote>
+<p>下一次总是处理与磁头距离最近的请求以使寻道时间最小化。缺陷：不断有新请求距离最近，距离最远的请求永远无法处理</p>
+</blockquote>
+<h3 id="电梯算法elevator-algorithm">电梯算法（elevator algorithm）</h3>
+<blockquote>
+<p>当一个请求处理完之后，磁盘或电梯的驱动程序检查该位，如果是UP，磁盘臂或电梯舱移至下一个更高的未完成的请求。如果更高的位置没有未完成的请求，则方向位取反。当方向位设置为DOWN时，同时存在一个低位置的请求，则移向该位置。</p>
+</blockquote>
+<h2 id="错误处理">错误处理</h2>
+<blockquote>
+<p>对于坏块存在两种一般的处理方法：<strong>在控制器中对它们进行处理或者在操作系统中对它们进行处理</strong>。在前一种方法中，磁盘在从工厂出厂之前要进行测试，并且将一个坏扇区列表写在磁盘上。<strong>对于每一个坏扇区，用一个备用扇区替换它</strong>。</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/IO/%e5%a4%84%e7%90%86.png"
+        data-srcset="/images/thinking/IO/%e5%a4%84%e7%90%86.png, /images/thinking/IO/%e5%a4%84%e7%90%86.png 1.5x, /images/thinking/IO/%e5%a4%84%e7%90%86.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/IO/处理.png"
+        title="/images/thinking/IO/处理.png" /></p>
+<blockquote>
+<p>a)具有一个坏扇区的磁盘磁道；b)用备用扇区替换坏扇区；c)移动所有扇区以回避坏扇区</p>
+</blockquote>
+<div class="typeit"><h4 id="id-1"></h4></div>
+
+<h2 id="稳定存储器">稳定存储器</h2>
+<blockquote>
+<p>稳定存储器使用一对完全相同的磁盘，对应的块一同工作以形成一个无差错的块。当不存在错误时，在两个驱动器上对应的块是相同的，读取任意一个都可以得到相同的结果。为了达到这一目的，定义了下述三种操作：</p>
+</blockquote>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>三种操作<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ol>
+<li>
+<p>稳定写（stable write）。稳定写首先将块写到驱动器1上，然后将其读回以校验写的是正确的。如果写的不正确，那么就再次做写和重读操作，一直到n次，直到正常为止。经过n次连续的失败之后，就将该块重映射到一个备用块上，并且重复写和重读操作直到成功为止，无论要尝试多少个备用块。在对驱动器1的写成功之后，对驱动器2上对应的块进行写和重读，如果需要的话就重复这样的操作，直到最后成功为止。如果不存在CPU崩溃，那么当稳定写完成后，块就正确地被写到两个驱动器上，并且在两个驱动器上得到校验。</p>
+</li>
+<li>
+<p>稳定读（stable read）。稳定读首先从驱动器l上读取块。如果这一操作产生错误的ECC，则再次尝试读操作，一直到n次。如果所有这些操作都给出错误的ECC，则从驱动器2上读取对应的数据块。给定一个成功的稳定写为数据块留下两个可靠的副本这样的事实，并且我们假设在合理的时间间隔内相同的块在两个驱动器上自发地变坏的概率可以忽略不计，那么稳定读就总是成功的。</p>
+</li>
+<li>
+<p>崩溃恢复（crash recovery）。崩溃之后，恢复程序扫描两个磁盘，比较对应的块。如果一对块都是好的并且是相同的，就什么都不做。如果其中一个具有ECC错误，那么坏块就用对应的好块来覆盖。如果一对块都是好的但是不相同，那么就将驱动器1上的块写到驱动器2上。</p>
+</li>
+</ol>
+</div>
+        </div>
+    </div>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/IO/%e6%93%8d%e4%bd%9c.png"
+        data-srcset="/images/thinking/IO/%e6%93%8d%e4%bd%9c.png, /images/thinking/IO/%e6%93%8d%e4%bd%9c.png 1.5x, /images/thinking/IO/%e6%93%8d%e4%bd%9c.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/IO/操作.png"
+        title="/images/thinking/IO/操作.png" /></p>
+<h2 id="时钟">时钟</h2>
+<blockquote>
+<p>时钟（clock）又称为定时器（timer），时钟负责维护时间，并且防止一个进程垄断CPU，此外还有其他的功能。</p>
+</blockquote>
+<h3 id="时钟硬件">时钟硬件</h3>
+<blockquote>
+<p>时钟由三个部件构成：晶体振荡器、计数器和存储寄存器，</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/thinking/IO/%e6%93%8d%e4%bd%9c.png"
+        data-srcset="/images/thinking/IO/%e6%93%8d%e4%bd%9c.png, /images/thinking/IO/%e6%93%8d%e4%bd%9c.png 1.5x, /images/thinking/IO/%e6%93%8d%e4%bd%9c.png 2x"
+        data-sizes="auto"
+        alt="/images/thinking/IO/操作.png"
+        title="/images/thinking/IO/操作.png" /></p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>工作流程<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">当把一块石英晶体适当地切割并且安装在一定的压力之下时，它就可以产生非常精确的周期性信号，典型的频率范围是几百兆赫兹，具体的频率值与所选的晶体有关。使用电子器件可以将这一基础信号乘以一个小的整数来获得高达1000MHz甚至更高的频率。在任何一台计算机里通常都可以找到至少一个这样的电路，它给计算机的各种电路提供同步信号。该信号被送到计数器，使其递减计数至0。当计数器变为0时，产生一个CPU中断。</div>
+        </div>
+    </div>
+<p>可编程时钟通常具有几种操作模式。在一次<strong>完成模式</strong>（one-shot mode）下，当时钟启动时，它把存储寄存器的值复制到计数器中，然后，来自晶体的每一个脉冲使计数器减1。当计数器变为0时，产生一个中断，并停止工作，直到软件再一次显式地启动它。在<strong>方波模式</strong>（square-wave mode）下，当计数器变为0并且产生中断之后，存储寄存器的值自动复制到计数器中，并且整个过程无限期地再次重复下去。这些周期性的中断称为时钟滴答（clock tick）。</p>
+<blockquote>
+<p>可编程时钟的优点是其中断频率可以由软件控制 如果采用500MHz的晶体，那么计数器将每隔2ns脉动一次。对于（无符号）32位寄存器，中断可以被编程为从2ns时间间隔发生一次到8.6s时间间隔发生一次。</p>
+</blockquote>
+<h3 id="时钟软件">时钟软件</h3>
+<blockquote>
+<p>时钟硬件所做的全部工作是根据已知的时间间隔产生中断。涉及时间的其他所有工作都必须由软件——时钟驱动程序完成。时钟驱动程序的确切任务因操作系统而异，但通常包括下面的大多数任务：</p>
+</blockquote>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>任务<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ol>
+<li>维护日时间。</li>
+<li>防止进程超时运行。</li>
+<li>对CPU的使用情况记账。</li>
+<li>处理用户进程提出的alarm系统调用。</li>
+<li>为系统本身的各个部分提供监视定时器。</li>
+<li>完成概要剖析、监视和统计信息收集。</li>
+</ol>
+</div>
+        </div>
+    </div>
+<h3 id="软定时器">软定时器</h3>
+<blockquote>
+<p>一般而言，有两种方法管理I/O：中断和轮询。</p>
+</blockquote>
+<div class="typeit"><h4 id="id-2"></h4></div>
+
+<div class="typeit"><h4 id="id-3"></h4></div>
+
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>描述<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ol>
+<li>系统调用。</li>
+<li>TLB未命中。</li>
+<li>页面故障。</li>
+<li>I/O中断。</li>
+<li>CPU变成空闲。</li>
+</ol>
+</div>
+        </div>
+    </div>
+<h2 id="用户界面键盘鼠标和监视器">用户界面：键盘、鼠标和监视器</h2>
+<h3 id="输入软件">输入软件</h3>
+<h4 id="键盘软件">键盘软件</h4>
+<blockquote>
+<p>每当一个键被按下的时候都会产生一个中断，并且每当一个键被释放的时候还会产生第二个中断。</p>
+</blockquote>
+<div class="typeit"><h4 id="id-4"></h4></div>
+
+<h4 id="鼠标软件">鼠标软件</h4>
+<blockquote>
+<p>当鼠标在随便哪个方向移动了一个确定的最小距离，或者按钮被按下或释放时，都会有一条消息发送给计算机。</p>
+</blockquote>
+<h3 id="输出软件">输出软件</h3>
+<h4 id="文本窗口">文本窗口</h4>
+<blockquote>
+<p>当输出是连续的单一字体、大小和颜色的形式时，输出比输入简单。大体上，程序将字符发送到当前窗口，而字符在那里显示出来。通常，一个字符块或者一行是在一个系统调用中被写到窗口上的。</p>
+</blockquote>
+<h4 id="x窗口系统">X窗口系统</h4>
+<blockquote>
+<p>几乎所有UNIX系统的用户界面都以X窗口系统（X Window System）为基础，X窗口系统经常仅称为X，它是作为Athena计划 [1] 的一部分于20世纪80年代在MIT开发的。</p>
+</blockquote>
+<h4 id="图形用户界面">图形用户界面</h4>
+<div class="typeit"><h4 id="id-5"></h4></div>
+
+<h4 id="位图">位图</h4>
+<h4 id="字体">字体</h4>
+<h3 id="客户机">客户机</h3>
+<blockquote>
+<p>此处的基本思想是从客户机剥离一切智能和软件，只是将其用作一台显示器，使所有计算（包括建立待显示的位图）都在服务器端完成。客户机和服务器之间的协议只是通知显示器如何更新视频RAM，再无其他。</p>
+</blockquote>
+<h3 id="小结">小结</h3>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>小结<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>输入/输出是一个经常被忽略但是十分重要的话题。任何一个操作系统都有大量的组分与I/O有关。I/O可以用三种方式来实现。第一是程序控制I/O，在这种方式下主CPU输入或输出每个字节或字并且闲置在一个密封的循环中等待，直到它能够获得或者发送下一个字节或字。第二是中断驱动的I/O，在这种方式下CPU针对一个字节或字开始I/O传送并且离开去做别的事情，直到一个中断到来发出信号通知I/O完成。第三是DMA，在这种方式下有一个单独的芯片管理着一个数据块的完整传送过程，只有当整个数据块完成传送时才引发一个中断。</p>
+<p>I/O可以组织成4个层次：中断服务程序、设备驱动程序、与设备无关的I/O软件和运行在用户空间的I/O库与假脱机程序。设备驱动程序处理运行设备的细节并且向操作系统的其余部分提供统一的接口。与设备无关的I/O软件做类似缓冲与错误报告这样的事情。</p>
+<p>盘具有多种类型，包括磁盘、RAID和各类光盘。磁盘臂调度算法经常用来改进磁盘性能，但是虚拟几何规格的出现使事情变得十分复杂。通过将两块磁盘组成一对，可以构造稳定的存储介质，具有某些有用的性质。</p>
+<p>时钟可以用于跟踪实际时间，限制进程可以运行多长时间，处理监视定时器，以及进行记账。</p>
+<p>面向字符的终端具有多种多样的问题，这些问题涉及特殊的字符如何输入以及特殊的转义序列如何输出。输入可以采用原始模式或加工模式，取决于程序对于输入需要有多少控制。针对输出的转义序列控制着光标的移动并且允许在屏幕上插入和删除文本。</p>
+<p>大多数UNIX系统使用X窗口系统作为用户界面的基础。它包含与特殊的库相绑定并发出绘图命令的程序，以及在显示器上执行绘图的服务器。</p>
+<p>许多个人计算机使用GUI作为它们的输出。GUI基于WIMP范式：窗口、图标、菜单和定点设备。基于GUI的程序一般是事件驱动的，当键盘事件、鼠标事件和其他事件发生时立刻会被发送给程序以便处理。在UNIX系统中，GUI几乎总是运行在X之上。</p>
+<p>瘦客户机与标准PC相比具有某些优势，对用户而言，值得注意的是简单性并且需要较少维护。对THINC瘦客户机进行的实验表明，以五条简单的原语就能制造出具有良好性能的客户机，即使对于视频也是如此。</p>
+<p>最后，电源管理对于笔记本电脑来说是一个主要的问题，因为电池寿命是有限的。操作系统可以采用各种技术来减少功率消耗。通过牺牲某些质量以换取更长的电池寿命，应用程序也可以做出贡献。</p>
+</div>
+        </div>
+    </div>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-04-22</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="/posts/thinking/io-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/" data-title="操作系统-IO输入输出"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/" class="prev" rel="prev" title="储存管理～页面置换算法篇"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>储存管理～页面置换算法篇</a>
+            <a href="/posts/thinking/%E8%B5%84%E6%BA%90%E4%B8%8E%E6%AD%BB%E9%94%81/" class="next" rel="next" title="操作系统-资源与死锁">操作系统-资源与死锁<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript">Disqus</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">霞诗子 - coding....</div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="15816034825" target="_blank">霞诗子</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/css/lightgallery-bundle.min.css"><script type="text/javascript" src="https://.disqus.com/embed.js" defer></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/lightgallery.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightgallery@2.5.0/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"data":{"id-1":"控制器所能够做的事情是将备用扇区之一重映射为扇区7，另一种方法是将所有扇区向上移动一个扇区。一旦操作系统知道哪些扇区是坏的，它就可以建立重映射表。它必须确保坏扇区不出现在任何文件中，并且不出现在空闲列表或位图中。做到这一点的一种方法是创建一个包含所有坏扇区的秘密的文件。如果该文件不被加入文件系统，用户就不会意外地读到它","id-2":"中断具有较低的等待时间，也就是说，它们在事件本身之后立即发生，具有很少的延迟或者没有延迟。另一方面，对于现代CPU而言，由于需要上下文切换以及对于流水线、TLB和高速缓存的影响，中断具有相当大的开销。","id-3":"软定时器（soft timer）避免了中断。无论何时当内核因某种其他原因在运行时，在它返回到用户态之前，它都要检查实时时钟以了解软定时器是否到期。如果这个定时器已经到期，则执行被调度的事件（例如，传送数据包或者检查到来的数据包），而无需切换到内核态，因为系统已经在内核态。在完成工作之后，软定时器被复位以便再次闹响。要做的全部工作是将当前时钟值复制给定时器并且将超时间隔加上。软定时器随着因为其他原因进入内核的频率而脉动。这些原因包括：","id-4":"I/O端口中的数字是键编号，称为扫描码（scan code），而不是ASCII码。键盘所拥有的键不超过128个，所以只需7个位表示键编号。当键按下时，第8位设置为0，当键释放时，第8位设置为1。跟踪每个键的状态（按下或弹起）是驱动程序的任务。","id-5":"GUI具有用字符WIMP表示的四个基本要素，这些字母分别代表窗口（Window）、图标（Icon）、菜单（Menu）和定点设备（Pointing device）。窗口是一个矩形块状的屏幕区域，用来运行程序。图标是小符号，可以在其上点击导致某个动作发生。菜单是动作列表，人们可以从中进行选择。最后，定点设备是鼠标、跟踪球或者其他硬件设备，用来在屏幕上移动光标以便选择项目。GUI软件可以在用户级代码中实现（如UNIX系统所做的那样），也可以在操作系统中实现（如Windows的情况）。GUI系统的输入仍然使用键盘和鼠标，但是输出几乎总是送往特殊的硬件电路板，称为图形适配器（graphics adapter）。","id-6":"霞诗子 - coding","id-7":"霞诗子 - coding"},"lightgallery":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-4":["id-4"],"id-5":["id-5"],"id-6":["id-6"],"id-7":["id-7"],"软定时器":["id-2","id-3"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -71,20 +71,20 @@
     <description><![CDATA[输入输出标准库了解与学习]]></description>
 </item>
 <item>
+    <title>操作系统-死锁篇</title>
+    <link>/posts/thinking/%E6%AD%BB%E9%94%81%E9%A2%84%E9%98%B2/</link>
+    <pubDate>Sun, 25 Apr 2021 15:58:26 &#43;0800</pubDate>
+    <author>霞诗子</author>
+    <guid>/posts/thinking/%E6%AD%BB%E9%94%81%E9%A2%84%E9%98%B2/</guid>
+    <description><![CDATA[死锁避免 资源轨迹图 我们看到一个处理两个进程和两种资源（打印机和绘图仪）的模型。横轴表示进程A执行的指令，纵轴表示进程B执行的指令。进程A在I]]></description>
+</item>
+<item>
     <title>储存管理～页面置换算法篇</title>
     <link>/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/</link>
     <pubDate>Sun, 04 Apr 2021 15:58:26 &#43;0800</pubDate>
     <author>霞诗子</author>
     <guid>/posts/thinking/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95/</guid>
     <description><![CDATA[操作系统，内存页面置换算法]]></description>
-</item>
-<item>
-    <title>储存管理～虚拟内存篇</title>
-    <link>/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/</link>
-    <pubDate>Thu, 01 Apr 2021 15:58:26 &#43;0800</pubDate>
-    <author>霞诗子</author>
-    <guid>/posts/thinking/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/</guid>
-    <description><![CDATA[操作系统虚拟内存详解]]></description>
 </item>
 </channel>
 </rss>

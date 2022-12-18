@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "\/posts\/thinking\/%E4%BD%BF%E7%94%A8efb%E6%9C%8D%E5%8A%A1%E5%9C%A8telegram%E6%94%B6%E5%8F%91wechat%E6%B6%88%E6%81%AF\/"
-        },"genre": "posts","keywords": "WaChat, arch","wordcount":  1395 ,
+        },"genre": "posts","keywords": "WaChat, arch","wordcount":  1435 ,
         "url": "\/posts\/thinking\/%E4%BD%BF%E7%94%A8efb%E6%9C%8D%E5%8A%A1%E5%9C%A8telegram%E6%94%B6%E5%8F%91wechat%E6%B6%88%E6%81%AF\/","datePublished": "2022-12-18T15:58:26+08:00","dateModified": "2022-12-18T15:58:26+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -118,7 +118,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Telegram代收WeChat消息-EFB</h1><h2 class="single-subtitle">使用EFB服务代收wechat消息</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="15816034825" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>霞诗子</a></span>&nbsp;<span class="post-category">included in <a href="/categories/wachat/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>WaChat</a>&nbsp;<a href="/categories/arch/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>arch</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-18">2022-12-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1395 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-12-18">2022-12-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1435 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;<span id="/posts/thinking/%E4%BD%BF%E7%94%A8efb%E6%9C%8D%E5%8A%A1%E5%9C%A8telegram%E6%94%B6%E5%8F%91wechat%E6%B6%88%E6%81%AF/" class="leancloud_visitors" data-flag-title="Telegram代收WeChat消息-EFB">
                         <i class="far fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
                     </span>&nbsp;</div>
@@ -208,6 +208,9 @@
 <p>若出现xml.parsers.expat.ExpatError:报错，详情请见<a href="https://github.com/ehForwarderBot/efb-wechat-slave/issues/142" target="_blank" rel="noopener noreffer ">github_issues</a></p>
 </blockquote>
 <h3 id="configyaml">config.yaml</h3>
+<blockquote>
+<p>在终端中键入以下命令，创建一些必备的配置文件夹以及文件。</p>
+</blockquote>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> ~/.ehforwarderbot/profiles
 </span></span><span class="line"><span class="cl">mkdir wechat
 </span></span><span class="line"><span class="cl">mkdir blueset.telegram
@@ -217,9 +220,10 @@
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> blueset.telegram
 </span></span><span class="line"><span class="cl">touch config.yaml
 </span></span></code></pre></div><blockquote>
-<p>执行以下bash脚本</p>
+<p>复制以下bash脚本，并赋予执行权限，执行</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">WECHAT_WEB_CONFIG</span><span class="o">=</span>~/.ehforwarderbot/profiles/wechat
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/sh
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nv">WECHAT_WEB_CONFIG</span><span class="o">=</span>~/.ehforwarderbot/profiles/wechat
 </span></span><span class="line"><span class="cl"><span class="nv">TELEGRAM_MASTER</span><span class="o">=</span><span class="s2">&#34;blueset.telegram&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nv">WECHAT_SLAVE</span><span class="o">=</span><span class="s2">&#34;blueset.wechat&#34;</span>
 </span></span><span class="line"><span class="cl">configure_wechat_web<span class="o">()</span> <span class="o">{</span>

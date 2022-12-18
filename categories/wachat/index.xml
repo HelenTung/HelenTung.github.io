@@ -1,24 +1,16 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>arch - Category - 霞诗子</title>
-        <link>/categories/arch/</link>
-        <description>arch - Category - 霞诗子</description>
+        <title>WaChat - Category - 霞诗子</title>
+        <link>/categories/wachat/</link>
+        <description>WaChat - Category - 霞诗子</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>1635161916@qq.com (霞诗子)</managingEditor>
-            <webMaster>1635161916@qq.com (霞诗子)</webMaster><lastBuildDate>Sun, 18 Dec 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/categories/arch/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>1635161916@qq.com (霞诗子)</webMaster><lastBuildDate>Sun, 18 Dec 2022 15:58:26 &#43;0800</lastBuildDate><atom:link href="/categories/wachat/" rel="self" type="application/rss+xml" /><item>
     <title>Telegram代收WeChat消息-EFB</title>
     <link>/posts/thinking/%E4%BD%BF%E7%94%A8efb%E6%9C%8D%E5%8A%A1%E5%9C%A8telegram%E6%94%B6%E5%8F%91wechat%E6%B6%88%E6%81%AF/</link>
     <pubDate>Sun, 18 Dec 2022 15:58:26 &#43;0800</pubDate>
     <author>霞诗子</author>
     <guid>/posts/thinking/%E4%BD%BF%E7%94%A8efb%E6%9C%8D%E5%8A%A1%E5%9C%A8telegram%E6%94%B6%E5%8F%91wechat%E6%B6%88%E6%81%AF/</guid>
     <description><![CDATA[本文主要介绍了如何在一个虚拟服务器 (VPS) 中安装并配置 EFB、Telegram 主端和 WeChat 从端，以及如何使用 Telegram 主端来收发 WeChat 消息。]]></description>
-</item>
-<item>
-    <title>ffmpeg&#43;v4l2内核模块-虚拟摄像头</title>
-    <link>/posts/thinking/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4/</link>
-    <pubDate>Fri, 04 Nov 2022 15:58:26 &#43;0800</pubDate>
-    <author>霞诗子</author>
-    <guid>/posts/thinking/%E8%99%9A%E6%8B%9F%E6%91%84%E5%83%8F%E5%A4%B4/</guid>
-    <description><![CDATA[利用ffmpeg+v4l2内核模块捏造出虚拟摄像头]]></description>
 </item>
 </channel>
 </rss>
